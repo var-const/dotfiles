@@ -1,3 +1,4 @@
+"just testing
 set langmenu=C
 set helplang=en
 set encoding=utf-8
