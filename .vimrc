@@ -37,6 +37,8 @@ NeoBundle 'Townk/vim-autoclose'
 
 NeoBundle 'SirVer/ultisnips'
 
+" NeoBundle 'kana/vim-textobj-entire'
+
 NeoBundle 'jonathanfilip/vim-lucius'
 
 " Required:
@@ -67,6 +69,7 @@ set relativenumber
 
 "Better line wrapping 
 set wrap
+set linebreak
 set textwidth=99
 set formatoptions=qrn1
 
@@ -103,6 +106,10 @@ set foldmethod=indent "fold based on indent
 set foldnestmax=2 "deepest fold is 2 levels
 set nofoldenable "dont fold by default
 
+set nrformats= " When doing Ctrl-A/Ctrl-X, treat all numbers as base10
+
+set history=200 " commmand-line history
+
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
 set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest " compiled object files
@@ -121,6 +128,7 @@ set gdefault
 set clipboard+=unnamed
 
 inoremap kj <esc> " seems to be best, right-to-left movement
+inoremap jk <esc> " fallback
 
 nnoremap k gk
 nnoremap j gj
