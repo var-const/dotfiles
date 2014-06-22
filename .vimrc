@@ -4,11 +4,10 @@ set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,koi8-r,cp1251,default,latin1
-syntax on
 " No silly toolbar
 set guioptions-=T
 set ff=unix
-  
+ 
 if has('vim_starting')
   set nocompatible               " Be iMproved
 
@@ -16,8 +15,11 @@ if has('vim_starting')
   set runtimepath+=~/vimfiles/bundle/neobundle.vim/
 endif
 
+syntax off " seems like it should be off before the whole NeoBundle thing
+
 " Required:
 call neobundle#rc(expand('~/vimfiles/bundle/'))
+" This fucking thing seems to reset filetype
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -35,7 +37,6 @@ NeoBundle 'vim-scripts/bufkill.vim'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-commentary'
-" TODO: unused
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-speeddating'
@@ -43,6 +44,12 @@ NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'derekwyatt/vim-fswitch'
 
 NeoBundle 'Townk/vim-autoclose'
+
+NeoBundle 'vim-scripts/refactor'
+
+NeoBundle 'xolox/vim-easytags'
+NeoBundle 'xolox/vim-misc'
+NeoBundle 'xolox/vim-shell'
 
 " TODO: unused
 NeoBundle 'SirVer/ultisnips'
@@ -59,10 +66,17 @@ NeoBundle 'yegappan/grep'
 " NeoBundle 'kana/vim-textobj-entire'
 
 NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'octol/vim-cpp-enhanced-highlight'
+NeoBundle 'vim-jp/cpp-vim'
+
+NeoBundle 'dag/vim2hs'
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
+
+filetype plugin indent on
+syntax on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set keymap=russian-jcukenwin
@@ -77,6 +91,8 @@ set shiftwidth=4
 set softtabstop=4
 " When expandtab is set, hitting Tab in insert mode will produce the appropriate number of spaces.
 " set noexpandtab
+
+autocmd FileType xml setlocal shiftwidth=2 tabstop=2
 
 "Indent stuff
 set smartindent
@@ -150,10 +166,9 @@ set gdefault
 " Add the unnamed register to the clipboard
 set clipboard+=unnamed
 
-" Now escape is different, because it doesn't safe, which seems in line
-" with it's more 'oh, no, no, no' feel
-inoremap kj <esc>:w<CR> " seems to be best, right-to-left movement
-inoremap jk <esc>:w<CR> " fallback
+inoremap kj <esc> " seems to be best, right-to-left movement
+inoremap jk <esc> " fallback
+inoremap jj <esc>:w<CR> " saves
 
 nnoremap k gk
 nnoremap j gj
@@ -188,7 +203,6 @@ let mapleader = " "
 
 "Opens a vertical split and switches over
 nnoremap <leader>v <C-w>v<C-w>l
-
 "Opens a horizontal split and switches over
 nnoremap <leader>h <C-w>h<C-w>j
 
@@ -203,29 +217,42 @@ nnoremap <leader>x "_x
 nnoremap <leader>X "_X
 
 noremap <leader>ft :set filetype=
+noremap <leader>cc :set filetype=cpp<CR>
+noremap <leader>ll :set filetype=lua<CR>
+
+nnoremap <silent> <leader>oc :!explorer %:h<CR>
 
 nnoremap <F2> :call RenameFile()<CR>
+nnoremap <C-F2> :call NewHeaderSourcePairInCurFileDir()<CR>
 
 let g:unite_source_history_yank_enable = 1
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" call unite#filters#matcher_default#use(['matcher_regexp'])
+call unite#filters#matcher_default#use(['matcher_glob'])
 " @FIXME doesn' work
-" Unite-recursive
-nnoremap <leader>ur :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-" Unite-file
-nnoremap <leader>uf :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
-" Unite-history
-nnoremap <leader>uh :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
+" Filesystem-recursive
+" nnoremap <leader>ur :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
+nnoremap <leader>fr :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec:!<cr>
+" Filesystem-file
+nnoremap <leader>ff :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+" Filesystem-history
+nnoremap <leader>fh :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 " @FIXME doesn' work
-" Unite-outline
-nnoremap <leader>uo :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
-" Unite-(yank)history
-nnoremap <leader>uy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
-" Unite-buffer
-nnoremap <leader>ub :<C-u>Unite -no-split -buffer-name=buffer  buffer<cr>
+" Filesystem-outline
+nnoremap <leader>fo :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
+" Filesystem-(yank)history
+nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+" Filesystem-buffer
+nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<cr>
+" Filesystem-current directory
+nnoremap <silent><leader>fc :<C-u>UniteWithBufferDir
+\ -buffer-name=files -start-insert buffer file<CR>
 
 autocmd FileType unite call s:set_unite_settings()
 function! s:set_unite_settings()
-  nmap <buffer> <ESC> <Plug>(unite_exit)
+	nmap <buffer> <ESC> <Plug>(unite_exit)
+	nmap <buffer> <Tab> <Plug>(unite_narrowing_path)
+	imap <buffer> <Tab> <Plug>(unite_narrowing_path)
 endfunction
 
 " bufkill
@@ -236,7 +263,12 @@ nnoremap [b :BB<CR> " buffer prev
 nnoremap ]b :BF<CR> " buffer next
 
 " @TODO: change mapping to something more intuitive; now it stands for 'from here'
-nnoremap <leader>fh :e %:h/
+" nnoremap <leader>fh :e %:h/
+" Unite-current dir should make this mapping unnecessary
+
+" save
+nnoremap <leader>s :w<CR>
+nnoremap <leader><leader> :w<CR>
 
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
@@ -273,6 +305,16 @@ nmap <silent> <Leader>ol :FSLeft<cr>
 nmap <silent> <Leader>oL :FSSplitLeft<cr>
 
 nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+nnoremap <leader>rr	:call RenameVariable()<CR>
+nnoremap <leader>ro :call ReorderParameters()<CR>
+nnoremap <leader>rp :call LocalVariableToParameter()<CR>
+nnoremap <leader>re :call ExtractMethod()<CR>
+nnoremap <leader>rd :call RemoveParameter()<CR>
+nnoremap <leader>rc :call IntroduceConstant()<CR>
+
+" append
+nnoremap <leader>app :w! >>
 
 " Use VimFiler instead of netrw by default
 let g:vimfiler_as_default_explorer = 1
@@ -343,3 +385,87 @@ function! RenameFile()
     redraw!
   endif
 endfunction
+
+" Rename the current file
+function! NewHeaderSourcePairInCurFileDir()
+  let pair_name = @f
+  if pair_name != ''
+	let @f=''
+  else
+    let pair_name = input('New header/source pair name: ')
+  endif
+  if pair_name != ''
+	" @TODO: for BZ, add project code (like 'lsit5_') automatically
+	let full_pair_name = expand('%:h') . '/' . pair_name
+	" @FIXME overwriting. Should prompt for it
+	let header = full_pair_name . '.h'
+	let source = full_pair_name . '.cpp'
+	" @FIXME screws up buffer history
+    exec ':e ' . source
+	" @FIXME hack
+    exec ':normal ggdG'
+	exec ':normal i#include "' . pair_name . '.h"'
+	put='' " blank line
+    exec ':w! ' . source
+	" @FIXME hack
+	set filetype=cpp
+
+    exec ':e ' . header
+	" @FIXME hack
+    exec ':normal ggdG'
+	let include_guard = '_' . toupper(pair_name) . '_'
+	exec ':normal i#ifndef ' . include_guard
+	put=''
+	exec ':normal i#define ' . include_guard
+	put=''
+	put=''
+	put=''
+	put=''
+	exec ':normal i#endif'
+	exec ':normal gg3j'
+    exec ':w! ' . header
+	" @FIXME hack
+	set filetype=cpp
+    redraw!
+  endif
+endfunction
+
+" :t - just the filename
+nnoremap <silent><F4> :call YankOrPasteIncludeHeader()<CR>
+function! YankOrPasteIncludeHeader()
+  if @f != ''
+	put=@f
+	exec ':normal 0f"lvt.'
+	let @f=''
+  else
+    let @f='#include "' . expand("%:t") . '"'
+	echo "Current filename yanked for including"
+  endif
+endfunction
+
+" @TODO: need to unmap this default mapping, screws up window switching <C-l>			<Plug>(vimfiler_redraw_screen)
+
+let g:UltiSnipsExpandTrigger="<c-j>"
+" let g:UltiSnipsListSnippets ="<s-tab>"
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+               return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
+
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+" this mapping Enter key to <C-y> to chose the current highlight item 
+" and close the selection list, same as other IDEs.
+" CONFLICT with some plugins like tpope/Endwise
+inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
