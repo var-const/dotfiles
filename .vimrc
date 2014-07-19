@@ -45,20 +45,29 @@ NeoBundle 'derekwyatt/vim-fswitch'
 
 NeoBundle 'Townk/vim-autoclose'
 
+" Some C++ simple refactoring
 NeoBundle 'vim-scripts/refactor'
 
-NeoBundle 'xolox/vim-easytags'
+" C++ better code highlighting
+" make sure Python is used (g:easytags_python_enabled) for generating instead of vimscript 
+" NeoBundle 'xolox/vim-easytags'
+" NeoBundle 'xolox/vim-easytags'
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-shell'
+NeoBundle 'octol/vim-cpp-enhanced-highlight'
+NeoBundle 'vim-jp/cpp-vim'
 
 " TODO: unused
 NeoBundle 'SirVer/ultisnips'
 
+" Code completion, uses clang for C++
 NeoBundle 'Valloric/YouCompleteMe'
 
 " TODO: unused
+" Organizer
 NeoBundle 'vim-scripts/vimwiki'
 
+" Search in files
 NeoBundle 'rking/ag.vim'
 NeoBundle 'milesz/ack.vim'
 NeoBundle 'yegappan/grep'
@@ -66,9 +75,18 @@ NeoBundle 'yegappan/grep'
 " NeoBundle 'kana/vim-textobj-entire'
 
 NeoBundle 'jonathanfilip/vim-lucius'
-NeoBundle 'octol/vim-cpp-enhanced-highlight'
-NeoBundle 'vim-jp/cpp-vim'
 
+" Visual Studio integration
+NeoBundle 'vim-scripts/visual_studio.vim'
+
+NeoBundle 'vim-scripts/argtextobj.vim'
+
+NeoBundle 'vim-scripts/IndexedSearch'
+
+" nmap <Leader>s  <Plug>ReplaceWithRegisterOperator 
+NeoBundle 'vim-scripts/ReplaceWithRegister'
+
+" For Haskell
 NeoBundle 'dag/vim2hs'
 
 " If there are uninstalled bundles found on startup,
@@ -139,7 +157,7 @@ set autoread
 
 "set list listchars=trail:·
 
-set foldmethod=indent "fold based on indent
+set foldmethod=syntax 
 set foldnestmax=2 "deepest fold is 2 levels
 set nofoldenable "dont fold by default
 
@@ -166,9 +184,12 @@ set gdefault
 " Add the unnamed register to the clipboard
 set clipboard+=unnamed
 
-inoremap kj <esc> " seems to be best, right-to-left movement
-inoremap jk <esc> " fallback
-inoremap jj <esc>:w<CR> " saves
+" seems to be best, right-to-left movement
+inoremap kj <esc>
+" fallback
+inoremap jk <esc>
+" saves
+inoremap jj <esc>:w<CR>
 
 nnoremap k gk
 nnoremap j gj
@@ -246,7 +267,9 @@ nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
 nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<cr>
 " Filesystem-current directory
 nnoremap <silent><leader>fc :<C-u>UniteWithBufferDir
-\ -buffer-name=files -start-insert buffer file<CR>
+\ -buffer-name=files -no-split -start-insert buffer file<CR>
+" Filesystem-booKmarks
+nnoremap <leader>fk :<C-u>Unite -no-split -buffer-name=bookmark  -start-insert bookmark<cr>
 
 autocmd FileType unite call s:set_unite_settings()
 function! s:set_unite_settings()
@@ -279,7 +302,7 @@ nmap <leader>ev :tabedit ~/_vimrc<CR>
 " TODO: I'm sure there are much better SCM-integration plugins out there
 if has("win32")
 	" nmap <leader>ci gg<CR>
-	nmap <leader>ci :!TortoiseProc.exe /command:commit /path:"%:h"<CR>
+	nmap <leader>ci :!TortoiseProc.exe /command:commit /path:"%:p:h"<CR>
 endif
 
 " For vim-commentary: prefer // style comments to the default C-style
@@ -413,7 +436,7 @@ function! NewHeaderSourcePairInCurFileDir()
     exec ':e ' . header
 	" @FIXME hack
     exec ':normal ggdG'
-	let include_guard = '_' . toupper(pair_name) . '_'
+	let include_guard = '_' . toupper(pair_name) . '_H_'
 	exec ':normal i#ifndef ' . include_guard
 	put=''
 	exec ':normal i#define ' . include_guard
@@ -469,3 +492,5 @@ let g:UltiSnipsListSnippets="<c-e>"
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+let g:easytags_async = 1
