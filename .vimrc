@@ -49,13 +49,15 @@ NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'vim-scripts/refactor'
 
 " C++ better code highlighting
-" make sure Python is used (g:easytags_python_enabled) for generating instead of vimscript 
-" NeoBundle 'xolox/vim-easytags'
-" NeoBundle 'xolox/vim-easytags'
+let g:easytags_async = 1
+let g:easytags_include_members = 1
+let g:easytags_python_enabled = 1
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-shell'
+" NeoBundle 'xolox/vim-easytags'
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 NeoBundle 'vim-jp/cpp-vim'
+" NeoBundle 'vim-scripts/TagHighlight'
 
 " TODO: unused
 NeoBundle 'SirVer/ultisnips'
@@ -68,9 +70,9 @@ NeoBundle 'Valloric/YouCompleteMe'
 NeoBundle 'vim-scripts/vimwiki'
 
 " Search in files
-NeoBundle 'rking/ag.vim'
-NeoBundle 'milesz/ack.vim'
-NeoBundle 'yegappan/grep'
+"NeoBundle 'rking/ag.vim'
+"NeoBundle 'milesz/ack.vim'
+"NeoBundle 'yegappan/grep'
 
 " NeoBundle 'kana/vim-textobj-entire'
 
@@ -86,8 +88,10 @@ NeoBundle 'vim-scripts/IndexedSearch'
 " nmap <Leader>s  <Plug>ReplaceWithRegisterOperator 
 NeoBundle 'vim-scripts/ReplaceWithRegister'
 
+NeoBundle 'houtsnip/vim-emacscommandline'
+
 " For Haskell
-NeoBundle 'dag/vim2hs'
+" NeoBundle 'dag/vim2hs'
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
@@ -98,7 +102,8 @@ syntax on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set keymap=russian-jcukenwin
-set iminsert=2
+" set iminsert=2
+set iminsert=0
 set imsearch=-1
 
 " Tab stuff
@@ -241,7 +246,7 @@ noremap <leader>ft :set filetype=
 noremap <leader>cc :set filetype=cpp<CR>
 noremap <leader>ll :set filetype=lua<CR>
 
-nnoremap <silent> <leader>oc :!explorer %:h<CR>
+nnoremap <silent> <leader>oc :Open %:h<CR>
 
 nnoremap <F2> :call RenameFile()<CR>
 nnoremap <C-F2> :call NewHeaderSourcePairInCurFileDir()<CR>
@@ -327,7 +332,7 @@ nmap <silent> <Leader>ol :FSLeft<cr>
 " Switch to the file and load it into a new window split on the left
 nmap <silent> <Leader>oL :FSSplitLeft<cr>
 
-nnoremap <F12> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <F12> :YcmCompleter GoTo<CR>
 
 nnoremap <leader>rr	:call RenameVariable()<CR>
 nnoremap <leader>ro :call ReorderParameters()<CR>
@@ -493,4 +498,15 @@ let g:UltiSnipsListSnippets="<c-e>"
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-let g:easytags_async = 1
+" highlight link cMemberTag Special
+" highlight def cMemberTag gui=bold guifg=yellowgreen
+" highlight def cTypeTag gui=bold guifg=yellowgreen
+" highlight cMember gui=italic guifg=yellowgreen
+" highlight cType gui=italic guifg=yellowgreen
+" highlight cFunction gui=italic
+" highlight cEnum gui=italic
+" highlight def Identifier gui=italic
+highlight Identifier gui=italic
+highlight cMember gui=italic
+highlight cMemberTag gui=italic
+
