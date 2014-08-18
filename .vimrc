@@ -12,13 +12,21 @@ if has('vim_starting')
   set nocompatible               " Be iMproved
 
   " Required:
-  set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+	if has('win32')
+		set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+	else
+		set runtimepath+=~/.vim/bundle/neobundle.vim/
+	endif
 endif
 
 syntax off " seems like it should be off before the whole NeoBundle thing
 
 " Required:
-call neobundle#rc(expand('~/vimfiles/bundle/'))
+if has('win32')
+	call neobundle#rc(expand('~/vimfiles/bundle/'))
+else
+	call neobundle#rc(expand('~/.vim/bundle/'))
+endif
 " This fucking thing seems to reset filetype
 
 " Let NeoBundle manage NeoBundle
@@ -79,7 +87,9 @@ NeoBundle 'vim-scripts/vimwiki'
 NeoBundle 'jonathanfilip/vim-lucius'
 
 " Visual Studio integration
-NeoBundle 'vim-scripts/visual_studio.vim'
+if has('win32')
+	NeoBundle 'vim-scripts/visual_studio.vim'
+endif
 
 NeoBundle 'vim-scripts/argtextobj.vim'
 
@@ -301,7 +311,11 @@ nnoremap <leader><leader> :w<CR>
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
 "Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
-nmap <leader>ev :tabedit ~/_vimrc<CR>
+if has('win32')
+	nmap <leader>ev :tabedit ~/_vimrc<CR>
+else
+	nmap <leader>ev :tabedit ~/.vimrc<CR>
+endif
 
 " Try to commit the directory the files resides in using TortoiseSvn
 " TODO: I'm sure there are much better SCM-integration plugins out there
@@ -396,10 +410,14 @@ LuciusLight
 
 " Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
 if has("autocmd")
- augroup myvimrchooks
-  au!
-  autocmd bufwritepost _vimrc source ~/_vimrc
- augroup END
+	augroup myvimrchooks
+		au!
+		if has('win32')
+			autocmd bufwritepost _vimrc source ~/_vimrc
+		else
+			autocmd bufwritepost .vimrc source ~/.vimrc
+		endif
+	augroup END
 endif
 
 " @TODO: use
