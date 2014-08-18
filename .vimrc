@@ -54,7 +54,10 @@ NeoBundle 'derekwyatt/vim-fswitch'
 NeoBundle 'Townk/vim-autoclose'
 
 " Some C++ simple refactoring
-NeoBundle 'vim-scripts/refactor'
+if has('win32')
+	" Windows-style line endings, omg
+	NeoBundle 'vim-scripts/refactor' 
+endif
 
 " C++ better code highlighting
 let g:easytags_async = 1
@@ -79,7 +82,7 @@ NeoBundle 'vim-scripts/vimwiki'
 
 " Search in files
 "NeoBundle 'rking/ag.vim'
-"NeoBundle 'milesz/ack.vim'
+" NeoBundle 'milesz/ack.vim'
 "NeoBundle 'yegappan/grep'
 
 " NeoBundle 'kana/vim-textobj-entire'
@@ -189,7 +192,11 @@ set wildignore+=*.pyc                            " Python byte code
 set wildignore+=*.orig                           " Merge resolution files
 
 " @TODO: no hardcoding
-set directory=~/vimfiles/tmp
+if has('win32')
+	set directory=~/vimfiles/tmp
+else
+	set directory=~/.vim/tmp
+endif
 
 set autowrite " Automatically save buffer before switching to another one
 
