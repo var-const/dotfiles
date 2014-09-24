@@ -9,6 +9,7 @@ cmd=""
 # is to place a link to the first arg inside it
 $cmd ln -s $wd/.ncftp ~
 $cmd ln -s $wd/.vim ~
+
 $cmd ln -s $wd/.ackrc ~/.ackrc
 $cmd ln -s $wd/.bash_profile ~/.bash_profile
 $cmd ln -s $wd/.bashrc ~/.bashrc
