@@ -7,25 +7,27 @@ set fileencodings=utf-8,koi8-r,cp1251,default,latin1
 " No silly toolbar
 set guioptions-=T
 set ff=unix
- 
+
+set t_Co=256
+
 if has('vim_starting')
   set nocompatible               " Be iMproved
 
   " Required:
-	if has('win32')
-		set runtimepath+=~/vimfiles/bundle/neobundle.vim/
-	else
+	if has('unix')
 		set runtimepath+=~/.vim/bundle/neobundle.vim/
+	else
+		set runtimepath+=~/vimfiles/bundle/neobundle.vim/
 	endif
 endif
 
 syntax off " seems like it should be off before the whole NeoBundle thing
 
 " Required:
-if has('win32')
-	call neobundle#rc(expand('~/vimfiles/bundle/'))
-else
+if has('unix')
 	call neobundle#rc(expand('~/.vim/bundle/'))
+else
+	call neobundle#rc(expand('~/vimfiles/bundle/'))
 endif
 " This fucking thing seems to reset filetype
 
@@ -247,7 +249,7 @@ let mapleader = " "
 "Opens a vertical split and switches over
 nnoremap <leader>v <C-w>v<C-w>l
 "Opens a horizontal split and switches over
-nnoremap <leader>h <C-w>h<C-w>j
+nnoremap <leader>h :split<CR><C-w>j
 
 " Erase from existence
 nnoremap <leader>d "_d
@@ -262,6 +264,10 @@ nnoremap <leader>X "_X
 noremap <leader>ft :set filetype=
 noremap <leader>cc :set filetype=cpp<CR>
 noremap <leader>ll :set filetype=lua<CR>
+
+noremap <leader>tn :tabnew<CR>
+noremap <C-n> gt
+noremap <C-p> gT
 
 nnoremap <silent> <leader>oc :Open %:h<CR>
 
@@ -318,17 +324,17 @@ nnoremap <leader><leader> :w<CR>
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
 "Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
-if has('win32')
-	nmap <leader>ev :tabedit ~/_vimrc<CR>
-else
+if has('unix')
 	nmap <leader>ev :tabedit ~/.vimrc<CR>
+else
+	nmap <leader>ev :tabedit ~/_vimrc<CR>
 endif
 
 " Try to commit the directory the files resides in using TortoiseSvn
 " TODO: I'm sure there are much better SCM-integration plugins out there
 if has("win32")
-	" nmap <leader>ci gg<CR>
 	nmap <leader>ci :!TortoiseProc.exe /command:commit /path:"%:p:h"<CR>
+	" nmap <leader>ci :let cur_path = %:p:h | call xolox#misc#os#exec({'command': 'TortoiseProc.exe /command:commit /path:"' . cur_path . '"', 'async': 1})
 endif
 
 " For vim-commentary: prefer // style comments to the default C-style
@@ -419,10 +425,10 @@ LuciusLight
 if has("autocmd")
 	augroup myvimrchooks
 		au!
-		if has('win32')
-			autocmd bufwritepost _vimrc source ~/_vimrc
-		else
+		if has('unix')
 			autocmd bufwritepost .vimrc source ~/.vimrc
+		else
+			autocmd bufwritepost _vimrc source ~/_vimrc
 		endif
 	augroup END
 endif
