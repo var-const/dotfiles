@@ -52,6 +52,7 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
+export EDITOR=vim
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -98,7 +99,7 @@ alias zz='fasd_cd -d -i' # cd with interactive selection
 # I want to copy directories too, for chrissake
 alias cpdv="rsync -rpoghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 # @FIXME remove partially-absolute path (dotfiles)
-OS_NAME=$(dotfiles/get_os.sh)
+OS_NAME=$(~/dotfiles/get_os.sh)
 case $OS_NAME in
   cygwin)
 	alias open="cygstart"
