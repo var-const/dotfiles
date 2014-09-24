@@ -16,4 +16,5 @@ $cmd ln -s $wd/.bashrc ~/.bashrc
 $cmd ln -s $wd/.minttyrc ~/.minttyrc
 $cmd ln -s $wd/.profile ~/.profile
 $cmd ln -s $wd/.tmux.conf ~/.tmux.conf
+$cmd ln -s $wd/.vim/.vimrc ~/.vimrc
 $cmd ln -s $wd/.zshrc ~/.zshrc
