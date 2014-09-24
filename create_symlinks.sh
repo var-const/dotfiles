@@ -2,6 +2,8 @@
 
 # Thanks to SO: http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+os=$($wd/get_os.sh)
+# @TODO: read '--dry-run' parameter
 # cmd="echo "
 cmd=""
 
@@ -13,7 +15,9 @@ $cmd ln -s $wd/.vim ~
 $cmd ln -s $wd/.ackrc ~/.ackrc
 $cmd ln -s $wd/.bash_profile ~/.bash_profile
 $cmd ln -s $wd/.bashrc ~/.bashrc
-$cmd ln -s $wd/.minttyrc ~/.minttyrc
+if [ "$os" == "cygwin" ]; then
+	$cmd ln -s $wd/.minttyrc ~/.minttyrc
+fi
 $cmd ln -s $wd/.profile ~/.profile
 $cmd ln -s $wd/.tmux.conf ~/.tmux.conf
 $cmd ln -s $wd/.vim/.vimrc ~/.vimrc
