@@ -98,7 +98,8 @@ alias zz='fasd_cd -d -i' # cd with interactive selection
 # I want to copy directories too, for chrissake
 alias cpdv="rsync -rpoghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 
-OS_NAME=$(./get_os.sh)
+# @FIXME
+OS_NAME=$(dotfiles/get_os.sh)
 case $OS_NAME in
   cygwin)
 	alias open="cygstart"
