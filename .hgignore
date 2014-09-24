@@ -1,0 +1,21 @@
+syntax: glob
+.cache/
+.directory_history
+.config/ranger/bookmarks
+.ncftp/trace*
+.git
+.gitignore
+.oh-my-zsh
+.fasd
+.vim/.netrwhist
+.vim/bundle
+.vim/tmp/
+.zcompdump*
+tmp
+_viminfo
+*~
+.zsh_history
+.zsh-update
+.viminfo
+.ncftp/log
+.bash_history

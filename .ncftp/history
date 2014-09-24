@@ -1,0 +1,32 @@
+set passive no
+open -u bigfish ftp.boomzap.net
+exit
+(line omitted from history because it contained sensitive information)
+ls
+passive
+set passive yes
+(line omitted from history because it contained sensitive information)
+debug
+passive on
+passive
+set passive on
+(line omitted from history because it contained sensitive information)
+get passive
+passive
+set passive on
+passive
+exit
+debug
+passive
+(line omitted from history because it contained sensitive information)
+stop
+(line omitted from history because it contained sensitive information)
+ls
+cd igs3/
+ls
+get Otherworld3_2014_03_05.ipa 
+passive
+get Otherworld3_2014_03_05.ipa 
+open ftp.mozilla.org
+(line omitted from history because it contained sensitive information)
+quit
