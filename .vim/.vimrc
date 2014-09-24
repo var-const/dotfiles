@@ -35,7 +35,12 @@ endif
 " Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'Shougo/vimproc.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+      \ 'build' : {
+      \     'mac' : 'make -f make_mac.mak',
+      \    },
+      \ }
+
 NeoBundle 'Shougo/vimfiler.vim'
 
 NeoBundle 'Shougo/unite.vim'
