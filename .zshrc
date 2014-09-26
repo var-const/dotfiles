@@ -45,7 +45,8 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man common-aliases cp dircycle dirhistory extract git history-substring-search mercurial per-directory-history python svn-fast-info)
+plugins=(colored-man common-aliases cp dircycle extract git history-substring-search mercurial per-directory-history python svn-fast-info)
+#dirhistory 
 
 source $ZSH/oh-my-zsh.sh
 
@@ -54,9 +55,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -80,6 +78,12 @@ export EDITOR=vim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export CC=/usr/bin/clang.exe
+export CXX=/usr/bin/clang++
+
+# -2 arg to tmux means "Use 256 colors w/o trying to guess whether
+# they're available or not" (this guessing seems to fail under
+# some terminals, mintty in particular)
 if command -v tmux>/dev/null; then
   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2
 fi
@@ -103,6 +107,7 @@ OS_NAME=$(~/dotfiles/get_os.sh)
 case $OS_NAME in
   cygwin)
 	alias open="cygstart"
+	alias ack='/cygdrive/c/strawberry/perl/site/bin/ack'
     ;;
   darwin)
 	alias vim='mvim -v'
