@@ -85,7 +85,7 @@ export CXX=/usr/bin/clang++
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
 if command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 attach
 fi
 
 # To get fasd working in a shell, some initialization code must be run
