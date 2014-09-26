@@ -4,3 +4,5 @@ CursorBlinks=no
 FontHeight=18
 BackgroundColour=0,0,0
 CursorType=block
+Locale=ru_RU
+Charset=UTF-8
