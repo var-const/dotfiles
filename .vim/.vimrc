@@ -10,6 +10,23 @@ set ff=unix
 
 set t_Co=256
 
+" From Shougo's .vimrc
+let s:is_windows = has('win16') || has('win32') || has('win64')
+let s:is_cygwin = has('win32unix')
+let s:is_mac = !s:is_windows && !s:is_cygwin
+      \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+      \   (!executable('xdg-open') &&
+      \     system('uname') =~? '^darwin'))
+
+" Use English interface.
+if s:is_windows
+  " For Windows.
+  language message en
+else
+  " For Linux.
+  language mes C
+endif
+
 if has('vim_starting')
   set nocompatible               " Be iMproved
 
@@ -80,8 +97,15 @@ NeoBundle 'vim-jp/cpp-vim'
 " TODO: unused
 NeoBundle 'SirVer/ultisnips'
 
-" Code completion, uses clang for C++
-NeoBundle 'Valloric/YouCompleteMe'
+" if has('win32unix')
+	" NeoBundle 'Rip-Rip/clang_complete', {
+      " \ 'autoload' : {
+      " \     'filetypes' : ['c', 'cpp'],
+      " \    },
+      " \ }
+" else
+" 	NeoBundle 'Valloric/YouCompleteMe'
+" endif
 
 " TODO: unused
 " Organizer
@@ -89,7 +113,7 @@ NeoBundle 'vim-scripts/vimwiki'
 
 " Search in files
 "NeoBundle 'rking/ag.vim'
-" NeoBundle 'milesz/ack.vim'
+NeoBundle 'milesz/ack.vim'
 "NeoBundle 'yegappan/grep'
 
 " NeoBundle 'kana/vim-textobj-entire'
@@ -546,3 +570,24 @@ highlight Identifier gui=italic
 highlight cMember gui=italic
 highlight cMemberTag gui=italic
 
+let g:clang_auto_user_options='path, .clang_complete'
+" let g:clang_exec='"clang'
+" let g:clang_user_options='2>/dev/null || exit 0'
+let g:clang_complete_auto = 0
+let g:clang_complete_copen = 1
+let g:clang_library_path ='C:\Program Files\LLVM\bin'
+" let g:clang_user_options='|| exit 0'
+" let g:clang_auto_user_options='|| exit 0"' 
+" let g:clang_snippets_engine='clang_complete'
+" if there's an error, allow us to see it
+" let g:clang_complete_copen=1
+" let g:clang_complete_macros=1
+" let g:clang_complete_patterns=0
+" fix cygwin shell redirection
+" set shellredir=>\\"%s\\"\\ 2 > &1
+" set shellredir='>%s\ 2>&1'
+" set shellredir=>\"%s\"\ 2>&1
+
+
+" Add a commented-out copy above
+nmap <leader>yy mtyyP<Plug>CommentaryLine`t

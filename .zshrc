@@ -78,9 +78,6 @@ export EDITOR=vim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export CC=/usr/bin/clang.exe
-export CXX=/usr/bin/clang++
-
 # -2 arg to tmux means "Use 256 colors w/o trying to guess whether
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
@@ -108,6 +105,8 @@ case $OS_NAME in
   cygwin)
 	alias open="cygstart"
 	alias ack='/cygdrive/c/strawberry/perl/site/bin/ack'
+	# export CC=/usr/bin/clang.exe
+	# export CXX=/usr/bin/clang++
     ;;
   darwin)
 	alias vim='mvim -v'
