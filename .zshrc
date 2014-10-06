@@ -107,6 +107,7 @@ case $OS_NAME in
 	alias ack='/cygdrive/c/strawberry/perl/site/bin/ack'
 	# export CC=/usr/bin/clang.exe
 	# export CXX=/usr/bin/clang++
+	set LC_ALL=ru_RU.UTF-8
     ;;
   darwin)
 	alias vim='mvim -v'
@@ -122,5 +123,3 @@ function chpwd() {
 # @FIXME I'm just not sure about the case :)
 setopt EXTENDED_GLOB
 setopt extended_glob
-
-set LC_ALL=ru_RU.UTF-8
