@@ -76,6 +76,12 @@ NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'derekwyatt/vim-fswitch'
 
 NeoBundle 'Townk/vim-autoclose'
+" Original comment: "If you are using a console version of Vim, or dealing
+" with a file that changes externally (e.g. a web server log)
+" then Vim does not always check to see if the file has been changed.
+" The GUI version of Vim will check more often (for example on Focus change),
+" and prompt you if you want to reload the file"
+NeoBundle 'djoshea/vim-autoread'
 
 " Some C++ simple refactoring
 if has('win32')
@@ -97,15 +103,22 @@ NeoBundle 'vim-jp/cpp-vim'
 " TODO: unused
 NeoBundle 'SirVer/ultisnips'
 
-" if has('win32unix')
-	" NeoBundle 'Rip-Rip/clang_complete', {
-      " \ 'autoload' : {
-      " \     'filetypes' : ['c', 'cpp'],
-      " \    },
-      " \ }
-" else
-" 	NeoBundle 'Valloric/YouCompleteMe'
+" if s:is_cygwin
+" 	NeoBundle 'Rip-Rip/clang_complete', {
+"       \ 'autoload' : {
+"       \     'filetypes' : ['c', 'cpp'],
+"       \    },
+"       \ }
 " endif
+NeoBundle 'Rip-Rip/clang_complete', {
+      \ 'autoload' : {
+      \     'filetypes' : ['c', 'cpp'],
+      \    },
+      \ }
+
+if s:is_mac
+	NeoBundle 'Valloric/YouCompleteMe'
+endif
 
 " TODO: unused
 " Organizer
@@ -133,6 +146,12 @@ NeoBundle 'vim-scripts/IndexedSearch'
 NeoBundle 'vim-scripts/ReplaceWithRegister'
 
 NeoBundle 'houtsnip/vim-emacscommandline'
+
+" Fucks up folding
+" NeoBundle 'kien/rainbow_parentheses.vim'
+
+NeoBundle 'luochen1990/rainbow'
+" NeoBundle 'oblitum/rainbow' " Seems to be very slow
 
 " For Haskell
 " NeoBundle 'dag/vim2hs'
@@ -207,8 +226,9 @@ set autoread
 "set list listchars=trail:·
 
 set foldmethod=syntax 
-set foldnestmax=2 "deepest fold is 2 levels
-set nofoldenable "dont fold by default
+set foldnestmax=1 "deepest fold is 1 level
+set foldlevelstart=0
+set foldenable
 
 set nrformats= " When doing Ctrl-A/Ctrl-X, treat all numbers as base10
 
@@ -575,7 +595,8 @@ let g:clang_auto_user_options='path, .clang_complete'
 " let g:clang_user_options='2>/dev/null || exit 0'
 let g:clang_complete_auto = 0
 let g:clang_complete_copen = 1
-let g:clang_library_path ='C:\Program Files\LLVM\bin'
+" let g:clang_library_path ='C:\Program Files\LLVM\bin'
+let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
 " let g:clang_user_options='|| exit 0'
 " let g:clang_auto_user_options='|| exit 0"' 
 " let g:clang_snippets_engine='clang_complete'
@@ -587,7 +608,43 @@ let g:clang_library_path ='C:\Program Files\LLVM\bin'
 " set shellredir=>\\"%s\\"\\ 2 > &1
 " set shellredir='>%s\ 2>&1'
 " set shellredir=>\"%s\"\ 2>&1
+" set shellredir=>\"%s\"\ 2>/dev/null
 
+set shell=zsh\ -l
 
 " Add a commented-out copy above
 nmap <leader>yy mtyyP<Plug>CommentaryLine`t
+
+" au VimEnter * RainbowParenthesesToggle
+" au VimEnter * RainbowParenthesesActivate
+" au BufEnter * RainbowParenthesesActivate
+
+" This piece of shit doesn't want to work easily
+" au BufEnter * RainbowParenthesesLoadRound
+" au BufEnter * RainbowParenthesesLoadSquare
+" au BufEnter * RainbowParenthesesLoadBraces
+" au VimEnter * RainbowParenthesesActivate
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
+
+let g:rainbow_active = 1
+
+" Stolen from: http://stackoverflow.com/questions/9403098/is-it-possible-to-jump-to-closed-folds-in-vim
+" Goes to next _closed_ fold, skipping the open folds, unlike the default.
+" @TODO: make default available via leader key
+nnoremap <silent> zj :call NextClosedFold('j')<cr>
+nnoremap <silent> zk :call NextClosedFold('k')<cr>
+function! NextClosedFold(dir)
+    let cmd = 'norm!z' . a:dir
+    let view = winsaveview()
+    let [l0, l, open] = [0, view.lnum, 1]
+    while l != l0 && open
+        exe cmd
+        let [l0, l] = [l, line('.')]
+        let open = foldclosed(l) < 0
+    endwhile
+    if open
+        call winrestview(view)
+    endif
+endfunction
