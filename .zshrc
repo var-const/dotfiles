@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man common-aliases cp dircycle extract git history-substring-search mercurial per-directory-history python svn-fast-info)
+plugins=(colored-man common-aliases cp dircycle extract git history-substring-search mercurial python)
 #dirhistory 
 
 source $ZSH/oh-my-zsh.sh
@@ -88,30 +88,14 @@ fi
 # To get fasd working in a shell, some initialization code must be run
 eval "$(fasd --init auto)"
 
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
-
-# I want to copy directories too, for chrissake
-alias cpdv="rsync -rpoghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 # @FIXME remove partially-absolute path (dotfiles)
 OS_NAME=$(~/dotfiles/get_os.sh)
 case $OS_NAME in
   cygwin)
-	alias open="cygstart"
-	alias ack='/cygdrive/c/strawberry/perl/site/bin/ack'
 	# export CC=/usr/bin/clang.exe
 	# export CXX=/usr/bin/clang++
 	set LC_ALL=ru_RU.UTF-8
     ;;
-  darwin)
-	alias vim='mvim -v'
-	;;
 esac
 
 # ls automatically after changing dirs
@@ -123,3 +107,33 @@ function chpwd() {
 # @FIXME I'm just not sure about the case :)
 setopt EXTENDED_GLOB
 setopt extended_glob
+
+# Very cool - allows to always run Vim in a single instance and
+# automatically open new files from shell in this instance.
+# Stolen from: http://vim.wikia.com/wiki/Enable_servername_capability_in_vim/xterm
+# Original comments follow:
+# "Function for always using one (and only one) vim server, even when not
+# using gvim.
+# If you really want a new vim session, simply do not pass any
+# argument to this function"
+# @TODO: make work. At the very least, the vim currently installed doesn't have clientserver
+# functionality
+# function vim {
+#   vim_orig=$(which 2>/dev/null vim)
+#   if [ -z $vim_orig ]; then
+#     echo "$SHELL: vim: command not found"
+#     return 127;
+#   fi
+#   $vim_orig --serverlist | grep -q VIM
+#   # If there is already a vimserver, use it
+#   # unless no args were given
+#   if [ $? -eq 0 ]; then
+#     if [ $# -eq 0 ]; then
+#       $vim_orig
+#     else
+#       $vim_orig --remote "$@"
+#     fi
+#   else
+#     $vim_orig --servername vim "$@"
+#   fi
+# }
