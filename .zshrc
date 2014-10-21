@@ -95,6 +95,8 @@ case $OS_NAME in
 	# export CC=/usr/bin/clang.exe
 	# export CXX=/usr/bin/clang++
 	set LC_ALL=ru_RU.UTF-8
+	export LESS="-R"
+	export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
     ;;
 esac
 

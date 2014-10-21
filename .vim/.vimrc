@@ -72,6 +72,16 @@ NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-speeddating'
+" Should check it out. Original comment:
+" More interesting is the :Subvert command to use the same kind of matching for :grep or :substitute. Example:
+"     The following fixes several different misspellings of "necessary": :%S/{,un}nec{ce,ces,e}sar{y,ily}/{}nec{es}sar{}/g
+" We give Subvert three multimatch sections and define how each one should be replaced.
+" But the kicker is that the whole word is also multimatch:
+" :%S/square/rectangle/g
+" That will replace Square with Rectangle, square with rectangle, SQUARE with RECTANGLE. 
+" Also:
+" Want to turn fooBar into foo_bar? Press crs (coerce to snake_case). MixedCase (crm), camelCase (crc), snake_case (crs), and UPPER_CASE (cru) are all just 3 keystrokes away. These commands support repeat.vim.
+NeoBundle 'tpope/vim-abolish'
 
 NeoBundle 'derekwyatt/vim-fswitch'
 
@@ -155,6 +165,19 @@ NeoBundle 'luochen1990/rainbow'
 
 " For Haskell
 " NeoBundle 'dag/vim2hs'
+
+" Show a VCS diff using Vim's sign column.
+NeoBundle 'mhinz/vim-signify'
+
+" Automatic resizing of Vim windows to the golden ratio
+" Both are really buggy and don't allow to change the ratio
+" zhaocai seems worse and also defines some silly mappings
+" NeoBundle 'roman/golden-ratio'
+" NeoBundle 'zhaocai/GoldenView.Vim'
+
+NeoBundle 'nathanaelkane/vim-indent-guides'
+
+NeoBundle 'ntpeters/vim-better-whitespace'
 
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
@@ -353,6 +376,7 @@ function! s:set_unite_settings()
 	nmap <buffer> <ESC> <Plug>(unite_exit)
 	nmap <buffer> <Tab> <Plug>(unite_narrowing_path)
 	imap <buffer> <Tab> <Plug>(unite_narrowing_path)
+	imap <buffer> <bs> <Plug>(unite_delete_backward_path)
 endfunction
 
 " bufkill
@@ -648,3 +672,21 @@ function! NextClosedFold(dir)
         call winrestview(view)
     endif
 endfunction
+
+" @TODO: check it out
+" http://www.reddit.com/r/vim/comments/1yfzg2/does_anyone_actually_use_easymotion/
+" What I find myself doing constantly is to either jump to some arbitrary point on my screen, or copy some arbitrary line somewhere on screen to my current location.
+" In the former case, I focus my eye on it, hit / or ? and just type whatever I see at the location I want to jump to. incsearch will instantly give me a visual cue when I've typed enough to take me there. Hit enter and I'm there.
+" In the latter case I just use a range instead of counting lines. If I want to copy a line matching "foo", which is located above my current position, I just type:
+" :?foo?t.  
+" ..and hit enter. If I wanted to move it, I'd swap the t for an m. If I wanted to do the same with a line below my current line, I'd swap the question marks with forward slashes:
+" :/foo/t.  
+" Thanks to /u/romainl I can now combine these two methods with the following mappings in my .vimrc file:
+" " allows incsearch highlighting for range commands
+" cnoremap $t <CR>:t''<CR>
+" cnoremap $T <CR>:T''<CR>
+" cnoremap $m <CR>:m''<CR>
+" cnoremap $M <CR>:M''<CR>
+" cnoremap $d <CR>:d<CR>``
+" These allow me to first do a regular search forward or backwards by pressing / or ? and start typing what line I want to copy. Due to incsearch, I'll get an instant visual cue if I'm matching the line I want. Then I hit $ and the ex command I need. So using my previous example I would do:
+" ?foo$m  

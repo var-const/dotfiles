@@ -10,6 +10,8 @@ alias zz='fasd_cd -d -i' # cd with interactive selection
 # I want to copy directories too, for chrissake
 alias cpdv="rsync -rpoghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 
+alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less -M '
+
 # @FIXME remove partially-absolute path (dotfiles)
 OS_NAME=$(~/dotfiles/get_os.sh)
 case $OS_NAME in
