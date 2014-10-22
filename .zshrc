@@ -94,9 +94,9 @@ export EDITOR=vim
 # -2 arg to tmux means "Use 256 colors w/o trying to guess whether
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
-# if command -v tmux>/dev/null; then
-#   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 attach
-# fi
+if command -v tmux>/dev/null; then
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 attach
+fi
 
 # To get fasd working in a shell, some initialization code must be run
 eval "$(fasd --init auto)"
