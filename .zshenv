@@ -28,4 +28,7 @@ case $OS_NAME in
   darwin)
 	alias vim='mvim -v'
 	;;
+  linux)
+	alias open="xdg-open"
+	;;
 esac
