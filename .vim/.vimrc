@@ -17,6 +17,7 @@ let s:is_mac = !s:is_windows && !s:is_cygwin
       \ && (has('mac') || has('macunix') || has('gui_macvim') ||
       \   (!executable('xdg-open') &&
       \     system('uname') =~? '^darwin'))
+let s:is_unix = !s:is_windows && !s:is_cygwin && !s:is_mac
 
 " Use English interface.
 if s:is_windows
@@ -42,9 +43,9 @@ syntax off " seems like it should be off before the whole NeoBundle thing
 
 " Required:
 if has('unix')
-	call neobundle#rc(expand('~/.vim/bundle/'))
+	call neobundle#begin(expand('~/.vim/bundle/'))
 else
-	call neobundle#rc(expand('~/vimfiles/bundle/'))
+	call neobundle#begin(expand('~/vimfiles/bundle/'))
 endif
 " This fucking thing seems to reset filetype
 
@@ -55,6 +56,7 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim', {
       \ 'build' : {
       \     'mac' : 'make -f make_mac.mak',
+      \	    'unix' : 'make',
       \    },
       \ }
 
@@ -78,7 +80,7 @@ NeoBundle 'tpope/vim-speeddating'
 " We give Subvert three multimatch sections and define how each one should be replaced.
 " But the kicker is that the whole word is also multimatch:
 " :%S/square/rectangle/g
-" That will replace Square with Rectangle, square with rectangle, SQUARE with RECTANGLE. 
+" That will replace Square with Rectangle, square with rectangle, SQUARE with RECTANGLE.
 " Also:
 " Want to turn fooBar into foo_bar? Press crs (coerce to snake_case). MixedCase (crm), camelCase (crc), snake_case (crs), and UPPER_CASE (cru) are all just 3 keystrokes away. These commands support repeat.vim.
 NeoBundle 'tpope/vim-abolish'
@@ -96,7 +98,7 @@ NeoBundle 'djoshea/vim-autoread'
 " Some C++ simple refactoring
 if has('win32')
 	" Windows-style line endings, omg
-	NeoBundle 'vim-scripts/refactor' 
+	NeoBundle 'vim-scripts/refactor'
 endif
 
 " C++ better code highlighting
@@ -105,7 +107,9 @@ let g:easytags_include_members = 1
 let g:easytags_python_enabled = 1
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-shell'
-" NeoBundle 'xolox/vim-easytags'
+if s:is_unix
+	NeoBundle 'xolox/vim-easytags'
+end
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 NeoBundle 'vim-jp/cpp-vim'
 " NeoBundle 'vim-scripts/TagHighlight'
@@ -120,14 +124,24 @@ NeoBundle 'SirVer/ultisnips'
 "       \    },
 "       \ }
 " endif
-NeoBundle 'Rip-Rip/clang_complete', {
-      \ 'autoload' : {
-      \     'filetypes' : ['c', 'cpp'],
-      \    },
-      \ }
+if !s:is_unix
+	NeoBundle 'Rip-Rip/clang_complete', {
+		  \ 'autoload' : {
+		  \     'filetypes' : ['c', 'cpp'],
+		  \    },
+		  \ }
+end
 
-if s:is_mac
-	NeoBundle 'Valloric/YouCompleteMe'
+if s:is_mac || s:is_unix
+	NeoBundle 'Valloric/YouCompleteMe', {
+				\ 'build' : {
+				\	'mac' : './install.sh',
+				\	'unix' : './install.sh --clang-completer',
+				\	},
+				\ 'autoload' : {
+				\     'filetypes' : ['c', 'cpp'],
+				\   },
+				\ },
 endif
 
 " TODO: unused
@@ -136,8 +150,7 @@ NeoBundle 'vim-scripts/vimwiki'
 
 " Search in files
 "NeoBundle 'rking/ag.vim'
-NeoBundle 'milesz/ack.vim'
-"NeoBundle 'yegappan/grep'
+NeoBundle 'mileszs/ack.vim'
 
 " NeoBundle 'kana/vim-textobj-entire'
 
@@ -150,9 +163,10 @@ endif
 
 NeoBundle 'vim-scripts/argtextobj.vim'
 
+" @TODO: too wordy
 NeoBundle 'vim-scripts/IndexedSearch'
 
-" nmap <Leader>s  <Plug>ReplaceWithRegisterOperator 
+" nmap <Leader>s  <Plug>ReplaceWithRegisterOperator
 NeoBundle 'vim-scripts/ReplaceWithRegister'
 
 NeoBundle 'houtsnip/vim-emacscommandline'
@@ -179,6 +193,8 @@ NeoBundle 'nathanaelkane/vim-indent-guides'
 
 NeoBundle 'ntpeters/vim-better-whitespace'
 
+call neobundle#end()
+
 " If there are uninstalled bundles found on startup,
 " this will conveniently prompt you to install them.
 NeoBundleCheck
@@ -193,9 +209,9 @@ set iminsert=0
 set imsearch=-1
 
 " Tab stuff
-" how many columns a tab counts for. 
+" how many columns a tab counts for.
 set tabstop=4
-" how many columns text is indented with the reindent operations (<< and >>) 
+" how many columns text is indented with the reindent operations (<< and >>)
 set shiftwidth=4
 set softtabstop=4
 " When expandtab is set, hitting Tab in insert mode will produce the appropriate number of spaces.
@@ -211,7 +227,7 @@ set autoindent
 set number
 set relativenumber
 
-"Better line wrapping 
+"Better line wrapping
 set wrap
 set linebreak
 set textwidth=99
@@ -248,7 +264,7 @@ set autoread
 
 "set list listchars=trail:·
 
-set foldmethod=syntax 
+set foldmethod=syntax
 set foldnestmax=1 "deepest fold is 1 level
 set foldlevelstart=0
 set foldenable
@@ -376,7 +392,6 @@ function! s:set_unite_settings()
 	nmap <buffer> <ESC> <Plug>(unite_exit)
 	nmap <buffer> <Tab> <Plug>(unite_narrowing_path)
 	imap <buffer> <Tab> <Plug>(unite_narrowing_path)
-	imap <buffer> <bs> <Plug>(unite_delete_backward_path)
 endfunction
 
 " bufkill
@@ -597,7 +612,7 @@ endfunction
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-e>"
-" this mapping Enter key to <C-y> to chose the current highlight item 
+" this mapping Enter key to <C-y> to chose the current highlight item
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
@@ -622,7 +637,7 @@ let g:clang_complete_copen = 1
 " let g:clang_library_path ='C:\Program Files\LLVM\bin'
 let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
 " let g:clang_user_options='|| exit 0'
-" let g:clang_auto_user_options='|| exit 0"' 
+" let g:clang_auto_user_options='|| exit 0"'
 " let g:clang_snippets_engine='clang_complete'
 " if there's an error, allow us to see it
 " let g:clang_complete_copen=1
@@ -678,9 +693,9 @@ endfunction
 " What I find myself doing constantly is to either jump to some arbitrary point on my screen, or copy some arbitrary line somewhere on screen to my current location.
 " In the former case, I focus my eye on it, hit / or ? and just type whatever I see at the location I want to jump to. incsearch will instantly give me a visual cue when I've typed enough to take me there. Hit enter and I'm there.
 " In the latter case I just use a range instead of counting lines. If I want to copy a line matching "foo", which is located above my current position, I just type:
-" :?foo?t.  
+" :?foo?t.
 " ..and hit enter. If I wanted to move it, I'd swap the t for an m. If I wanted to do the same with a line below my current line, I'd swap the question marks with forward slashes:
-" :/foo/t.  
+" :/foo/t.
 " Thanks to /u/romainl I can now combine these two methods with the following mappings in my .vimrc file:
 " " allows incsearch highlighting for range commands
 " cnoremap $t <CR>:t''<CR>
@@ -689,4 +704,4 @@ endfunction
 " cnoremap $M <CR>:M''<CR>
 " cnoremap $d <CR>:d<CR>``
 " These allow me to first do a regular search forward or backwards by pressing / or ? and start typing what line I want to copy. Due to incsearch, I'll get an instant visual cue if I'm matching the line I want. Then I hit $ and the ex command I need. So using my previous example I would do:
-" ?foo$m  
+" ?foo$m

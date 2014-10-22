@@ -1,3 +1,9 @@
+# From prezto. Original comment:
+# "Ensure that a non-login, non-interactive shell has a defined environment"
+if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprofile"
+fi
+
 alias a='fasd -a'        # any
 alias s='fasd -si'       # show / search / select
 alias d='fasd -d'        # directory
