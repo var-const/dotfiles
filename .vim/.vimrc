@@ -17,7 +17,7 @@ let s:is_mac = !s:is_windows && !s:is_cygwin
       \ && (has('mac') || has('macunix') || has('gui_macvim') ||
       \   (!executable('xdg-open') &&
       \     system('uname') =~? '^darwin'))
-let s:is_unix = !s:is_windows && !s:is_cygwin && !s:is_mac
+let s:is_linux = !s:is_windows && !s:is_cygwin && !s:is_mac
 
 " Use English interface.
 if s:is_windows
@@ -66,6 +66,8 @@ NeoBundle 'Shougo/unite.vim'
 " TODO: unused
 NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neomru.vim'
+NeoBundle 'ujihisa/unite-colorscheme'
+
 NeoBundle 'vim-scripts/bufkill.vim'
 
 NeoBundle 'tpope/vim-sensible'
@@ -107,7 +109,7 @@ let g:easytags_include_members = 1
 let g:easytags_python_enabled = 1
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-shell'
-if s:is_unix
+if s:is_linux
 	NeoBundle 'xolox/vim-easytags'
 end
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
@@ -124,7 +126,7 @@ NeoBundle 'SirVer/ultisnips'
 "       \    },
 "       \ }
 " endif
-if !s:is_unix
+if !s:is_linux
 	NeoBundle 'Rip-Rip/clang_complete', {
 		  \ 'autoload' : {
 		  \     'filetypes' : ['c', 'cpp'],
@@ -132,7 +134,7 @@ if !s:is_unix
 		  \ }
 end
 
-if s:is_mac || s:is_unix
+if s:is_mac || s:is_linux
 	NeoBundle 'Valloric/YouCompleteMe', {
 				\ 'build' : {
 				\	'mac' : './install.sh',
@@ -149,12 +151,20 @@ endif
 NeoBundle 'vim-scripts/vimwiki'
 
 " Search in files
-"NeoBundle 'rking/ag.vim'
-NeoBundle 'mileszs/ack.vim'
+if s:is_mac || s:is_linux
+	NeoBundle 'rking/ag.vim'
+	NeoBundle 'mileszs/ack.vim'
+endif
 
 " NeoBundle 'kana/vim-textobj-entire'
 
 NeoBundle 'jonathanfilip/vim-lucius'
+NeoBundle 'whatyouhide/vim-gotham'
+NeoBundle 'vim-scripts/xoria256.vim'
+NeoBundle 'dsolstad/vim-wombat256i'
+NeoBundle 'vim-scripts/wombat256.vim'
+NeoBundle 'jnurmine/Zenburn'
+NeoBundle 'tomasr/molokai'
 
 " Visual Studio integration
 if has('win32')
@@ -294,7 +304,11 @@ set autowrite " Automatically save buffer before switching to another one
 set gdefault
 
 " Add the unnamed register to the clipboard
-set clipboard+=unnamed
+if s:is_linux
+	set clipboard=unnamedplus
+else
+	set clipboard+=unnamed
+endif
 
 " seems to be best, right-to-left movement
 inoremap kj <esc>
@@ -366,26 +380,37 @@ let g:unite_source_history_yank_enable = 1
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 " call unite#filters#matcher_default#use(['matcher_regexp'])
 call unite#filters#matcher_default#use(['matcher_glob'])
-" @FIXME doesn' work
+" @FIXME doesn't work
 " Filesystem-recursive
 " nnoremap <leader>ur :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
-nnoremap <leader>fr :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec:!<cr>
+nnoremap <leader>fr :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
 " Filesystem-file
-nnoremap <leader>ff :<C-u>Unite -no-split -buffer-name=files   -start-insert file<cr>
+nnoremap <leader>ff :<C-u>Unite -no-split -buffer-name=files   -start-insert file file_rec/async file/new<cr>
 " Filesystem-history
 nnoremap <leader>fh :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
-" @FIXME doesn' work
 " Filesystem-outline
 nnoremap <leader>fo :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
 " Filesystem-(yank)history
-nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    history/yank<cr>
+nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    -start-insert history/yank register<cr>
 " Filesystem-buffer
-nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer<cr>
+nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert -quick-match buffer_tab buffer<cr>
 " Filesystem-current directory
 nnoremap <silent><leader>fc :<C-u>UniteWithBufferDir
-\ -buffer-name=files -no-split -start-insert buffer file<CR>
+\ -buffer-name=files -no-split -start-insert buffer file file/new<CR>
 " Filesystem-booKmarks
 nnoremap <leader>fk :<C-u>Unite -no-split -buffer-name=bookmark  -start-insert bookmark<cr>
+nnoremap <leader>fg :<C-u>Unite -no-split -buffer-name=unite-grep  -start-insert grep:.<cr>
+nnoremap <leader>fj :<C-u>Unite -no-split -buffer-name=unite-grep  -start-insert jump<cr>
+nnoremap <leader>fclr :<C-u>Unite -no-split -buffer-name=unite-grep  -start-insert colorscheme<cr>
+
+if executable('ag')
+	" Use ag in unite grep source.
+	let g:unite_source_grep_command = 'ag'
+	let g:unite_source_grep_default_opts =
+	\ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+	\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+	let g:unite_source_grep_recursive_opt = ''
+endif
 
 autocmd FileType unite call s:set_unite_settings()
 function! s:set_unite_settings()
@@ -393,6 +418,8 @@ function! s:set_unite_settings()
 	nmap <buffer> <Tab> <Plug>(unite_narrowing_path)
 	imap <buffer> <Tab> <Plug>(unite_narrowing_path)
 endfunction
+
+let g:better_whitespace_filetypes_blacklist=['unite']
 
 " bufkill
 nnoremap <leader>bd :BD<CR> " buffer delete
@@ -420,7 +447,7 @@ endif
 
 " Try to commit the directory the files resides in using TortoiseSvn
 " TODO: I'm sure there are much better SCM-integration plugins out there
-if has("win32")
+if s:is_windows
 	nmap <leader>ci :!TortoiseProc.exe /command:commit /path:"%:p:h"<CR>
 	" nmap <leader>ci :let cur_path = %:p:h | call xolox#misc#os#exec({'command': 'TortoiseProc.exe /command:commit /path:"' . cur_path . '"', 'async': 1})
 endif
@@ -434,6 +461,7 @@ autocmd FileType cpp set commentstring=//%s
 " on every Vim start. Don't know if it's a bug or not, but
 " certainly annoying
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_warning_symbol = '⚠'
 
 " FSwich mappings (slightly modified from Wyatt's)
 " Switch to the file and load it into the current window
@@ -463,7 +491,9 @@ nnoremap <leader>app :w! >>
 let g:vimfiler_as_default_explorer = 1
 
 " Because I'm forced to use Ack 1.x
-let g:ackprg = "ack -H --nocolor --nogroup --column --smart-case --follow"
+if !s:is_linux
+	let g:ackprg = "ack -H --nocolor --nogroup --column --smart-case --follow"
+endif
 
 " doesn't work
 "au insertleave :update<cr>
@@ -521,7 +551,6 @@ if has("autocmd")
 	augroup END
 endif
 
-" @TODO: use
 " Rename the current file
 function! RenameFile()
   let old_name = expand('%')
@@ -533,7 +562,6 @@ function! RenameFile()
   endif
 endfunction
 
-" Rename the current file
 function! NewHeaderSourcePairInCurFileDir()
   let pair_name = @f
   if pair_name != ''
@@ -629,25 +657,27 @@ highlight Identifier gui=italic
 highlight cMember gui=italic
 highlight cMemberTag gui=italic
 
-let g:clang_auto_user_options='path, .clang_complete'
-" let g:clang_exec='"clang'
-" let g:clang_user_options='2>/dev/null || exit 0'
-let g:clang_complete_auto = 0
-let g:clang_complete_copen = 1
-" let g:clang_library_path ='C:\Program Files\LLVM\bin'
-let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
-" let g:clang_user_options='|| exit 0'
-" let g:clang_auto_user_options='|| exit 0"'
-" let g:clang_snippets_engine='clang_complete'
-" if there's an error, allow us to see it
-" let g:clang_complete_copen=1
-" let g:clang_complete_macros=1
-" let g:clang_complete_patterns=0
-" fix cygwin shell redirection
-" set shellredir=>\\"%s\\"\\ 2 > &1
-" set shellredir='>%s\ 2>&1'
-" set shellredir=>\"%s\"\ 2>&1
-" set shellredir=>\"%s\"\ 2>/dev/null
+if s:is_cygwin
+	let g:clang_auto_user_options='path, .clang_complete'
+	" let g:clang_exec='"clang'
+	" let g:clang_user_options='2>/dev/null || exit 0'
+	let g:clang_complete_auto = 0
+	let g:clang_complete_copen = 1
+	" let g:clang_library_path ='C:\Program Files\LLVM\bin'
+	let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
+	" let g:clang_user_options='|| exit 0'
+	" let g:clang_auto_user_options='|| exit 0"'
+	" let g:clang_snippets_engine='clang_complete'
+	" if there's an error, allow us to see it
+	" let g:clang_complete_copen=1
+	" let g:clang_complete_macros=1
+	" let g:clang_complete_patterns=0
+	" fix cygwin shell redirection
+	" set shellredir=>\\"%s\\"\\ 2 > &1
+	" set shellredir='>%s\ 2>&1'
+	" set shellredir=>\"%s\"\ 2>&1
+	" set shellredir=>\"%s\"\ 2>/dev/null
+endif
 
 set shell=zsh\ -l
 
@@ -669,6 +699,10 @@ nmap <leader>yy mtyyP<Plug>CommentaryLine`t
 
 let g:rainbow_active = 1
 
+let g:rainbow_conf = {
+    \  'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    \  'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
+	\}
 " Stolen from: http://stackoverflow.com/questions/9403098/is-it-possible-to-jump-to-closed-folds-in-vim
 " Goes to next _closed_ fold, skipping the open folds, unlike the default.
 " @TODO: make default available via leader key
@@ -705,3 +739,5 @@ endfunction
 " cnoremap $d <CR>:d<CR>``
 " These allow me to first do a regular search forward or backwards by pressing / or ? and start typing what line I want to copy. Due to incsearch, I'll get an instant visual cue if I'm matching the line I want. Then I hit $ and the ex command I need. So using my previous example I would do:
 " ?foo$m
+
+" au FileType c,cpp,objc,objcpp call rainbow#load()
