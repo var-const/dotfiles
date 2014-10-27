@@ -90,6 +90,7 @@ fpath=(~/zsh-completions/src $fpath)
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR=vim
+export VISUAL=vim
 
 # -2 arg to tmux means "Use 256 colors w/o trying to guess whether
 # they're available or not" (this guessing seems to fail under
