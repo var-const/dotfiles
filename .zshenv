@@ -32,3 +32,5 @@ case $OS_NAME in
 	alias open="xdg-open"
 	;;
 esac
+
+alias t='cd ~/worklog && worklog && cd -'

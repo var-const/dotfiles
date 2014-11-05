@@ -199,7 +199,8 @@ NeoBundle 'mhinz/vim-signify'
 " NeoBundle 'roman/golden-ratio'
 " NeoBundle 'zhaocai/GoldenView.Vim'
 
-NeoBundle 'nathanaelkane/vim-indent-guides'
+" NeoBundle 'nathanaelkane/vim-indent-guides'
+NeoBundle 'Yggdroot/indentLine'
 
 NeoBundle 'ntpeters/vim-better-whitespace'
 
@@ -393,7 +394,7 @@ nnoremap <leader>fo :<C-u>Unite -no-split -buffer-name=outline -start-insert out
 " Filesystem-(yank)history
 nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    -start-insert history/yank register<cr>
 " Filesystem-buffer
-nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert -quick-match buffer_tab buffer<cr>
+nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer_tab buffer<cr>
 " Filesystem-current directory
 nnoremap <silent><leader>fc :<C-u>UniteWithBufferDir
 \ -buffer-name=files -no-split -start-insert buffer file file/new<CR>
@@ -741,3 +742,5 @@ endfunction
 " ?foo$m
 
 " au FileType c,cpp,objc,objcpp call rainbow#load()
+
+let g:indentLine_faster = 1
