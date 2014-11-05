@@ -113,6 +113,10 @@ case $OS_NAME in
 	export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
     ;;
   linux)
+	export CC=/usr/bin/gcc-4.9
+	export CXX=/usr/bin/g++-4.9
+	# export CC=/usr/bin/clang
+	# export CXX=/usr/bin/clang++
 	export LESS="-R"
 	export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
     ;;
