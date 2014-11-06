@@ -126,7 +126,7 @@ NeoBundle 'SirVer/ultisnips'
 "       \    },
 "       \ }
 " endif
-if !s:is_linux
+if s:is_windows
 	NeoBundle 'Rip-Rip/clang_complete', {
 		  \ 'autoload' : {
 		  \     'filetypes' : ['c', 'cpp'],
@@ -137,7 +137,7 @@ end
 if s:is_mac || s:is_linux
 	NeoBundle 'Valloric/YouCompleteMe', {
 				\ 'build' : {
-				\	'mac' : './install.sh',
+				\	'mac' : './install.sh --clang-completer',
 				\	'unix' : './install.sh --clang-completer',
 				\	},
 				\ 'autoload' : {
