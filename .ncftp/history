@@ -30,3 +30,6 @@ get Otherworld3_2014_03_05.ipa
 open ftp.mozilla.org
 (line omitted from history because it contained sensitive information)
 quit
+open -u code ftp.boomzap.net
+ls
+exit
