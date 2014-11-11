@@ -126,7 +126,7 @@ NeoBundle 'SirVer/ultisnips'
 "       \    },
 "       \ }
 " endif
-if !s:is_linux
+if s:is_windows
 	NeoBundle 'Rip-Rip/clang_complete', {
 		  \ 'autoload' : {
 		  \     'filetypes' : ['c', 'cpp'],
@@ -137,7 +137,7 @@ end
 if s:is_mac || s:is_linux
 	NeoBundle 'Valloric/YouCompleteMe', {
 				\ 'build' : {
-				\	'mac' : './install.sh',
+				\	'mac' : './install.sh --clang-completer',
 				\	'unix' : './install.sh --clang-completer',
 				\	},
 				\ 'autoload' : {
@@ -200,7 +200,7 @@ NeoBundle 'mhinz/vim-signify'
 " NeoBundle 'zhaocai/GoldenView.Vim'
 
 " NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'Yggdroot/indentLine'
+" NeoBundle 'Yggdroot/indentLine'
 
 NeoBundle 'ntpeters/vim-better-whitespace'
 
@@ -394,7 +394,10 @@ nnoremap <leader>fh :<C-u>Unite -no-split -buffer-name=mru     -start-insert fil
 " Filesystem-outline
 nnoremap <leader>fo :<C-u>Unite -no-split -buffer-name=outline -start-insert outline<cr>
 " Filesystem-(yank)history
-nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    -start-insert history/yank register<cr>
+nnoremap <leader>fy :<C-u>Unite -no-split -buffer-name=yank    -start-insert history/yank<cr>
+" Filesystem-(register)history
+nnoremap <leader>f8 :<C-u>Unite -no-split -buffer-name=register    -start-insert register<cr>
+nnoremap <leader>f* :<C-u>Unite -no-split -buffer-name=register    -start-insert register<cr>
 " Filesystem-buffer
 nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer_tab buffer<cr>
 " Filesystem-current directory
