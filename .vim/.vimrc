@@ -204,6 +204,8 @@ NeoBundle 'Yggdroot/indentLine'
 
 NeoBundle 'ntpeters/vim-better-whitespace'
 
+NeoBundle 'mbbill/undotree'
+
 call neobundle#end()
 
 " If there are uninstalled bundles found on startup,
@@ -462,6 +464,7 @@ autocmd FileType cpp set commentstring=//%s
 " on every Vim start. Don't know if it's a bug or not, but
 " certainly annoying
 let g:ycm_confirm_extra_conf = 0
+let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '⚠'
 
 " FSwich mappings (slightly modified from Wyatt's)
@@ -744,3 +747,13 @@ endfunction
 " au FileType c,cpp,objc,objcpp call rainbow#load()
 
 let g:indentLine_faster = 1
+
+" Extend our undoable steps and preserve over restart (if available)
+if has('persistent_undo')
+	set undodir=$TMPDIR,~/tmp,~/.vim/tmp,/tmp,/var/tmp
+	set undofile
+	set undoreload=10000
+end
+set undolevels=10000
+" UndoTree
+nmap <leader>u :UndotreeToggle<CR>
