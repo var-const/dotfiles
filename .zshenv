@@ -33,4 +33,4 @@ case $OS_NAME in
 	;;
 esac
 
-alias t='cd ~/worklog && worklog && cd -'
+alias svn-st-imm="svn st --depth files"
