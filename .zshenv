@@ -34,3 +34,5 @@ case $OS_NAME in
 esac
 
 alias svn-st-imm="svn st --depth files"
+alias svn-st-vers="svn st | grep '^[M|D|A]'"
+alias svn-st-vers-imm="svn st | grep '^[M|D|A]' --depth files"
