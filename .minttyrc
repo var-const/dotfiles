@@ -1,7 +1,7 @@
 BoldAsFont=no
 Transparency=off
 CursorBlinks=no
-FontHeight=18
+FontHeight=12
 BackgroundColour=0,0,0
 CursorType=block
 Locale=ru_RU
