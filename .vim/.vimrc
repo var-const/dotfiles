@@ -135,15 +135,15 @@ if s:is_windows
 end
 
 if s:is_mac || s:is_linux
-	NeoBundle 'Valloric/YouCompleteMe', {
-				\ 'build' : {
-				\	'mac' : './install.sh --clang-completer',
-				\	'unix' : './install.sh --clang-completer',
-				\	},
-				\ 'autoload' : {
-				\     'filetypes' : ['c', 'cpp'],
-				\   },
-				\ },
+ " NeoBundle 'Valloric/YouCompleteMe', {
+	" 			\ 'build' : {
+	" 			\	'mac' : './install.sh --clang-completer',
+	" 			\	'unix' : './install.sh --clang-completer',
+	" 			\	},
+	" 			\ 'autoload' : {
+	" 			\     'filetypes' : ['c', 'cpp'],
+	" 			\   },
+	" 			\ },
 endif
 
 " TODO: unused
@@ -200,11 +200,15 @@ NeoBundle 'mhinz/vim-signify'
 " NeoBundle 'zhaocai/GoldenView.Vim'
 
 " NeoBundle 'nathanaelkane/vim-indent-guides'
-" NeoBundle 'Yggdroot/indentLine'
+NeoBundle 'Yggdroot/indentLine'
 
 NeoBundle 'ntpeters/vim-better-whitespace'
 
 NeoBundle 'mbbill/undotree'
+
+NeoBundle 'junegunn/vim-easy-align'
+
+NeoBundle 'regedarek/ZoomWin'
 
 call neobundle#end()
 
@@ -760,3 +764,7 @@ end
 set undolevels=10000
 " UndoTree
 nmap <leader>u :UndotreeToggle<CR>
+
+set list lcs=tab:\|\ 
+
+nnoremap <silent> <leader>z :call ZoomWin()<cr>
