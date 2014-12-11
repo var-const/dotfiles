@@ -33,3 +33,42 @@ quit
 open -u code ftp.boomzap.net
 ls
 exit
+open -u code ftp.boomzap.net 
+ls
+exit
+cd internal/qst
+ls
+get tqa_2014_11_14.rar
+get tqa_2014_11_03.rar
+get tq_2014_11_20.rar tq_2014_11_03.rar
+ls
+open boomzap
+open -u code ftp.boomzap.net
+ls
+cd internal/qst
+get tq_2014_11_14. rar tq_2014_11_17.rar
+get tq_2014_11_14.rar
+open -u code ftp.boomzap.net
+cd internal/qst
+get tq_2014_11_14.rar
+ls
+open -u code ftp.boomzap.net
+cd internal
+ls
+get dxdsk
+cd dxdsk/
+ls
+get dxsdk_oct2004.exe 
+exit
+cd bigfish/dr1
+ls
+cd ../lsit5
+ls
+du lsit5_src.rar
+cd ..
+ls ec6
+get ec6_source_2014_06_16.rar
+get ec6/ec6_source_2014_06_16.rar 
+cd internal/pm2
+get pm2_2014_12_03.rar 
+exit
