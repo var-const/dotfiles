@@ -37,5 +37,23 @@ esac
 alias svn-st-imm="svn st --depth files"
 alias svn-st-vers="svn st | grep '^[M|D|A]'"
 alias svn-st-vers-imm="svn st | grep '^[M|D|A]' --depth files"
+alias svn-mk-patch="svn diff --diff-cmd /usr/bin/diff -x \"-i -b\""
 
 alias rsy="rsync-copy"
+
+alias du="du -h"
+
+svn-log-user() {
+	username="$1"
+	args="${@:2}"
+	# echo "$args"
+	# svn log "$args" | sed -n "/\"$username\"/,/-----$/ p"
+	svn log "$args" | sed -n "/$username/,/-----$/ p"
+}
+svn-log-user-period() {
+	username="$1"
+	shift="$2"
+	prev_date="$(date '+%Y-%m-%d %H:%M' --date today$shift)"
+	today="$(date '+%Y-%m-%d %H:%M')"
+	svn log -vr \{"$prev_date"\}:\{"$today"\} | sed -n "/$username/,/-----$/ p"
+}
