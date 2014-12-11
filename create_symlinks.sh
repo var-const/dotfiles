@@ -23,3 +23,7 @@ $cmd ln -s $wd/.tmux.conf ~/.tmux.conf
 $cmd ln -s $wd/.vim/.vimrc ~/.vimrc
 $cmd ln -s $wd/.zshrc ~/.zshrc
 $cmd ln -s $wd/.zshenv ~/.zshenv
+
+mkdir ~/.subversion
+rm -rf ~/.subversion/config
+$cmd ln -s $wd/svn_config ~/.subversion/config
