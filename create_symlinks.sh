@@ -21,6 +21,7 @@ fi
 $cmd ln -s $wd/.profile ~/.profile
 $cmd ln -s $wd/.tmux.conf ~/.tmux.conf
 $cmd ln -s $wd/.vim/.vimrc ~/.vimrc
+$cmd ln -s $wd/.zpreztorc ~/.zpreztorc
 $cmd ln -s $wd/.zshrc ~/.zshrc
 $cmd ln -s $wd/.zshenv ~/.zshenv
 
