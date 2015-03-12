@@ -111,7 +111,7 @@ let g:easytags_python_enabled = 1
 NeoBundle 'xolox/vim-misc'
 NeoBundle 'xolox/vim-shell'
 if s:is_linux
-	NeoBundle 'xolox/vim-easytags'
+	" NeoBundle 'xolox/vim-easytags'
 end
 NeoBundle 'octol/vim-cpp-enhanced-highlight'
 NeoBundle 'vim-jp/cpp-vim'
@@ -768,4 +768,37 @@ nmap <leader>u :UndotreeToggle<CR>
 
 set list lcs=tab:\|\ 
 
-nnoremap <silent> <leader>z :call ZoomWin()<cr>
+nnoremap <silent> <leader>zw :call ZoomWin()<cr>
+
+function! ScrollToPercent(percent)
+    let movelines=winheight(0)*(50-a:percent)/100
+    echo movelines
+    if movelines<0
+        let motion='k'
+        let rmotion='j'
+        let movelines=-movelines
+    elseif movelines>0
+        let motion='j'
+        let rmotion='k'
+    else
+        return 0
+    endif
+    if has('float') && type(movelines)==type(0.0)
+        let movelines=float2nr(movelines)
+    endif
+    execute 'normal! zz'.movelines.motion.'zz'.movelines.rmotion
+endfunction
+
+nnoremap <leader>zz :<C-u>call ScrollToPercent(15)<CR>
+
+" :hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+:hi CursorLine   cterm=NONE ctermbg=white ctermfg=black
+" :hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
+" :nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+:nnoremap <Leader>c :set cursorline!<CR>
+
+" @FIXME need a better mapping
+nmap <Up> <C-W>+
+nmap <Down> <C-W>-
+nmap <Left> <C-W>>
+nmap <Right> <C-W><
