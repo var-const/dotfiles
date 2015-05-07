@@ -812,3 +812,63 @@ set timeout
 set ttimeout
 set timeoutlen=500
 set ttimeoutlen=10
+
+" 'Clighter searches libclang-3.5 in your system automatically.
+" You must set this option when clighter cannot find libclang, or other version of libclang is used.'
+" We're using 3.6, so let's provide the path explicitly
+let g:clighter_libclang_file = '/usr/lib/x86_64-linux-gnu/libclang-3.6.so'
+let g:clighter_occurrences_mode = 1
+
+" " Free functions
+hi link clighterDeclRefExprCall Function
+hi link clighterFunctionDecl Function
+
+" " Enums
+" hi link clighterEnumDecl Identifier
+" hi link clighterEnumConstantDecl Constant
+" hi link clighterDeclRefExprEnum Constant
+
+" hi link clighterMacroInstantiation Constant
+" hi link clighterPrepro PreProc
+
+" Member variable and method calls
+hi link clighterMemberRefExprCall Function
+
+" " Not working
+" hi link clighterMemberRefExprVar Error
+
+" " namespace { ... }
+" hi link clighterNamespace Constant
+" hi link clighterNamespaceRef Constant
+
+" hi link clighterOccurrences IncSearch
+
+" " Templated types
+" hi link clighterTemplateRef Type
+
+" " References to templated types
+" hi link clighterTypeRef Type
+
+" " The 'T' in template <class T>
+" hi link clighterTemplateTypeParameter Type
+
+" " class/struct declarations
+" hi link clighterClassDecl None
+" hi link clighterStructDecl None
+
+" " 'using name = ...' statements
+" hi link clighterDecl None
+
+" " Class member variable declarations
+" hi link clighterFieldDecl None
+
+" " Function parameters, including the template types
+" hi link clighterParmDecl None
+
+" " Lambda campture variables, using std::name statements
+" hi link clighterRef None
+
+" hi link clighterUnionDecl None
+
+" " Local variables
+" hi link clighterVarDecl None
