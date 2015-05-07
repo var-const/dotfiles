@@ -72,3 +72,11 @@ get ec6/ec6_source_2014_06_16.rar
 cd internal/pm2
 get pm2_2014_12_03.rar 
 exit
+cd internal/qst
+ls
+mv tqa_2014_12_14.rar tqa_2014_12_12.rar
+ls
+exit
+cd internal/qst
+put tqa_2014_12_24.rar 
+exit

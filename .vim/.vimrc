@@ -106,17 +106,20 @@ if has('win32')
 endif
 
 " C++ better code highlighting
-let g:easytags_async = 1
-let g:easytags_include_members = 1
-let g:easytags_python_enabled = 1
-NeoBundle 'xolox/vim-misc'
-NeoBundle 'xolox/vim-shell'
-if s:is_linux
+" Disabled in favor of clighter
+" let g:easytags_async = 1
+" let g:easytags_include_members = 1
+" let g:easytags_python_enabled = 1
+" NeoBundle 'xolox/vim-misc'
+" NeoBundle 'xolox/vim-shell'
+" if s:is_linux
 	" NeoBundle 'xolox/vim-easytags'
-end
-NeoBundle 'octol/vim-cpp-enhanced-highlight'
-NeoBundle 'vim-jp/cpp-vim'
-" NeoBundle 'vim-scripts/TagHighlight'
+" end
+" NeoBundle 'octol/vim-cpp-enhanced-highlight'
+" NeoBundle 'vim-jp/cpp-vim'
+"" NeoBundle 'vim-scripts/TagHighlight'
+
+NeoBundle 'bbchung/clighter'
 
 " TODO: unused
 NeoBundle 'SirVer/ultisnips'
@@ -137,15 +140,15 @@ if s:is_windows
 end
 
 if s:is_mac || s:is_linux
- " NeoBundle 'Valloric/YouCompleteMe', {
-	" 			\ 'build' : {
-	" 			\	'mac' : './install.sh --clang-completer',
-	" 			\	'unix' : './install.sh --clang-completer',
-	" 			\	},
-	" 			\ 'autoload' : {
-	" 			\     'filetypes' : ['c', 'cpp'],
-	" 			\   },
-	" 			\ },
+ NeoBundle 'Valloric/YouCompleteMe', {
+				\ 'build' : {
+				\	'mac' : './install.sh --clang-completer',
+				\	'unix' : './install.sh --clang-completer',
+				\	},
+				\ 'autoload' : {
+				\     'filetypes' : ['c', 'cpp', 'objc', 'objcpp', 'python'],
+				\   },
+				\ },
 endif
 
 " TODO: unused
