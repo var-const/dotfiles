@@ -215,6 +215,8 @@ NeoBundle 'junegunn/vim-easy-align'
 
 NeoBundle 'regedarek/ZoomWin'
 
+NeoBundle 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
+
 call neobundle#end()
 
 " If there are uninstalled bundles found on startup,
@@ -237,7 +239,7 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 " When expandtab is set, hitting Tab in insert mode will produce the appropriate number of spaces.
-" set noexpandtab
+set expandtab
 
 autocmd FileType xml setlocal shiftwidth=2 tabstop=2
 
@@ -328,6 +330,7 @@ inoremap kj <esc>
 inoremap jk <esc>
 " saves
 inoremap jj <esc>:w<CR>
+inoremap ZZ <esc>:wq<CR>
 
 nnoremap k gk
 nnoremap j gj
@@ -872,3 +875,29 @@ hi link clighterMemberRefExprCall Function
 
 " " Local variables
 " hi link clighterVarDecl None
+
+" let g:pymode_lint_checkers = ['pylint', 'pep8', 'mccabe', 'pep257']
+" let g:pymode_lint_checkers = ['pylint', 'pep8', 'mccabe']
+" All these rebindings don't work for some reason
+" let g:pymode_run_bind = '<leader>pr'
+" let g:pymode_run_bind = '<leader>q'
+" let g:pymode_breakpoint_bind='<leader>e'
+
+let g:pymode_lint_ignore = ''
+" Sort errors: E errors first, then warnings, etc.
+let g:pymode_lint_sort = ['E', 'C', 'I']
+" let g:pymode_lint_todo_symbol = 'WW'
+let g:pymode_lint_comment_symbol = '⚠'
+" let g:pymode_lint_visual_symbol = 'RR'
+let g:pymode_lint_error_symbol = '✗'
+" let g:pymode_lint_info_symbol = 'II'
+" let g:pymode_lint_pyflakes_symbol = 'FF'
+
+let g:pymode_rope_completion = 0
+let g:pymode_rope_complete_on_dot = 0
+
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gw :Gwrite<CR>
+nnoremap <Leader>gc :Gcommit<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gb :Gblame<CR>
