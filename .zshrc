@@ -9,11 +9,12 @@ fpath=(~/zsh-completions/src $fpath)
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
+export BROWSER=firefox
 
 # -2 arg to tmux means "Use 256 colors w/o trying to guess whether
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
-if command -v tmux>/dev/null; then
+if [[ -n $DISPLAY ]] && command -v tmux>/dev/null; then
   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 attach
 fi
 
@@ -22,6 +23,10 @@ eval "$(fasd --init auto)"
 
 # @FIXME remove partially-absolute path (dotfiles)
 OS_NAME=$(~/dotfiles/get_os.sh)
+DISTRO_NAME=""
+if [[ $OS_NAME == "linux" ]]; then
+    DISTRO_NAME=$(~/dotfiles/get-distro-name.sh)
+fi
 case $OS_NAME in
   cygwin)
 	# export CC=/usr/bin/clang.exe
@@ -35,10 +40,16 @@ case $OS_NAME in
 	# export CXX=/usr/bin/g++-4.9
 	# export CC=/usr/bin/clang
 	# export CXX=/usr/bin/clang++
-	export CC=clang-3.6
-	export CXX=clang++-3.6
-	# export CC=/usr/bin/clang-3.6
-	# export CXX=/usr/bin/clang++-3.6
+    case $DISTRO_NAME in
+        arch)
+            export CC=clang
+            export CXX=clang++
+            ;;
+        ubuntu)
+            export CC=clang-3.6
+            export CXX=clang++-3.6
+            ;;
+    esac
 	export LESS="-R"
 	export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
     ;;
