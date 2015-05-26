@@ -43,6 +43,10 @@ alias rsy="rsync-copy"
 
 alias du="du -h"
 
+alias shutdown="systemctl poweroff"
+alias reboot="systemctl reboot"
+alias suspend="systemctl suspend"
+
 svn-log-user() {
 	username="$1"
 	args="${@:2}"
