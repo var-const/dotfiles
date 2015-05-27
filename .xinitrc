@@ -37,6 +37,8 @@ fi
 # compton -b --backend glx --vsync opengl-swc --paint-on-overlay
 compton -b --backend glx --vsync opengl-swc
 
-exec awesome
-
-#exec bspwm
+sxhkd &
+termite &
+firefox &
+unclutter &
+exec bspwm
