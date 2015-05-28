@@ -3,7 +3,7 @@
 " OPTION {{{
   group user
   set guioptions=bCrsT
-  set hintkeys=fjdkvnslerutcmxapzb
+  set hintkeys=fjdkvnslerutcmxazb
   set hlfind
 
   " find as you type
