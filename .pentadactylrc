@@ -30,6 +30,10 @@
   " movement
   nmap j 3<Down>
   nmap k 3<Up>
+  map <C-h> :tabmove -1<CR>
+  map <C-l> :tabmove +1<CR>
+  " map <C-L> :tabmove 99<CR>
+  map <Leader><C-l> :tabmove 99<CR>
   " " vimium like keymap
   " nmap d <C-d>
   " nmap u <C-u>
