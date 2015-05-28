@@ -3,8 +3,6 @@
 if [[ -z $(pidof xcape) ]]; then
     setxkbmap -model pc104 -layout us,ru -option grp:alt_shift_toggle
 
-    # spare_modifier="Hyper_L"
-    # spare_modifier="Scroll_Lock"
     spare_modifier="VoidSymbol"
 
     xmodmap -e "keycode 36 = $spare_modifier"
