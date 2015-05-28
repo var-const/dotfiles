@@ -12,6 +12,8 @@ alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
+alias v='f -e vim'       # quick opening files with vim
+alias zat='f -e zathura' # quick opening files with zathura
 
 # I want to copy directories too, for chrissake
 alias cpdv="rsync -rpoghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
@@ -48,6 +50,11 @@ alias reboot="systemctl reboot"
 alias suspend="systemctl suspend"
 
 alias aria-movie='aria2c --dir=/media/double/movies'
+alias aria-got='aria2c --dir=/media/double/movies/game-of-thrones'
+alias aria-prog-book='aria2c --dir=/media/double/prog-books'
+alias aria-book='aria2c --dir=/media/double/books'
+alias aria-music='aria2c --dir=/media/double/music'
+alias aria-mp3='aria2c --dir=/media/double/music/mp3'
 
 svn-log-user() {
 	username="$1"
