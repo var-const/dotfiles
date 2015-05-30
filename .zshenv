@@ -43,18 +43,19 @@ alias svn-mk-patch="svn diff --diff-cmd /usr/bin/diff -x \"-i -b\""
 
 alias rsy="rsync-copy"
 
-alias du="du -h"
+# Should be unnecessary because of utility module in prezto
+# alias du="du -h"
 
 alias shutdown="systemctl poweroff"
 alias reboot="systemctl reboot"
 alias suspend="systemctl suspend"
 
-alias aria-movie='aria2c --dir=/media/double/movies'
-alias aria-got='aria2c --dir=/media/double/movies/game-of-thrones'
-alias aria-prog-book='aria2c --dir=/media/double/prog-books'
-alias aria-book='aria2c --dir=/media/double/books'
-alias aria-music='aria2c --dir=/media/double/music'
-alias aria-mp3='aria2c --dir=/media/double/music/mp3'
+alias aria-movie='aria2c --dir=/mnt/double/movies'
+alias aria-got='aria2c --dir=/mnt/double/movies/game-of-thrones'
+alias aria-prog-book='aria2c --dir=/mnt/double/prog-books'
+alias aria-book='aria2c --dir=/mnt/double/books'
+alias aria-music='aria2c --dir=/mnt/double/music'
+alias aria-mp3='aria2c --dir=/mnt/double/music/mp3'
 
 svn-log-user() {
 	username="$1"
