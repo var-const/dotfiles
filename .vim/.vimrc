@@ -818,8 +818,9 @@ set ttimeoutlen=10
 
 " 'Clighter searches libclang-3.5 in your system automatically.
 " You must set this option when clighter cannot find libclang, or other version of libclang is used.'
-" We're using 3.6, so let's provide the path explicitly
-let g:clighter_libclang_file = '/usr/lib/x86_64-linux-gnu/libclang-3.6.so'
+" On Ubuntu, We're using 3.6, so let's provide the path explicitly
+" let g:clighter_libclang_file = '/usr/lib/x86_64-linux-gnu/libclang-3.6.so'
+" @TODO: differentiate between Arch and Ubuntu
 let g:clighter_occurrences_mode = 1
 
 " " Free functions
@@ -901,3 +902,8 @@ nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
+
+" Write with superuser permissions
+cmap w!! w !sudo tee %
+
+" @TODO: gre works, but grE doesn't (insert and replace)
