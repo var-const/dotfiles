@@ -34,6 +34,8 @@
   map <C-l> :tabmove +1<CR>
   " map <C-L> :tabmove 99<CR>
   map <Leader><C-l> :tabmove 99<CR>
+  map <C-j> :tabdetach<CR>
+
   " " vimium like keymap
   " nmap d <C-d>
   " nmap u <C-u>
