@@ -907,3 +907,12 @@ nnoremap <Leader>gb :Gblame<CR>
 cmap w!! w !sudo tee %
 
 " @TODO: gre works, but grE doesn't (insert and replace)
+
+let g:neomru#file_mru_ignore_pattern =
+\ '\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
+\ '\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
+\ '\|^\%(\\\\\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'.
+\ '\|\%(^\%(fugitive\)://\)'
+
+let g:neomru#directory_mru_ignore_pattern = '\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
+\ '\|^\%(\\\\\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'
