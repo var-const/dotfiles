@@ -46,9 +46,9 @@ alias rsy="rsync-copy"
 # Should be unnecessary because of utility module in prezto
 # alias du="du -h"
 
-alias shutdown="systemctl poweroff"
-alias reboot="systemctl reboot"
-alias suspend="systemctl suspend"
+alias shutd="systemctl poweroff"
+alias reb="systemctl reboot"
+alias susp="systemctl suspend"
 
 alias aria-movie='aria2c --dir=/mnt/double/movies'
 alias aria-got='aria2c --dir=/mnt/double/movies/game-of-thrones'
