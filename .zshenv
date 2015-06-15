@@ -46,7 +46,7 @@ alias rsy="rsync-copy"
 # Should be unnecessary because of utility module in prezto
 # alias du="du -h"
 
-alias shutd="systemctl poweroff"
+alias shut="systemctl poweroff"
 alias reb="systemctl reboot"
 alias susp="systemctl suspend"
 
