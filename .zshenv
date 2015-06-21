@@ -56,6 +56,7 @@ alias aria-prog-book='aria2c --dir=/mnt/double/prog-books'
 alias aria-book='aria2c --dir=/mnt/double/books'
 alias aria-music='aria2c --dir=/mnt/double/music'
 alias aria-mp3='aria2c --dir=/mnt/double/music/mp3'
+alias aria-game='aria2c --dir=/mnt/double/games'
 
 svn-log-user() {
 	username="$1"
