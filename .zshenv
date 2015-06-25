@@ -60,6 +60,8 @@ alias aria-game='aria2c --dir=/mnt/double/games'
 
 alias mpv='mpv --no-audio-display'
 
+alias cv='cv -w'
+
 svn-log-user() {
 	username="$1"
 	args="${@:2}"
