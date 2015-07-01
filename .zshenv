@@ -57,7 +57,7 @@ alias aria-book='aria2c --dir=/mnt/double/books'
 alias aria-music='aria2c --dir=/mnt/double/music'
 alias aria-mp3='aria2c --dir=/mnt/double/music/mp3'
 alias aria-game='aria2c --dir=/mnt/double/games'
-alias aria-cwd='aria2c --dir=.'
+alias aria-here='aria2c --dir=.'
 
 alias mpv='mpv --no-audio-display'
 
