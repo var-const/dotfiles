@@ -4,6 +4,7 @@
   group user
   set guioptions=bCrsT
   set hintkeys=fjdkvnsleutcmxazb
+  " Highlight all search matches, not just the first
   set hlfind
 
   " find as you type
