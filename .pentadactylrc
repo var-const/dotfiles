@@ -28,12 +28,11 @@
   map <Space> <Leader>
   nmap <Leader>a a -tags 
   " movement
-  nmap j 3<Down>
-  nmap k 3<Up>
+  map -count -modes=n j -builtin <count>3j
+  map -count -modes=n k -builtin <count>3k
   map <C-h> :tabmove -1<CR>
   map <C-l> :tabmove +1<CR>
-  " map <C-L> :tabmove 99<CR>
-  map <Leader><C-l> :tabmove 99<CR>
+  map <Leader><C-l> :tabmove $<CR>
   map <C-j> :tabdetach<CR>
 
   " " vimium like keymap
