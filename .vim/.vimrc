@@ -91,7 +91,7 @@ NeoBundle 'tpope/vim-abolish'
 
 NeoBundle 'derekwyatt/vim-fswitch'
 
-NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'Raimondi/delimitMate'
 " Original comment: "If you are using a console version of Vim, or dealing
 " with a file that changes externally (e.g. a web server log)
 " then Vim does not always check to see if the file has been changed.
@@ -121,7 +121,6 @@ endif
 
 NeoBundle 'bbchung/clighter'
 
-" TODO: unused
 NeoBundle 'SirVer/ultisnips'
 
 " if s:is_cygwin
@@ -151,14 +150,9 @@ if s:is_mac || s:is_linux
 				\ },
 endif
 
-" TODO: unused
-" Organizer
-NeoBundle 'vim-scripts/vimwiki'
-
 " Search in files
 if s:is_mac || s:is_linux
 	NeoBundle 'rking/ag.vim'
-	NeoBundle 'mileszs/ack.vim'
 endif
 
 " NeoBundle 'kana/vim-textobj-entire'
@@ -231,6 +225,30 @@ set keymap=russian-jcukenwin
 " set iminsert=2
 set iminsert=0
 set imsearch=-1
+" @TODO: supposed to change cursor color when keymap is changed,
+" doesn't seem to work
+highlight lCursor guifg=NONE guibg=Cyan
+
+" language
+inoremap <C-l> <C-O>:call ToggleKeymap()<CR>
+
+" Also switch some keybindings. 'kj' is rare in English, but 'ол' is common in Russian
+function! ToggleKeymap()
+  " iminsert can be used to check if keymap is currently enabled (== 1) or not (== 0)
+  if &iminsert == 0
+      iunmap jj
+      iunmap jk
+      iunmap kj
+      inoremap mm <esc>:w<CR>
+  else
+      iunmap mm
+      inoremap kj <esc>
+      inoremap jk <esc>
+      inoremap jj <esc>:w<CR>
+  endif
+  call feedkeys("\<C-^>")
+endfunction
+
 
 " Tab stuff
 " how many columns a tab counts for.
@@ -254,7 +272,8 @@ set relativenumber
 "Better line wrapping
 set wrap
 set linebreak
-set textwidth=99
+" set textwidth=99
+set textwidth=80
 set formatoptions=qrn1
 
 "Set incremental searching"
@@ -331,6 +350,9 @@ inoremap jk <esc>
 " saves
 inoremap jj <esc>:w<CR>
 inoremap ZZ <esc>:wq<CR>
+cnoremap kj <esc>
+cnoremap jk <esc>
+cnoremap jj <CR>
 
 nnoremap k gk
 nnoremap j gj
@@ -356,7 +378,7 @@ nnoremap <C-l> <C-w>l
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <F3> :set hlsearch!<CR>
+nnoremap <F3> /abcabcabcabcabcabcabcabc<CR>
 
 " Don't move on *
 "nnoremap * *N
@@ -659,6 +681,8 @@ endfunction
 au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsListSnippets="<c-e>"
+let g:UltiSnipsSnippetDirectories = ["custom-ulti-snippets", "UltiSnips"]
+
 " this mapping Enter key to <C-y> to chose the current highlight item
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
@@ -815,6 +839,7 @@ set timeout
 set ttimeout
 set timeoutlen=500
 set ttimeoutlen=10
+set noesckeys
 
 " 'Clighter searches libclang-3.5 in your system automatically.
 " You must set this option when clighter cannot find libclang, or other version of libclang is used.'
