@@ -24,5 +24,6 @@ stow tmux
 stow vim
 stow vimpager
 stow x
+stow youtube-dl
 stow zathura
 stow zsh
