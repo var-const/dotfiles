@@ -12,6 +12,7 @@ stow bspwm
 stow git
 stow mercurial
 stow mps-youtube
+stow mpv
 if [ "$os" == "cygwin" ]; then
     stow mintty
     stow ncftp
