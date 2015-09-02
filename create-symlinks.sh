@@ -5,6 +5,7 @@ wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 os=$($wd/get-os.sh)
 
 stow ack
+stow aria2
 stow archey3
 stow bash
 stow bspwm
