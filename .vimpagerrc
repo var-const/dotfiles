@@ -1,0 +1,30 @@
+set noloadplugins
+
+let vimpager_disable_x11 = 1
+
+"if has('vim_starting')
+  "set nocompatible               " Be iMproved
+	"if has('unix')
+		"set runtimepath+=~/.vim/bundle/neobundle.vim/
+	"else
+		"set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+	"endif
+"endif
+""
+"syntax off " seems like it should be off before the whole NeoBundle thing
+""
+""" Required:
+"if has('unix')
+	"call neobundle#begin(expand('~/.vim/bundle/'))
+"else
+	"call neobundle#begin(expand('~/vimfiles/bundle/'))
+"endif
+""
+"syntax on
+""
+"NeoBundleFetch 'Shougo/neobundle.vim'
+"NeoBundle 'jonathanfilip/vim-lucius'
+"call neobundle#end()
+""
+"colorscheme lucius
+"LuciusLight
