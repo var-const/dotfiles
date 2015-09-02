@@ -941,3 +941,7 @@ let g:neomru#file_mru_ignore_pattern =
 
 let g:neomru#directory_mru_ignore_pattern = '\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
 \ '\|^\%(\\\\\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'
+
+autocmd FileType text,gitcommit setlocal spell
+set spelllang=en_us,ru_ru
+set complete+=kspell
