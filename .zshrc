@@ -50,8 +50,9 @@ case $OS_NAME in
             export CXX=clang++-3.6
             ;;
     esac
-	export LESS="-R"
-	export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+	# export LESS="-R"
+	# export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+    export PAGER=/usr/bin/vimpager
     ;;
 esac
 
