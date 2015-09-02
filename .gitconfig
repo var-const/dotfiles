@@ -3,6 +3,8 @@
 	email = vk@localhost
 [core]
 	excludesfile = /home/vk/.gitignore
+    ; @TODO: make vimpager work
+    pager = less
 [diff]
 	tool = vimdiff
 [merge]
