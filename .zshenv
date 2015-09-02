@@ -58,6 +58,8 @@ alias aria-music='aria2c --dir=/mnt/double/music'
 alias aria-mp3='aria2c --dir=/mnt/double/music/mp3'
 alias aria-game='aria2c --dir=/mnt/double/games'
 alias aria-here='aria2c --dir=.'
+alias ydl='youtube-dl'
+alias ydl-prog='youtube-dl --output "/mnt/double/prog-vids/%(title)s.%(ext)s"'
 
 alias mpv='mpv --no-audio-display'
 
