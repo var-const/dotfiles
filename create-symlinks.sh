@@ -2,7 +2,7 @@
 
 # Thanks to SO: http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-os=$($wd/get_os.sh)
+os=$($wd/get-os.sh)
 
 stow ack
 stow archey3

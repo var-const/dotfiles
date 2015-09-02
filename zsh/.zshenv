@@ -21,7 +21,7 @@ alias cpdv="rsync -rpoghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
 alias lessh='LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s" less -M '
 
 # @FIXME remove partially-absolute path (dotfiles)
-OS_NAME=$(~/dotfiles/get_os.sh)
+OS_NAME=$(~/dotfiles/get-os.sh)
 case $OS_NAME in
   cygwin)
 	alias open="cygstart"

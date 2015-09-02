@@ -22,7 +22,7 @@ fi
 eval "$(fasd --init auto)"
 
 # @FIXME remove partially-absolute path (dotfiles)
-OS_NAME=$(~/dotfiles/get_os.sh)
+OS_NAME=$(~/dotfiles/get-os.sh)
 DISTRO_NAME=""
 if [[ $OS_NAME == "linux" ]]; then
     DISTRO_NAME=$(~/dotfiles/get-distro-name.sh)
