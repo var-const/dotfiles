@@ -119,3 +119,4 @@ plugins
 gitignore
 repo
 plugin
+NeoBundle
