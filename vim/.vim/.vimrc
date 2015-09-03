@@ -442,6 +442,7 @@ nnoremap <leader>fk :<C-u>Unite -no-split -buffer-name=bookmark  -start-insert b
 nnoremap <leader>fg :<C-u>Unite -no-split -buffer-name=unite-grep  -start-insert grep:.<cr>
 nnoremap <leader>fj :<C-u>Unite -no-split -buffer-name=unite-grep  -start-insert jump<cr>
 nnoremap <leader>fclr :<C-u>Unite -no-split -buffer-name=unite-grep  -start-insert colorscheme<cr>
+nnoremap <leader>fd :e %:h<cr>
 
 if executable('ag')
 	" Use ag in unite grep source.
