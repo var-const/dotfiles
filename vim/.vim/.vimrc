@@ -138,7 +138,7 @@ if s:is_windows
 		  \ }
 end
 
-if s:is_mac || s:is_linux
+if s:is_mac " || s:is_linux
  NeoBundle 'Valloric/YouCompleteMe', {
 				\ 'build' : {
 				\	'mac' : './install.sh --clang-completer',
