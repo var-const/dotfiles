@@ -1,1 +1,2 @@
 --output "/mnt/double/youtube-vids/%(title)s.%(ext)s"
+--external-downloader aria2c
