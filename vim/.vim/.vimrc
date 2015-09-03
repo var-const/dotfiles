@@ -923,6 +923,7 @@ let g:pymode_lint_error_symbol = '✗'
 let g:pymode_rope_completion = 0
 let g:pymode_rope_complete_on_dot = 0
 
+" Fugitive mappings
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit<CR>
