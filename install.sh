@@ -27,3 +27,5 @@ stow x
 stow youtube-dl
 stow zathura
 stow zsh
+
+./install-vim-neobundle.sh
