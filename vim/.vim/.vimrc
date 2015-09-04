@@ -335,8 +335,6 @@ else
 	set directory=~/.vim/tmp
 endif
 
-set autowrite " Automatically save buffer before switching to another one
-
 "Search/replace commands have /g by default, add /g to override
 set gdefault
 
@@ -478,7 +476,6 @@ nnoremap ]b :BF<CR> " buffer next
 " Unite-current dir should make this mapping unnecessary
 
 " save
-nnoremap <leader>s :w<CR>
 nnoremap <leader><leader> :w<CR>
 
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
@@ -951,3 +948,8 @@ let g:neomru#directory_mru_ignore_pattern = '\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%
 autocmd FileType text,gitcommit setlocal spell
 set spelllang=en_us,ru_ru
 set complete+=kspell
+
+" Autosave each time text is changed in normal mode or each time we leave insert
+" mode. No more saving-related headaches
+autocmd InsertLeave,TextChanged * if &filetype != 'gitcommit' && expand('%') != '' | update | endif
+set autowrite " Automatically save buffer before switching to another one
