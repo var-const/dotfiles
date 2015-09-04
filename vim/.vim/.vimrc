@@ -313,7 +313,8 @@ set autoread
 set foldmethod=syntax
 set foldnestmax=1 "deepest fold is 1 level
 set foldlevelstart=0
-set foldenable
+" Folding doesn't seem to be a good default
+set nofoldenable
 
 set nrformats= " When doing Ctrl-A/Ctrl-X, treat all numbers as base10
 
