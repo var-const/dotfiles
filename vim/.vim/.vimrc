@@ -78,6 +78,7 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-sleuth'
 " Should check it out. Original comment:
 " More interesting is the :Subvert command to use the same kind of matching for :grep or :substitute. Example:
 "     The following fixes several different misspellings of "necessary": :%S/{,un}nec{ce,ces,e}sar{y,ily}/{}nec{es}sar{}/g
