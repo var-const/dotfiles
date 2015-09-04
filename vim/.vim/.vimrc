@@ -212,6 +212,8 @@ NeoBundle 'regedarek/ZoomWin'
 
 NeoBundle 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
 
+NeoBundle 'christoomey/vim-tmux-navigator'
+
 call neobundle#end()
 
 " If there are uninstalled bundles found on startup,
