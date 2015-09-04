@@ -960,3 +960,9 @@ set autowrite " Automatically save buffer before switching to another one
 nnoremap " '
 nnoremap ' `
 nnoremap ` '
+
+" I use line selection more often, so let's make that the default
+nnoremap v V
+nnoremap V v
+vnoremap v V
+vnoremap V v
