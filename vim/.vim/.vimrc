@@ -555,7 +555,7 @@ endif
 "noremap <silent> <C-9> <C-W>+
 "noremap <silent> <C-0> <C-W>>
 
-set guifont=Courier_New:h18
+set guifont=DejaVuSansMono\ 15
 colorscheme lucius
 LuciusLight
 "LuciusWhite
