@@ -252,7 +252,6 @@ function! ToggleKeymap()
   call feedkeys("\<C-^>")
 endfunction
 
-
 " Tab stuff
 " how many columns a tab counts for.
 set tabstop=4
@@ -480,7 +479,7 @@ nnoremap <leader><leader> :w<CR>
 
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
-"Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
+" Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
 if has('unix')
 	nmap <leader>ev :tabedit ~/.vimrc<CR>
 else
