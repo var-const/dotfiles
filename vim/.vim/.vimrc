@@ -486,13 +486,6 @@ else
 	nmap <leader>ev :tabedit ~/_vimrc<CR>
 endif
 
-" Try to commit the directory the files resides in using TortoiseSvn
-" TODO: I'm sure there are much better SCM-integration plugins out there
-if s:is_windows
-	nmap <leader>ci :!TortoiseProc.exe /command:commit /path:"%:p:h"<CR>
-	" nmap <leader>ci :let cur_path = %:p:h | call xolox#misc#os#exec({'command': 'TortoiseProc.exe /command:commit /path:"' . cur_path . '"', 'async': 1})
-endif
-
 " For vim-commentary: prefer // style comments to the default C-style
 " for C++
 autocmd FileType cpp set commentstring=//%s
@@ -539,20 +532,6 @@ endif
 
 " doesn't work
 "au insertleave :update<cr>
-
-" CHECK IT OUT
-" allow command line editing like emacs
-"cnoremap <C-A> <Home>
-"cnoremap <C-B> <Left>
-"cnoremap <C-E> <End>
-"cnoremap <C-F> <Right>
-"cnoremap <C-N> <End>
-"cnoremap <C-P> <Up>
-"cnoremap <ESC>b <S-Left>
-"cnoremap <ESC><C-B> <S-Left>
-"cnoremap <ESC>f <S-Right>
-"cnoremap <ESC><C-F> <S-Right>
-"cnoremap <ESC><C-H> <C-W>
 
 " CHECK IT OUT
 " Maps to make handling windows a bit easier
