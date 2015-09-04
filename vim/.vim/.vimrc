@@ -953,3 +953,10 @@ set complete+=kspell
 " mode. No more saving-related headaches
 autocmd InsertLeave,TextChanged * if &filetype != 'gitcommit' && expand('%') != '' | update | endif
 set autowrite " Automatically save buffer before switching to another one
+
+" Swap two mark-jumping bindings. My default use-case is to go to the exact mark
+" position, not the beginning of the line. Also tilde is a pain to reach, so
+" let's make " double as `
+nnoremap " '
+nnoremap ' `
+nnoremap ` '
