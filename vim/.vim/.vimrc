@@ -496,7 +496,8 @@ nmap <silent> <Leader>ol :FSLeft<cr>
 " Switch to the file and load it into a new window split on the left
 nmap <silent> <Leader>oL :FSSplitLeft<cr>
 
-nnoremap <F12> :YcmCompleter GoTo<CR>
+" Instead of built-in command which opens help for word under cursor
+nnoremap K :YcmCompleter GoTo<CR>
 
 nnoremap <leader>rr	:call RenameVariable()<CR>
 nnoremap <leader>ro :call ReorderParameters()<CR>
