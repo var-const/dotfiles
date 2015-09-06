@@ -383,11 +383,12 @@ nnoremap <leader>h :split<CR><C-w>j
 nnoremap <leader>d "_d
 nnoremap <leader>dd "_dd
 nnoremap <leader>D "_D
+nnoremap <leader>x "_x
+nnoremap <leader>X "_X
+" @TODO: these are unused. Maybe remap the key to something else?
 nnoremap <leader>c "_c
 nnoremap <leader>cc "_cc
 nnoremap <leader>C "_C
-nnoremap <leader>x "_x
-nnoremap <leader>X "_X
 
 noremap <leader>ft :set filetype=
 noremap <leader>cc :set filetype=cpp<CR>
