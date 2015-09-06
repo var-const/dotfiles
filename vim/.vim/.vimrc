@@ -925,7 +925,7 @@ autocmd InsertLeave,TextChanged * if &filetype != 'gitcommit' && expand('%') != 
 set autowrite " Automatically save buffer before switching to another one
 
 " Swap two mark-jumping bindings. My default use-case is to go to the exact mark
-" position, not the beginning of the line. Also tilde is a pain to reach, so
+" position, not the beginning of the line.
 nnoremap ' `
 nnoremap ` '
 
