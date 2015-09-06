@@ -959,6 +959,9 @@ endw
 " let terminal resize scale the internal windows
 autocmd VimResized * :wincmd =
 
+" expands %% to current file's directory in command-line mode
+cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
+
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
