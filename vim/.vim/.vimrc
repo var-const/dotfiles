@@ -970,6 +970,11 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Switch to last buffer
 nnoremap <BS> :b#<CR>
 
+:set guioptions-=m  " remove menu bar
+:set guioptions-=T  " remove toolbar
+:set guioptions-=r  " remove right-hand scroll bar
+:set guioptions-=L  " remove left-hand scroll bar
+
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
