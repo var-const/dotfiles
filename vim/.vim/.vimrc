@@ -916,8 +916,12 @@ set spelllang=en_us,ru_ru
 set complete+=kspell
 
 " Autosave each time text is changed in normal mode or each time we leave insert
-" mode. No more saving-related headaches
-autocmd InsertLeave,TextChanged * if &filetype != 'gitcommit' && expand('%') != '' | update | endif
+" mode. No more saving-related headaches.
+" Don't autosave git commit message, because once it's saved, Fugitive thinks
+" the commit should go through
+" Don't autosave in git diff mode, something prevents vim from automatically
+" saving the staged file. @TODO: find out the reason
+autocmd InsertLeave,TextChanged * if &filetype != 'gitcommit' && expand('%') != '' && expand('%:h') !~ 'fugitive' | update | endif
 set autowrite " Automatically save buffer before switching to another one
 
 " Swap two mark-jumping bindings. My default use-case is to go to the exact mark
