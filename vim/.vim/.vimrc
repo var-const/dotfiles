@@ -966,6 +966,10 @@ cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 " visually select the last paste or change
 nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 
+" @TODO: figure out a better mapping
+" Switch to last buffer
+nnoremap <BS> :b#<CR>
+
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
