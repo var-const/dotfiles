@@ -956,6 +956,9 @@ while c <= 'z'
 	let c = nr2char(1+char2nr(c))
 endw
 
+" let terminal resize scale the internal windows
+autocmd VimResized * :wincmd =
+
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
