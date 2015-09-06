@@ -467,9 +467,9 @@ nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
 " Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
 if has('unix')
-    nmap <leader>ev :tabedit ~/.vimrc<CR>
+	nnoremap <leader>ev :tabedit ~/dotfiles/vim/.vim/.vimrc<CR>
 else
-    nmap <leader>ev :tabedit ~/_vimrc<CR>
+	nnoremap <leader>ev :tabedit ~/_vimrc<CR>
 endif
 
 " For vim-commentary: prefer // style comments to the default C-style
