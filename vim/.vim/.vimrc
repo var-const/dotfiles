@@ -392,13 +392,10 @@ nnoremap <leader>C "_C
 
 noremap <leader>ft :set filetype=
 noremap <leader>cc :set filetype=cpp<CR>
-noremap <leader>ll :set filetype=lua<CR>
 
 noremap <leader>tn :tabnew<CR>
 noremap <C-n> gt
 noremap <C-p> gT
-
-nnoremap <silent> <leader>oc :Open %:h<CR>
 
 nnoremap <F2> :call RenameFile()<CR>
 nnoremap <C-F2> :call NewHeaderSourcePairInCurFileDir()<CR>
@@ -456,8 +453,6 @@ let g:better_whitespace_filetypes_blacklist=['unite']
 nnoremap <leader>bd :BD<CR> " buffer delete
 nnoremap <leader>bp :BB<CR> " buffer prev
 nnoremap <leader>bn :BF<CR> " buffer next
-nnoremap [b :BB<CR> " buffer prev
-nnoremap ]b :BF<CR> " buffer next
 
 " @TODO: change mapping to something more intuitive; now it stands for 'from here'
 " nnoremap <leader>fh :e %:h/
