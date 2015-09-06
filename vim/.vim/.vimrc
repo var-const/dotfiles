@@ -938,3 +938,13 @@ vnoremap V v
 " I go to the first non-whitespace character a lot more often
 nnoremap 0 ^
 nnoremap ^ 0
+
+" From https://github.com/junegunn/dotfiles/blob/master/vimrc
+nnoremap <silent> <C-k> :move-2<cr>
+nnoremap <silent> <C-j> :move+<cr>
+nnoremap <silent> <C-h> <<
+nnoremap <silent> <C-l> >>
+xnoremap <silent> <C-k> :move-2<cr>gv
+xnoremap <silent> <C-j> :move'>+<cr>gv
+xnoremap <silent> <C-h> <gv
+xnoremap <silent> <C-l> >gv
