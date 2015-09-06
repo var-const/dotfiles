@@ -14,38 +14,38 @@ set t_Co=256
 let s:is_windows = has('win16') || has('win32') || has('win64')
 let s:is_cygwin = has('win32unix')
 let s:is_mac = !s:is_windows && !s:is_cygwin
-      \ && (has('mac') || has('macunix') || has('gui_macvim') ||
-      \   (!executable('xdg-open') &&
-      \     system('uname') =~? '^darwin'))
+            \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+            \   (!executable('xdg-open') &&
+            \     system('uname') =~? '^darwin'))
 let s:is_linux = !s:is_windows && !s:is_cygwin && !s:is_mac
 
 " Use English interface.
 if s:is_windows
-  " For Windows.
-  language message en
+    " For Windows.
+    language message en
 else
-  " For Linux.
-  language mes C
+    " For Linux.
+    language mes C
 endif
 
 if has('vim_starting')
-  set nocompatible               " Be iMproved
+    set nocompatible               " Be iMproved
 
-  " Required:
-	if has('unix')
-		set runtimepath+=~/.vim/bundle/neobundle.vim/
-	else
-		set runtimepath+=~/vimfiles/bundle/neobundle.vim/
-	endif
+    " Required:
+    if has('unix')
+        set runtimepath+=~/.vim/bundle/neobundle.vim/
+    else
+        set runtimepath+=~/vimfiles/bundle/neobundle.vim/
+    endif
 endif
 
 syntax off " seems like it should be off before the whole NeoBundle thing
 
 " Required:
 if has('unix')
-	call neobundle#begin(expand('~/.vim/bundle/'))
+    call neobundle#begin(expand('~/.vim/bundle/'))
 else
-	call neobundle#begin(expand('~/vimfiles/bundle/'))
+    call neobundle#begin(expand('~/vimfiles/bundle/'))
 endif
 " This fucking thing seems to reset filetype
 
@@ -54,12 +54,12 @@ endif
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/vimproc.vim', {
-      \ 'build' : {
-      \     'mac' : 'make -f make_mac.mak',
-      \	    'unix' : 'make',
-	  \		'cygwin' : 'make -f make_cygwin.mak',
-      \    },
-      \ }
+            \ 'build' : {
+            \     'mac' : 'make -f make_mac.mak',
+            \	    'unix' : 'make',
+            \		'cygwin' : 'make -f make_cygwin.mak',
+            \    },
+            \ }
 
 NeoBundle 'Shougo/vimfiler.vim'
 
@@ -102,8 +102,8 @@ NeoBundle 'djoshea/vim-autoread'
 
 " Some C++ simple refactoring
 if has('win32')
-	" Windows-style line endings, omg
-	NeoBundle 'vim-scripts/refactor'
+    " Windows-style line endings, omg
+    NeoBundle 'vim-scripts/refactor'
 endif
 
 " C++ better code highlighting
@@ -114,7 +114,7 @@ endif
 " NeoBundle 'xolox/vim-misc'
 " NeoBundle 'xolox/vim-shell'
 " if s:is_linux
-	" NeoBundle 'xolox/vim-easytags'
+" NeoBundle 'xolox/vim-easytags'
 " end
 " NeoBundle 'octol/vim-cpp-enhanced-highlight'
 " NeoBundle 'vim-jp/cpp-vim'
@@ -132,28 +132,28 @@ NeoBundle 'SirVer/ultisnips'
 "       \ }
 " endif
 if s:is_windows
-	NeoBundle 'Rip-Rip/clang_complete', {
-		  \ 'autoload' : {
-		  \     'filetypes' : ['c', 'cpp'],
-		  \    },
-		  \ }
+    NeoBundle 'Rip-Rip/clang_complete', {
+                \ 'autoload' : {
+                \     'filetypes' : ['c', 'cpp'],
+                \    },
+                \ }
 end
 
 if s:is_mac " || s:is_linux
- NeoBundle 'Valloric/YouCompleteMe', {
-				\ 'build' : {
-				\	'mac' : './install.sh --clang-completer',
-				\	'unix' : './install.sh --clang-completer',
-				\	},
-				\ 'autoload' : {
-				\     'filetypes' : ['c', 'cpp', 'objc', 'objcpp', 'python'],
-				\   },
-				\ },
+    NeoBundle 'Valloric/YouCompleteMe', {
+                \ 'build' : {
+                \	'mac' : './install.sh --clang-completer',
+                \	'unix' : './install.sh --clang-completer',
+                \	},
+                \ 'autoload' : {
+                \     'filetypes' : ['c', 'cpp', 'objc', 'objcpp', 'python'],
+                \   },
+                \ },
 endif
 
 " Search in files
 if s:is_mac || s:is_linux
-	NeoBundle 'rking/ag.vim'
+    NeoBundle 'rking/ag.vim'
 endif
 
 " NeoBundle 'kana/vim-textobj-entire'
@@ -168,7 +168,7 @@ NeoBundle 'tomasr/molokai'
 
 " Visual Studio integration
 if has('win32')
-	NeoBundle 'vim-scripts/visual_studio.vim'
+    NeoBundle 'vim-scripts/visual_studio.vim'
 endif
 
 NeoBundle 'vim-scripts/argtextobj.vim'
@@ -192,12 +192,6 @@ NeoBundle 'luochen1990/rainbow'
 
 " Show a VCS diff using Vim's sign column.
 NeoBundle 'mhinz/vim-signify'
-
-" Automatic resizing of Vim windows to the golden ratio
-" Both are really buggy and don't allow to change the ratio
-" zhaocai seems worse and also defines some silly mappings
-" NeoBundle 'roman/golden-ratio'
-" NeoBundle 'zhaocai/GoldenView.Vim'
 
 " NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Yggdroot/indentLine'
@@ -237,19 +231,19 @@ inoremap <C-l> <C-O>:call ToggleKeymap()<CR>
 
 " Also switch some keybindings. 'kj' is rare in English, but 'ол' is common in Russian
 function! ToggleKeymap()
-  " iminsert can be used to check if keymap is currently enabled (== 1) or not (== 0)
-  if &iminsert == 0
-      iunmap jj
-      iunmap jk
-      iunmap kj
-      inoremap mm <esc>:w<CR>
-  else
-      iunmap mm
-      inoremap kj <esc>
-      inoremap jk <esc>
-      inoremap jj <esc>:w<CR>
-  endif
-  call feedkeys("\<C-^>")
+    " iminsert can be used to check if keymap is currently enabled (== 1) or not (== 0)
+    if &iminsert == 0
+        iunmap jj
+        iunmap jk
+        iunmap kj
+        inoremap mm <esc>:w<CR>
+    else
+        iunmap mm
+        inoremap kj <esc>
+        inoremap jk <esc>
+        inoremap jj <esc>:w<CR>
+    endif
+    call feedkeys("\<C-^>")
 endfunction
 
 " Tab stuff
@@ -271,14 +265,14 @@ set autoindent
 set number
 set relativenumber
 
-"Better line wrapping
+" Better line wrapping
 set wrap
 set linebreak
 " set textwidth=99
 set textwidth=80
 set formatoptions=qrn1
 
-"Set incremental searching"
+" Set incremental searching
 set incsearch
 set hlsearch "Highlight searching
 set showmatch
@@ -329,9 +323,9 @@ set wildignore+=*.orig                           " Merge resolution files
 
 " @TODO: no hardcoding
 if has('win32')
-	set directory=~/vimfiles/tmp
+    set directory=~/vimfiles/tmp
 else
-	set directory=~/.vim/tmp
+    set directory=~/.vim/tmp
 endif
 
 "Search/replace commands have /g by default, add /g to override
@@ -339,9 +333,9 @@ set gdefault
 
 " Add the unnamed register to the clipboard
 if s:is_linux
-	set clipboard=unnamedplus
+    set clipboard=unnamedplus
 else
-	set clipboard+=unnamed
+    set clipboard+=unnamed
 endif
 
 " seems to be best, right-to-left movement
@@ -366,12 +360,6 @@ nnoremap J mqJ`q
 nnoremap n nzz
 nnoremap N Nzz
 "nnoremap } }zz
-
-" easier window navigation
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
 
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
@@ -437,7 +425,7 @@ nnoremap <leader>f* :<C-u>Unite -no-split -buffer-name=register    -start-insert
 nnoremap <leader>fb :<C-u>Unite -no-split -buffer-name=buffer  -start-insert buffer_tab buffer<cr>
 " Filesystem-current directory
 nnoremap <silent><leader>fc :<C-u>UniteWithBufferDir
-\ -buffer-name=files -no-split -start-insert buffer file file/new<CR>
+            \ -buffer-name=files -no-split -start-insert buffer file file/new<CR>
 " Filesystem-booKmarks
 nnoremap <leader>fk :<C-u>Unite -no-split -buffer-name=bookmark  -start-insert bookmark<cr>
 nnoremap <leader>fg :<C-u>Unite -no-split -buffer-name=unite-grep  -start-insert grep:.<cr>
@@ -446,19 +434,19 @@ nnoremap <leader>fclr :<C-u>Unite -no-split -buffer-name=unite-grep  -start-inse
 nnoremap <leader>fd :e %:h<cr>
 
 if executable('ag')
-	" Use ag in unite grep source.
-	let g:unite_source_grep_command = 'ag'
-	let g:unite_source_grep_default_opts =
-	\ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
-	\ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
-	let g:unite_source_grep_recursive_opt = ''
+    " Use ag in unite grep source.
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+                \ '-i --line-numbers --nocolor --nogroup --hidden --ignore ' .
+                \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    let g:unite_source_grep_recursive_opt = ''
 endif
 
 autocmd FileType unite call s:set_unite_settings()
 function! s:set_unite_settings()
-	nmap <buffer> <ESC> <Plug>(unite_exit)
-	nmap <buffer> <Tab> <Plug>(unite_narrowing_path)
-	imap <buffer> <Tab> <Plug>(unite_narrowing_path)
+    nmap <buffer> <ESC> <Plug>(unite_exit)
+    nmap <buffer> <Tab> <Plug>(unite_narrowing_path)
+    imap <buffer> <Tab> <Plug>(unite_narrowing_path)
 endfunction
 
 let g:better_whitespace_filetypes_blacklist=['unite']
@@ -481,9 +469,9 @@ nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
 " Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
 if has('unix')
-	nmap <leader>ev :tabedit ~/.vimrc<CR>
+    nmap <leader>ev :tabedit ~/.vimrc<CR>
 else
-	nmap <leader>ev :tabedit ~/_vimrc<CR>
+    nmap <leader>ev :tabedit ~/_vimrc<CR>
 endif
 
 " For vim-commentary: prefer // style comments to the default C-style
@@ -527,7 +515,7 @@ let g:vimfiler_as_default_explorer = 1
 
 " Because I'm forced to use Ack 1.x
 if !s:is_linux
-	let g:ackprg = "ack -H --nocolor --nogroup --column --smart-case --follow"
+    let g:ackprg = "ack -H --nocolor --nogroup --column --smart-case --follow"
 endif
 
 " doesn't work
@@ -562,81 +550,81 @@ LuciusLight
 
 " Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
 if has("autocmd")
-	augroup myvimrchooks
-		au!
-		if has('unix')
-			autocmd bufwritepost .vimrc source ~/.vimrc
-		else
-			autocmd bufwritepost _vimrc source ~/_vimrc
-		endif
-	augroup END
+    augroup myvimrchooks
+        au!
+        if has('unix')
+            autocmd bufwritepost .vimrc source ~/.vimrc
+        else
+            autocmd bufwritepost _vimrc source ~/_vimrc
+        endif
+    augroup END
 endif
 
 " Rename the current file
 function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
-  endif
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
 endfunction
 
 function! NewHeaderSourcePairInCurFileDir()
-  let pair_name = @f
-  if pair_name != ''
-	let @f=''
-  else
-    let pair_name = input('New header/source pair name: ')
-  endif
-  if pair_name != ''
-	" @TODO: for BZ, add project code (like 'lsit5_') automatically
-	let full_pair_name = expand('%:h') . '/' . pair_name
-	" @FIXME overwriting. Should prompt for it
-	let header = full_pair_name . '.h'
-	let source = full_pair_name . '.cpp'
-	" @FIXME screws up buffer history
-    exec ':e ' . source
-	" @FIXME hack
-    exec ':normal ggdG'
-	exec ':normal i#include "' . pair_name . '.h"'
-	put='' " blank line
-    exec ':w! ' . source
-	" @FIXME hack
-	set filetype=cpp
+    let pair_name = @f
+    if pair_name != ''
+        let @f=''
+    else
+        let pair_name = input('New header/source pair name: ')
+    endif
+    if pair_name != ''
+        " @TODO: for BZ, add project code (like 'lsit5_') automatically
+        let full_pair_name = expand('%:h') . '/' . pair_name
+        " @FIXME overwriting. Should prompt for it
+        let header = full_pair_name . '.h'
+        let source = full_pair_name . '.cpp'
+        " @FIXME screws up buffer history
+        exec ':e ' . source
+        " @FIXME hack
+        exec ':normal ggdG'
+        exec ':normal i#include "' . pair_name . '.h"'
+        put='' " blank line
+        exec ':w! ' . source
+        " @FIXME hack
+        set filetype=cpp
 
-    exec ':e ' . header
-	" @FIXME hack
-    exec ':normal ggdG'
-	let include_guard = '_' . toupper(pair_name) . '_H_'
-	exec ':normal i#ifndef ' . include_guard
-	put=''
-	exec ':normal i#define ' . include_guard
-	put=''
-	put=''
-	put=''
-	put=''
-	exec ':normal i#endif'
-	exec ':normal gg3j'
-    exec ':w! ' . header
-	" @FIXME hack
-	set filetype=cpp
-    redraw!
-  endif
+        exec ':e ' . header
+        " @FIXME hack
+        exec ':normal ggdG'
+        let include_guard = '_' . toupper(pair_name) . '_H_'
+        exec ':normal i#ifndef ' . include_guard
+        put=''
+        exec ':normal i#define ' . include_guard
+        put=''
+        put=''
+        put=''
+        put=''
+        exec ':normal i#endif'
+        exec ':normal gg3j'
+        exec ':w! ' . header
+        " @FIXME hack
+        set filetype=cpp
+        redraw!
+    endif
 endfunction
 
 " :t - just the filename
 nnoremap <silent><F4> :call YankOrPasteIncludeHeader()<CR>
 function! YankOrPasteIncludeHeader()
-  if @f != ''
-	put=@f
-	exec ':normal 0f"lvt.'
-	let @f=''
-  else
-    let @f='#include "' . expand("%:t") . '"'
-	echo "Current filename yanked for including"
-  endif
+    if @f != ''
+        put=@f
+        exec ':normal 0f"lvt.'
+        let @f=''
+    else
+        let @f='#include "' . expand("%:t") . '"'
+        echo "Current filename yanked for including"
+    endif
 endfunction
 
 " @TODO: need to unmap this default mapping, screws up window switching <C-l>			<Plug>(vimfiler_redraw_screen)
@@ -651,7 +639,7 @@ function! g:UltiSnips_Complete()
         else
             call UltiSnips#JumpForwards()
             if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
+                return "\<TAB>"
             endif
         endif
     endif
@@ -681,25 +669,25 @@ highlight cMember gui=italic
 highlight cMemberTag gui=italic
 
 if s:is_cygwin
-	let g:clang_auto_user_options='path, .clang_complete'
-	" let g:clang_exec='"clang'
-	" let g:clang_user_options='2>/dev/null || exit 0'
-	let g:clang_complete_auto = 0
-	let g:clang_complete_copen = 1
-	" let g:clang_library_path ='C:\Program Files\LLVM\bin'
-	let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
-	" let g:clang_user_options='|| exit 0'
-	" let g:clang_auto_user_options='|| exit 0"'
-	" let g:clang_snippets_engine='clang_complete'
-	" if there's an error, allow us to see it
-	" let g:clang_complete_copen=1
-	" let g:clang_complete_macros=1
-	" let g:clang_complete_patterns=0
-	" fix cygwin shell redirection
-	" set shellredir=>\\"%s\\"\\ 2 > &1
-	" set shellredir='>%s\ 2>&1'
-	" set shellredir=>\"%s\"\ 2>&1
-	" set shellredir=>\"%s\"\ 2>/dev/null
+    let g:clang_auto_user_options='path, .clang_complete'
+    " let g:clang_exec='"clang'
+    " let g:clang_user_options='2>/dev/null || exit 0'
+    let g:clang_complete_auto = 0
+    let g:clang_complete_copen = 1
+    " let g:clang_library_path ='C:\Program Files\LLVM\bin'
+    let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
+    " let g:clang_user_options='|| exit 0'
+    " let g:clang_auto_user_options='|| exit 0"'
+    " let g:clang_snippets_engine='clang_complete'
+    " if there's an error, allow us to see it
+    " let g:clang_complete_copen=1
+    " let g:clang_complete_macros=1
+    " let g:clang_complete_patterns=0
+    " fix cygwin shell redirection
+    " set shellredir=>\\"%s\\"\\ 2 > &1
+    " set shellredir='>%s\ 2>&1'
+    " set shellredir=>\"%s\"\ 2>&1
+    " set shellredir=>\"%s\"\ 2>/dev/null
 endif
 
 set shell=zsh\ -l
@@ -723,9 +711,9 @@ nmap <leader>yy mtyyP<Plug>CommentaryLine`t
 let g:rainbow_active = 1
 
 let g:rainbow_conf = {
-    \  'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-    \  'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
-	\}
+            \  'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+            \  'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
+            \}
 " Stolen from: http://stackoverflow.com/questions/9403098/is-it-possible-to-jump-to-closed-folds-in-vim
 " Goes to next _closed_ fold, skipping the open folds, unlike the default.
 " @TODO: make default available via leader key
@@ -769,9 +757,9 @@ let g:indentLine_faster = 1
 
 " Extend our undoable steps and preserve over restart (if available)
 if has('persistent_undo')
-	set undodir=$TMPDIR,~/tmp,~/.vim/tmp,/tmp,/var/tmp
-	set undofile
-	set undoreload=10000
+    set undodir=$TMPDIR,~/tmp,~/.vim/tmp,/tmp,/var/tmp
+    set undofile
+    set undoreload=10000
 end
 set undolevels=10000
 " UndoTree
@@ -915,13 +903,13 @@ cmap w!! w !sudo tee %
 " @TODO: gre works, but grE doesn't (insert and replace)
 
 let g:neomru#file_mru_ignore_pattern =
-\ '\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
-\ '\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
-\ '\|^\%(\\\\\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'.
-\ '\|\%(^\%(fugitive\)://\)'
+            \ '\~$\|\.\%(o\|exe\|dll\|bak\|zwc\|pyc\|sw[po]\)$'.
+            \ '\|\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
+            \ '\|^\%(\\\\\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'.
+            \ '\|\%(^\%(fugitive\)://\)'
 
 let g:neomru#directory_mru_ignore_pattern = '\%(^\|/\)\.\%(hg\|git\|bzr\|svn\)\%($\|/\)'.
-\ '\|^\%(\\\\\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'
+            \ '\|^\%(\\\\\|/temp/\|/tmp/\|\%(/private\)\=/var/folders/\)'
 
 autocmd FileType text,gitcommit setlocal spell
 set spelllang=en_us,ru_ru
