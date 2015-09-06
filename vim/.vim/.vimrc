@@ -459,6 +459,8 @@ nnoremap <leader>bn :BF<CR> " buffer next
 " Unite-current dir should make this mapping unnecessary
 
 " save
+" @TODO: now that autosaving makes manual saving a much lesser used operation,
+" maybe remap this very easy keybinding to something else?
 nnoremap <leader><leader> :w<CR>
 
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
