@@ -970,6 +970,9 @@ nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
 " Switch to last buffer
 nnoremap <BS> :b#<CR>
 
+" Return cursor to previous location on load:
+autocmd BufReadPost * if &filetype != 'gitcommit' && expand('%:h') !~ 'fugitive' | normal `"
+
 :set guioptions-=m  " remove menu bar
 :set guioptions-=T  " remove toolbar
 :set guioptions-=r  " remove right-hand scroll bar
