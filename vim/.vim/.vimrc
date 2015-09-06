@@ -56,8 +56,8 @@ NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'Shougo/vimproc.vim', {
             \ 'build' : {
             \     'mac' : 'make -f make_mac.mak',
-            \	    'unix' : 'make',
-            \		'cygwin' : 'make -f make_cygwin.mak',
+            \       'unix' : 'make',
+            \       'cygwin' : 'make -f make_cygwin.mak',
             \    },
             \ }
 
@@ -125,7 +125,7 @@ NeoBundle 'bbchung/clighter'
 NeoBundle 'SirVer/ultisnips'
 
 " if s:is_cygwin
-" 	NeoBundle 'Rip-Rip/clang_complete', {
+"   NeoBundle 'Rip-Rip/clang_complete', {
 "       \ 'autoload' : {
 "       \     'filetypes' : ['c', 'cpp'],
 "       \    },
@@ -142,9 +142,9 @@ end
 if s:is_mac " || s:is_linux
     NeoBundle 'Valloric/YouCompleteMe', {
                 \ 'build' : {
-                \	'mac' : './install.sh --clang-completer',
-                \	'unix' : './install.sh --clang-completer',
-                \	},
+                \   'mac' : './install.sh --clang-completer',
+                \   'unix' : './install.sh --clang-completer',
+                \   },
                 \ 'autoload' : {
                 \     'filetypes' : ['c', 'cpp', 'objc', 'objcpp', 'python'],
                 \   },
@@ -467,9 +467,9 @@ nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
 " Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
 if has('unix')
-	nnoremap <leader>ev :tabedit ~/dotfiles/vim/.vim/.vimrc<CR>
+    nnoremap <leader>ev :tabedit ~/dotfiles/vim/.vim/.vimrc<CR>
 else
-	nnoremap <leader>ev :tabedit ~/_vimrc<CR>
+    nnoremap <leader>ev :tabedit ~/_vimrc<CR>
 endif
 
 " For vim-commentary: prefer // style comments to the default C-style
@@ -499,7 +499,7 @@ nmap <silent> <Leader>oL :FSSplitLeft<cr>
 " Instead of built-in command which opens help for word under cursor
 nnoremap K :YcmCompleter GoTo<CR>
 
-nnoremap <leader>rr	:call RenameVariable()<CR>
+nnoremap <leader>rr :call RenameVariable()<CR>
 nnoremap <leader>ro :call ReorderParameters()<CR>
 nnoremap <leader>rp :call LocalVariableToParameter()<CR>
 nnoremap <leader>re :call ExtractMethod()<CR>
@@ -626,7 +626,7 @@ function! YankOrPasteIncludeHeader()
     endif
 endfunction
 
-" @TODO: need to unmap this default mapping, screws up window switching <C-l>			<Plug>(vimfiler_redraw_screen)
+" @TODO: need to unmap this default mapping, screws up window switching <C-l>           <Plug>(vimfiler_redraw_screen)
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 " let g:UltiSnipsListSnippets ="<s-tab>"
@@ -951,9 +951,9 @@ xnoremap <silent> <C-l> >gv
 
 let c='a'
 while c <= 'z'
-	exec "set <A-".c.">=\e".c
-	exec "imap \e".c." <A-".c.">"
-	let c = nr2char(1+char2nr(c))
+    exec "set <A-".c.">=\e".c
+    exec "imap \e".c." <A-".c.">"
+    let c = nr2char(1+char2nr(c))
 endw
 
 " let terminal resize scale the internal windows
