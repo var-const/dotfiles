@@ -790,7 +790,8 @@ endfunction
 nnoremap <leader>zz :<C-u>call ScrollToPercent(15)<CR>
 
 " :hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
-:hi CursorLine   cterm=NONE ctermbg=white ctermfg=black
+" :hi CursorLine   cterm=NONE ctermbg=white ctermfg=black
+:hi CursorLine   cterm=NONE ctermbg=white
 " :hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " :nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
 :nnoremap <Leader>c :set cursorline!<CR>
