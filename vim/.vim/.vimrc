@@ -934,3 +934,7 @@ nnoremap v V
 nnoremap V v
 vnoremap v V
 vnoremap V v
+
+" I go to the first non-whitespace character a lot more often
+nnoremap 0 ^
+nnoremap ^ 0
