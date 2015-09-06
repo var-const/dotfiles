@@ -962,6 +962,10 @@ autocmd VimResized * :wincmd =
 " expands %% to current file's directory in command-line mode
 cnoremap %% <C-R>=fnameescape(expand('%:h')).'/'<CR>
 
+" @TODO: curious mapping, see if it's useful
+" visually select the last paste or change
+nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
+
 let g:tmux_navigator_no_mappings = 1
 
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
