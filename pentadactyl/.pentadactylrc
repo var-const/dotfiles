@@ -34,7 +34,8 @@
   map <C-h> :tabmove -1<CR>
   map <C-l> :tabmove +1<CR>
   map <Leader><C-l> :tabmove $<CR>
-  map <C-j> :tabdetach<CR>
+  " map <C-J> :tabdetach<CR>
+  map <C-J> <CR>
   map 0 :tabrewind<CR>
   map $ :tablast<CR>
 
