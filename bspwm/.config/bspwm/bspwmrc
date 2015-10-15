@@ -25,4 +25,5 @@ bspc config focused_locked_border_color "#9a875f"
 # bspc rule -a Kupfer.py focus=on
 # bspc rule -a Screenkey manage=off
 # bspc rule -a mpv floating=on
-bspc rule -a zathura desktop=^2
+bspc rule -a zathura desktop=^10
+bspc rule -a Skype desktop=^3
