@@ -18,6 +18,7 @@ if [ "$os" == "cygwin" ]; then
     stow ncftp
 fi
 stow pentadactyl
+stow qutebrowser
 stow svn
 stow termite
 stow tmux
