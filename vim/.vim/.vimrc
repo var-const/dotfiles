@@ -47,7 +47,6 @@ if has('unix')
 else
     call neobundle#begin(expand('~/vimfiles/bundle/'))
 endif
-" This fucking thing seems to reset filetype
 
 " Let NeoBundle manage NeoBundle
 " Required:
@@ -78,7 +77,14 @@ NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-speeddating'
 NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-sleuth'
+" @TODO: breaks on C++ files if LLVM-style formatting of access modifiers is
+" used:
+" class Foo {
+"   public:
+"     void fun();
+" };
+" Logically, the tab width should be 4, but it gets set as 2
+" NeoBundle 'tpope/vim-sleuth'
 " Should check it out. Original comment:
 " More interesting is the :Subvert command to use the same kind of matching for :grep or :substitute. Example:
 "     The following fixes several different misspellings of "necessary": :%S/{,un}nec{ce,ces,e}sar{y,ily}/{}nec{es}sar{}/g
@@ -120,7 +126,9 @@ endif
 " NeoBundle 'vim-jp/cpp-vim'
 "" NeoBundle 'vim-scripts/TagHighlight'
 
-NeoBundle 'bbchung/clighter'
+" @TODO: find a fix. Right now it just garbles all C++ files, maybe due to
+" updated clang
+" "NeoBundle 'bbchung/clighter'
 
 NeoBundle 'SirVer/ultisnips'
 
@@ -181,7 +189,7 @@ NeoBundle 'vim-scripts/ReplaceWithRegister'
 
 NeoBundle 'houtsnip/vim-emacscommandline'
 
-" Fucks up folding
+" Screws up folding
 " NeoBundle 'kien/rainbow_parentheses.vim'
 
 NeoBundle 'luochen1990/rainbow'
@@ -794,6 +802,7 @@ nnoremap <leader>zz :<C-u>call ScrollToPercent(15)<CR>
 :hi CursorLine   cterm=NONE ctermbg=white
 " :hi CursorColumn cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " :nnoremap <Leader>c :set cursorline! cursorcolumn!<CR>
+set cursorline
 :nnoremap <Leader>c :set cursorline!<CR>
 
 " @FIXME need a better mapping
