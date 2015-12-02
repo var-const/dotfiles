@@ -133,6 +133,9 @@ super + space
 super + Escape
 	pkill -USR1 -x sxhkd
 
+super + BackSpace
+    date | dzen2 -p 2
+
 # @TODO:
 #
 # Sticky window is a window which is visible
