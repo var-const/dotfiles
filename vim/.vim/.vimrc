@@ -263,6 +263,11 @@ set softtabstop=4
 " When expandtab is set, hitting Tab in insert mode will produce the appropriate number of spaces.
 set expandtab
 
+" From: https://github.com/tejr/dotfiles/blob/master/vim/vimrc
+" When indenting lines with < or >, round the indent to a multiple of
+" 'shiftwidth', so even if the line is indented by one space it will indent
+" up to 4 and down to 0, for example
+set shiftround
 autocmd FileType xml setlocal shiftwidth=2 tabstop=2
 
 "Indent stuff
