@@ -270,6 +270,9 @@ set expandtab
 set shiftround
 " Don't join lines with two spaces at the end of sentences; I don't two-space
 set nojoinspaces
+" Match all forms of brackets in pairs (including angle brackets)
+set matchpairs=(:),{:},[:],<:>
+
 autocmd FileType xml setlocal shiftwidth=2 tabstop=2
 
 "Indent stuff
