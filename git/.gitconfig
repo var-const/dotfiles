@@ -12,7 +12,7 @@
 [difftool]
 	prompt = false
 [alias]
-    ci = commit
+    ci = commit --verbose
     diff = diff --word-diff
     dc = diff --cached
     dt = difftool --word-diff
