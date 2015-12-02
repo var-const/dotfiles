@@ -41,4 +41,6 @@ sxhkd &
 termite &
 firefox &
 unclutter &
+skype &
+qutebrowser &
 exec bspwm
