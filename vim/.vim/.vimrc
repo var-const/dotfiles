@@ -268,6 +268,8 @@ set expandtab
 " 'shiftwidth', so even if the line is indented by one space it will indent
 " up to 4 and down to 0, for example
 set shiftround
+" Don't join lines with two spaces at the end of sentences; I don't two-space
+set nojoinspaces
 autocmd FileType xml setlocal shiftwidth=2 tabstop=2
 
 "Indent stuff
