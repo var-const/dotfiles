@@ -234,6 +234,12 @@ set imsearch=-1
 " doesn't seem to work
 highlight lCursor guifg=NONE guibg=Cyan
 
+" Relative to textwidth
+set colorcolumn=+1
+" @FIXME supposed to highlight lines longer than the limit, doesn't work
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
 " language
 inoremap <C-l> <C-O>:call ToggleKeymap()<CR>
 
