@@ -317,6 +317,12 @@ set encoding=utf-8
 
 set ttyfast
 
+" From: https://github.com/tejr/dotfiles/blob/master/vim/vimrc
+" Don't bother drawing the screen while executing macros or other automated or
+" scripted processes, just draw the screen as it is when the operation
+" completes
+set lazyredraw
+
 set autoread
 
 "set list listchars=trail:·
