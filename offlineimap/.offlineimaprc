@@ -1,0 +1,165 @@
+[general]
+# List of accounts to be synced, separated by a comma.
+accounts = gmail,mailru
+# Path to file with arbitrary Python code to be loaded
+pythonfile = ~/.offlineimap/code.py
+# Controls how many accounts may be synced simultaneously
+maxsyncaccounts = 2
+
+[Account gmail]
+# Identifier for the local repository; e.g. the maildir to be synced via IMAP.
+localrepository = gmail-local
+# Identifier for the remote repository; i.e. the actual IMAP, usually non-local.
+remoterepository = gmail-remote
+# Status cache. Default is plain, which eventually becomes huge and slow.
+status_backend = sqlite
+# http://stevelosh.com/blog/2012/10/the-homely-mutt/#configuring-offlineimap
+# We’re also telling offlineimap that it doesn’t need to
+# fsync after every single operation. This will speed things
+# up, and since it’s just a local copy it’s typically not a
+# big deal if we lose an email here and there from a crash
+# (it’ll just be synced the next time anyway).
+fsync = False
+postsynchook = /home/vk/bin/offlineimap-hook.sh
+# Minutes between syncs
+autorefresh = 2
+# Number of quick-syncs between autorefreshes. Quick-syncs do not update if the
+# only changes were to IMAP flags
+quick = 4
+
+[Repository gmail-local]
+# Currently, offlineimap only supports maildir and IMAP for local repositories.
+type = Maildir
+# Where should the mail be placed?
+localfolders = ~/en/mail/gmail
+nametrans = lambda folder: {
+        'DRAFTS':    '[Gmail]/Drafts',
+        'IMPORTANT': '[Gmail]/Important',
+        'SENT':      '[Gmail]/Sent Mail',
+        'FLAGGED':   '[Gmail]/Starred',
+        'SPAM':      '[Gmail]/Spam',
+        'TRASH':     '[Gmail]/Trash',
+        'ARCHIVE':   '[Gmail]/All Mail',
+    }.get(folder, folder)
+
+[Repository gmail-remote]
+# Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
+type = Gmail
+remoteuser = varconsteq@gmail.com
+# Decrypt and read the encrypted password
+remotepasseval = get_pass("gmail-main")
+maxconnections = 1
+# Steve Losh:
+# If this is set to yes, then deleting an email in your inbox
+# would actually delete it entirely. When you set it to no,
+# hen deleting an email from your inbox
+# (or any label’s folder) will leave it in Gmail’s All Mail.
+# If you want to really delete an email, you’ll need to
+# delete it from All Mail (which is named archive on our
+# local filesystem, remember?). I feel like this is a good
+# compromise. I rarely care about actually deleting mail,
+# given that I have many unused gigabytes available on Gmail.
+realdelete = no
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+nametrans = lambda folder: {
+        '[Gmail]/Drafts':    'DRAFTS',
+        '[Gmail]/Important': 'IMPORTANT',
+        '[Gmail]/Sent Mail': 'SENT',
+        '[Gmail]/Spam':      'SPAM',
+        '[Gmail]/Starred':   'FLAGGED',
+        '[Gmail]/Trash':     'TRASH',
+        '[Gmail]/All Mail':  'ARCHIVE',
+    }.get(folder, folder)
+folderfilter = lambda folder: folder not in [
+    '[Gmail]/Important',
+    '[Gmail]/All Mail',
+    ]
+# '[Gmail]/Trash',
+# '[Gmail]/Spam',
+# Instead of closing the connection once a sync is complete, offlineimap will
+# send empty data to the server to hold the connection open. A value of 60
+# attempts to hold the connection for a minute between syncs (both quick and
+# autorefresh).This setting has no effect if autorefresh and holdconnectionopen
+# are not both set.
+keepalive = 60
+# OfflineIMAP normally closes IMAP server connections between refreshes if
+# the global option autorefresh is specified.  If you wish it to keep the
+# connection open, set this to true. This setting has no effect if autorefresh
+# is not set.
+holdconnectionopen = yes
+
+[Account mailru]
+# Identifier for the local repository; e.g. the maildir to be synced via IMAP.
+localrepository = mailru-local
+# Identifier for the remote repository; i.e. the actual IMAP, usually non-local.
+remoterepository = mailru-remote
+# Status cache. Default is plain, which eventually becomes huge and slow.
+status_backend = sqlite
+# http://stevelosh.com/blog/2012/10/the-homely-mutt/#configuring-offlineimap
+# We’re also telling offlineimap that it doesn’t need to
+# fsync after every single operation. This will speed things
+# up, and since it’s just a local copy it’s typically not a
+# big deal if we lose an email here and there from a crash
+# (it’ll just be synced the next time anyway).
+fsync = False
+postsynchook = /home/vk/bin/offlineimap-hook.sh
+# Minutes between syncs
+autorefresh = 2
+# Number of quick-syncs between autorefreshes. Quick-syncs do not update if the
+# only changes were to IMAP flags
+quick = 4
+
+[Repository mailru-local]
+# Currently, offlineimap only supports maildir and IMAP for local repositories.
+type = Maildir
+# Where should the mail be placed?
+localfolders = ~/en/mail/mailru
+# nametrans = lambda folder: {
+#         'DRAFTS':    '[Gmail]/Drafts',
+#         'IMPORTANT': '[Gmail]/Important',
+#         'SENT':      '[Gmail]/Sent Mail',
+#         'FLAGGED':   '[Gmail]/Starred',
+#         'SPAM':      '[Gmail]/Spam',
+#         'TRASH':     '[Gmail]/Trash',
+#         'ARCHIVE':   '[Gmail]/All Mail',
+#     }.get(folder, folder)
+
+[Repository mailru-remote]
+# Remote repos can be IMAP or Gmail, the latter being a preconfigured IMAP.
+type = IMAP
+remoteuser = varlamovkonst@mail.ru
+remotehost = imap.mail.ru
+# Decrypt and read the encrypted password
+remotepasseval = get_pass("mailru-main")
+maxconnections = 1
+realdelete = yes
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+# nametrans = lambda folder: {
+#         '[Gmail]/Drafts':    'DRAFTS',
+#         '[Gmail]/Important': 'IMPORTANT',
+#         '[Gmail]/Sent Mail': 'SENT',
+#         '[Gmail]/Spam':      'SPAM',
+#         '[Gmail]/Starred':   'FLAGGED',
+#         '[Gmail]/Trash':     'TRASH',
+#         '[Gmail]/All Mail':  'ARCHIVE',
+#     }.get(folder, folder)
+# folderfilter = lambda folder: folder not in [
+#     '[Gmail]/Important',
+#     '[Gmail]/All Mail',
+#     ]
+keepalive = 60
+holdconnectionopen = yes
+
+# From Arch wiki:
+# https://wiki.archlinux.org/index.php/OfflineIMAP#Automatic_mailbox_generation_for_mutt
+# "Mutt cannot be simply pointed to an IMAP or maildir directory and be expected
+# to guess which subdirectories happen to be the mailboxes, yet offlineimap can
+# generate a muttrc fragment containing the mailboxes that it syncs."
+[mbnames]
+enabled = yes
+filename = ~/en/mail/all-mailboxes.muttrc
+header = "mailboxes "
+peritem = "+%(accountname)s/%(foldername)s"
+# peritem = "+%(foldername)s"
+sep = " "
+footer = "\n"
