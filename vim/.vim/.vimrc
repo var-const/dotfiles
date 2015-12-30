@@ -71,7 +71,9 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'vim-scripts/bufkill.vim'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-commentary', {'autoload': {'filetypes': ['python','cpp','vim']}}
+NeoBundle 'tpope/vim-commentary', {'autoload': {'filetypes':
+        \['python','c','cpp','vim','bash','sh','zsh','objcpp','objc']
+    \}}
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-speeddating'
@@ -105,39 +107,12 @@ NeoBundle 'Raimondi/delimitMate'
 " and prompt you if you want to reload the file"
 NeoBundle 'djoshea/vim-autoread'
 
-" " Some C++ simple refactoring
-" if has('win32')
-"     " Windows-style line endings, omg
-"     NeoBundle 'vim-scripts/refactor'
-" endif
-
-" C++ better code highlighting
-" Disabled in favor of clighter
-" let g:easytags_async = 1
-" let g:easytags_include_members = 1
-" let g:easytags_python_enabled = 1
-" NeoBundle 'xolox/vim-misc'
-" NeoBundle 'xolox/vim-shell'
-" if s:is_linux
-" NeoBundle 'xolox/vim-easytags'
-" end
-" NeoBundle 'octol/vim-cpp-enhanced-highlight'
-" NeoBundle 'vim-jp/cpp-vim'
-"" NeoBundle 'vim-scripts/TagHighlight'
-
 " @TODO: find a fix. Right now it just garbles all C++ files, maybe due to
 " updated clang
 " "NeoBundle 'bbchung/clighter'
 
 NeoBundle 'SirVer/ultisnips'
 
-" if s:is_cygwin
-"   NeoBundle 'Rip-Rip/clang_complete', {
-"       \ 'autoload' : {
-"       \     'filetypes' : ['c', 'cpp'],
-"       \    },
-"       \ }
-" endif
 if s:is_windows
     NeoBundle 'Rip-Rip/clang_complete', {
                 \ 'autoload' : {
@@ -146,7 +121,8 @@ if s:is_windows
                 \ }
 end
 
-if s:is_mac " || s:is_linux
+" On Arch, it's managed by pacman
+if s:is_mac
     NeoBundle 'Valloric/YouCompleteMe', {
                 \ 'build' : {
                 \   'mac' : './install.sh --clang-completer',
@@ -163,8 +139,6 @@ if s:is_mac || s:is_linux
     NeoBundle 'rking/ag.vim'
 endif
 
-" NeoBundle 'kana/vim-textobj-entire'
-
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'whatyouhide/vim-gotham'
 NeoBundle 'vim-scripts/xoria256.vim'
@@ -173,26 +147,19 @@ NeoBundle 'vim-scripts/wombat256.vim'
 NeoBundle 'jnurmine/Zenburn'
 NeoBundle 'tomasr/molokai'
 
-" " Visual Studio integration
-" if has('win32')
-"     NeoBundle 'vim-scripts/visual_studio.vim'
-" endif
-
 NeoBundle 'vim-scripts/argtextobj.vim'
 
 " @TODO: too wordy
 NeoBundle 'vim-scripts/IndexedSearch'
 
-" nmap <Leader>s  <Plug>ReplaceWithRegisterOperator
 NeoBundle 'vim-scripts/ReplaceWithRegister'
 
 NeoBundle 'houtsnip/vim-emacscommandline'
 
 " Screws up folding
 " NeoBundle 'kien/rainbow_parentheses.vim'
-
-NeoBundle 'luochen1990/rainbow'
 " NeoBundle 'oblitum/rainbow' " Seems to be very slow
+NeoBundle 'luochen1990/rainbow'
 
 " For Haskell
 " NeoBundle 'dag/vim2hs'
@@ -208,8 +175,6 @@ NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'mbbill/undotree'
 
 NeoBundle 'junegunn/vim-easy-align'
-
-" NeoBundle 'regedarek/ZoomWin'
 
 NeoBundle 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
 
@@ -388,7 +353,8 @@ nnoremap J mqJ`q
 " Center screen on search next/prev
 nnoremap n nzz
 nnoremap N Nzz
-"nnoremap } }zz
+nnoremap { {zz
+nnoremap } }zz
 
 " Using '<' and '>' in visual mode to shift code by a tab-width left/right by
 " default exits visual mode. With this mapping we remain in visual mode after
@@ -420,14 +386,10 @@ nnoremap <leader>cc "_cc
 nnoremap <leader>C "_C
 
 noremap <leader>ft :set filetype=
-" noremap <leader>cc :set filetype=cpp<CR>
 
 noremap <leader>tn :tabnew<CR>
 noremap <C-n> gt
 noremap <C-p> gT
-
-" nnoremap <F2> :call RenameFile()<CR>
-" nnoremap <C-F2> :call NewHeaderSourcePairInCurFileDir()<CR>
 
 let g:unite_source_history_yank_enable = 1
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -480,17 +442,8 @@ let g:better_whitespace_filetypes_blacklist=['unite','mail']
 
 " bufkill
 nnoremap <leader>bd :BD<CR> " buffer delete
-" nnoremap <leader>bp :BB<CR> " buffer prev
-" nnoremap <leader>bn :BF<CR> " buffer next
 
-" @TODO: change mapping to something more intuitive; now it stands for 'from here'
-" nnoremap <leader>fh :e %:h/
-" Unite-current dir should make this mapping unnecessary
-
-" save
-" @TODO: now that autosaving makes manual saving a much lesser used operation,
-" maybe remap this very easy keybinding to something else?
-" nnoremap <leader><leader> :w<CR>
+" @TODO: map now unused <leader><leader> keymap
 
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
@@ -528,26 +481,11 @@ nmap <silent> <Leader>oL :FSSplitLeft<cr>
 " Instead of built-in command which opens help for word under cursor
 nnoremap K :YcmCompleter GoTo<CR>
 
-" nnoremap <leader>rr :call RenameVariable()<CR>
-" nnoremap <leader>ro :call ReorderParameters()<CR>
-" nnoremap <leader>rp :call LocalVariableToParameter()<CR>
-" nnoremap <leader>re :call ExtractMethod()<CR>
-" nnoremap <leader>rd :call RemoveParameter()<CR>
-" nnoremap <leader>rc :call IntroduceConstant()<CR>
-
 " append
 nnoremap <leader>app :w! >>
 
 " Use VimFiler instead of netrw by default
 let g:vimfiler_as_default_explorer = 1
-
-"" Because I'm forced to use Ack 1.x
-" if !s:is_linux
-"     let g:ackprg = "ack -H --nocolor --nogroup --column --smart-case --follow"
-" endif
-
-" doesn't work
-"au insertleave :update<cr>
 
 " CHECK IT OUT
 " Maps to make handling windows a bit easier
@@ -574,6 +512,7 @@ let g:vimfiler_as_default_explorer = 1
 set guifont=DejaVuSansMono\ 15
 colorscheme lucius
 LuciusLight
+" LuciusDark
 "LuciusWhite
 
 " Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
@@ -587,73 +526,6 @@ if has("autocmd")
         endif
     augroup END
 endif
-
-" " Rename the current file
-" function! RenameFile()
-"     let old_name = expand('%')
-"     let new_name = input('New file name: ', expand('%'), 'file')
-"     if new_name != '' && new_name != old_name
-"         exec ':saveas ' . new_name
-"         exec ':silent !rm ' . old_name
-"         redraw!
-"     endif
-" endfunction
-
-" function! NewHeaderSourcePairInCurFileDir()
-"     let pair_name = @f
-"     if pair_name != ''
-"         let @f=''
-"     else
-"         let pair_name = input('New header/source pair name: ')
-"     endif
-"     if pair_name != ''
-"         " @TODO: for BZ, add project code (like 'lsit5_') automatically
-"         let full_pair_name = expand('%:h') . '/' . pair_name
-"         " @FIXME overwriting. Should prompt for it
-"         let header = full_pair_name . '.h'
-"         let source = full_pair_name . '.cpp'
-"         " @FIXME screws up buffer history
-"         exec ':e ' . source
-"         " @FIXME hack
-"         exec ':normal ggdG'
-"         exec ':normal i#include "' . pair_name . '.h"'
-"         put='' " blank line
-"         exec ':w! ' . source
-"         " @FIXME hack
-"         set filetype=cpp
-
-"         exec ':e ' . header
-"         " @FIXME hack
-"         exec ':normal ggdG'
-"         let include_guard = '_' . toupper(pair_name) . '_H_'
-"         exec ':normal i#ifndef ' . include_guard
-"         put=''
-"         exec ':normal i#define ' . include_guard
-"         put=''
-"         put=''
-"         put=''
-"         put=''
-"         exec ':normal i#endif'
-"         exec ':normal gg3j'
-"         exec ':w! ' . header
-"         " @FIXME hack
-"         set filetype=cpp
-"         redraw!
-"     endif
-" endfunction
-
-" " :t - just the filename
-" nnoremap <silent><F4> :call YankOrPasteIncludeHeader()<CR>
-" function! YankOrPasteIncludeHeader()
-"     if @f != ''
-"         put=@f
-"         exec ':normal 0f"lvt.'
-"         let @f=''
-"     else
-"         let @f='#include "' . expand("%:t") . '"'
-"         echo "Current filename yanked for including"
-"     endif
-" endfunction
 
 " @TODO: need to unmap this default mapping, screws up window switching <C-l>           <Plug>(vimfiler_redraw_screen)
 
@@ -684,57 +556,32 @@ let g:UltiSnipsSnippetDirectories = ["custom-ulti-snippets", "UltiSnips"]
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" highlight link cMemberTag Special
-" highlight def cMemberTag gui=bold guifg=yellowgreen
-" highlight def cTypeTag gui=bold guifg=yellowgreen
-" highlight cMember gui=italic guifg=yellowgreen
-" highlight cType gui=italic guifg=yellowgreen
-" highlight cFunction gui=italic
-" highlight cEnum gui=italic
-" highlight def Identifier gui=italic
-highlight Identifier gui=italic
-highlight cMember gui=italic
-highlight cMemberTag gui=italic
-
-" if s:is_cygwin
-"     let g:clang_auto_user_options='path, .clang_complete'
-"     " let g:clang_exec='"clang'
-"     " let g:clang_user_options='2>/dev/null || exit 0'
-"     let g:clang_complete_auto = 0
-"     let g:clang_complete_copen = 1
-"     " let g:clang_library_path ='C:\Program Files\LLVM\bin'
-"     let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
-"     " let g:clang_user_options='|| exit 0'
-"     " let g:clang_auto_user_options='|| exit 0"'
-"     " let g:clang_snippets_engine='clang_complete'
-"     " if there's an error, allow us to see it
-"     " let g:clang_complete_copen=1
-"     " let g:clang_complete_macros=1
-"     " let g:clang_complete_patterns=0
-"     " fix cygwin shell redirection
-"     " set shellredir=>\\"%s\\"\\ 2 > &1
-"     " set shellredir='>%s\ 2>&1'
-"     " set shellredir=>\"%s\"\ 2>&1
-"     " set shellredir=>\"%s\"\ 2>/dev/null
-" endif
+if s:is_cygwin
+    let g:clang_auto_user_options='path, .clang_complete'
+    " let g:clang_exec='"clang'
+    " let g:clang_user_options='2>/dev/null || exit 0'
+    let g:clang_complete_auto = 0
+    let g:clang_complete_copen = 1
+    " let g:clang_library_path ='C:\Program Files\LLVM\bin'
+    let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
+    " let g:clang_user_options='|| exit 0'
+    " let g:clang_auto_user_options='|| exit 0"'
+    " let g:clang_snippets_engine='clang_complete'
+    " if there's an error, allow us to see it
+    " let g:clang_complete_copen=1
+    " let g:clang_complete_macros=1
+    " let g:clang_complete_patterns=0
+    " fix cygwin shell redirection
+    " set shellredir=>\\"%s\\"\\ 2 > &1
+    " set shellredir='>%s\ 2>&1'
+    " set shellredir=>\"%s\"\ 2>&1
+    " set shellredir=>\"%s\"\ 2>/dev/null
+endif
 
 set shell=zsh\ -l
 
 " Add a commented-out copy above
 nmap <leader>yy mtyyP<Plug>CommentaryLine`t
-
-" au VimEnter * RainbowParenthesesToggle
-" au VimEnter * RainbowParenthesesActivate
-" au BufEnter * RainbowParenthesesActivate
-
-" This piece of shit doesn't want to work easily
-" au BufEnter * RainbowParenthesesLoadRound
-" au BufEnter * RainbowParenthesesLoadSquare
-" au BufEnter * RainbowParenthesesLoadBraces
-" au VimEnter * RainbowParenthesesActivate
-" au Syntax * RainbowParenthesesLoadRound
-" au Syntax * RainbowParenthesesLoadSquare
-" au Syntax * RainbowParenthesesLoadBraces
 
 let g:rainbow_active = 1
 
@@ -795,28 +642,8 @@ nmap <leader>u :UndotreeToggle<CR>
 
 set list lcs=tab:\|\ 
 
-" nnoremap <silent> <leader>zw :call ZoomWin()<cr>
-
-" function! ScrollToPercent(percent)
-"     let movelines=winheight(0)*(50-a:percent)/100
-"     echo movelines
-"     if movelines<0
-"         let motion='k'
-"         let rmotion='j'
-"         let movelines=-movelines
-"     elseif movelines>0
-"         let motion='j'
-"         let rmotion='k'
-"     else
-"         return 0
-"     endif
-"     if has('float') && type(movelines)==type(0.0)
-"         let movelines=float2nr(movelines)
-"     endif
-"     execute 'normal! zz'.movelines.motion.'zz'.movelines.rmotion
-" endfunction
-
-" nnoremap <leader>zz :<C-u>call ScrollToPercent(15)<CR>
+" @TODO: an easy way to modify zz would be to just call zz followed by several
+" Ctrl-Y's
 
 " :hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " :hi CursorLine   cterm=NONE ctermbg=white ctermfg=black
@@ -979,6 +806,7 @@ xnoremap <silent> <C-j> :move'>+<cr>gv
 xnoremap <silent> <C-h> <gv
 xnoremap <silent> <C-l> >gv
 
+" @TODO: comment
 let c='a'
 while c <= 'z'
     exec "set <A-".c.">=\e".c
