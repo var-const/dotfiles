@@ -186,7 +186,6 @@ call neobundle#end()
 " this will conveniently prompt you to install them.
 NeoBundleCheck
 
-filetype plugin indent on
 syntax on
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -247,7 +246,6 @@ autocmd FileType xml setlocal shiftwidth=2 tabstop=2
 
 "Indent stuff
 set smartindent
-set autoindent
 
 " Hybrid numbering
 set number
@@ -261,7 +259,6 @@ set textwidth=80
 set formatoptions=qrn1
 
 " Set incremental searching
-set incsearch
 set hlsearch "Highlight searching
 set showmatch
 
@@ -277,11 +274,9 @@ set splitbelow
 "Auto-completion menu
 set wildmode=list:longest
 set wildchar=<Tab>
-set wildmenu
 
 " Start scrolling when we're 10 lines away from margins
 " set scrolloff=10
-" set scrolloff=0
 
 set encoding=utf-8
 
@@ -293,19 +288,11 @@ set ttyfast
 " completes
 set lazyredraw
 
-set autoread
-
-"set list listchars=trail:·
-
 set foldmethod=syntax
 set foldnestmax=1 "deepest fold is 1 level
 set foldlevelstart=0
 " Folding doesn't seem to be a good default
 set nofoldenable
-
-set nrformats= " When doing Ctrl-A/Ctrl-X, treat all numbers as base10
-
-set history=200 " commmand-line history
 
 set wildignore+=.hg,.git,.svn                    " Version control
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg   " binary images
