@@ -69,10 +69,9 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'ujihisa/unite-colorscheme'
 
 NeoBundle 'vim-scripts/bufkill.vim'
-
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-commentary', {'autoload': {'filetypes': ['python','cpp','vim']}}
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 NeoBundle 'tpope/vim-speeddating'
@@ -106,11 +105,11 @@ NeoBundle 'Raimondi/delimitMate'
 " and prompt you if you want to reload the file"
 NeoBundle 'djoshea/vim-autoread'
 
-" Some C++ simple refactoring
-if has('win32')
-    " Windows-style line endings, omg
-    NeoBundle 'vim-scripts/refactor'
-endif
+" " Some C++ simple refactoring
+" if has('win32')
+"     " Windows-style line endings, omg
+"     NeoBundle 'vim-scripts/refactor'
+" endif
 
 " C++ better code highlighting
 " Disabled in favor of clighter
@@ -174,10 +173,10 @@ NeoBundle 'vim-scripts/wombat256.vim'
 NeoBundle 'jnurmine/Zenburn'
 NeoBundle 'tomasr/molokai'
 
-" Visual Studio integration
-if has('win32')
-    NeoBundle 'vim-scripts/visual_studio.vim'
-endif
+" " Visual Studio integration
+" if has('win32')
+"     NeoBundle 'vim-scripts/visual_studio.vim'
+" endif
 
 NeoBundle 'vim-scripts/argtextobj.vim'
 
@@ -210,7 +209,7 @@ NeoBundle 'mbbill/undotree'
 
 NeoBundle 'junegunn/vim-easy-align'
 
-NeoBundle 'regedarek/ZoomWin'
+" NeoBundle 'regedarek/ZoomWin'
 
 NeoBundle 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
 
@@ -397,7 +396,7 @@ nnoremap N Nzz
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <F3> /abcabcabcabcabcabcabcabc<CR>
+" nnoremap <F3> /abcabcabcabcabcabcabcabc<CR>
 
 " Don't move on *
 "nnoremap * *N
@@ -421,14 +420,14 @@ nnoremap <leader>cc "_cc
 nnoremap <leader>C "_C
 
 noremap <leader>ft :set filetype=
-noremap <leader>cc :set filetype=cpp<CR>
+" noremap <leader>cc :set filetype=cpp<CR>
 
 noremap <leader>tn :tabnew<CR>
 noremap <C-n> gt
 noremap <C-p> gT
 
-nnoremap <F2> :call RenameFile()<CR>
-nnoremap <C-F2> :call NewHeaderSourcePairInCurFileDir()<CR>
+" nnoremap <F2> :call RenameFile()<CR>
+" nnoremap <C-F2> :call NewHeaderSourcePairInCurFileDir()<CR>
 
 let g:unite_source_history_yank_enable = 1
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
@@ -477,12 +476,12 @@ function! s:set_unite_settings()
     imap <buffer> <Tab> <Plug>(unite_narrowing_path)
 endfunction
 
-let g:better_whitespace_filetypes_blacklist=['unite']
+let g:better_whitespace_filetypes_blacklist=['unite','mail']
 
 " bufkill
 nnoremap <leader>bd :BD<CR> " buffer delete
-nnoremap <leader>bp :BB<CR> " buffer prev
-nnoremap <leader>bn :BF<CR> " buffer next
+" nnoremap <leader>bp :BB<CR> " buffer prev
+" nnoremap <leader>bn :BF<CR> " buffer next
 
 " @TODO: change mapping to something more intuitive; now it stands for 'from here'
 " nnoremap <leader>fh :e %:h/
@@ -491,7 +490,7 @@ nnoremap <leader>bn :BF<CR> " buffer next
 " save
 " @TODO: now that autosaving makes manual saving a much lesser used operation,
 " maybe remap this very easy keybinding to something else?
-nnoremap <leader><leader> :w<CR>
+" nnoremap <leader><leader> :w<CR>
 
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
@@ -529,12 +528,12 @@ nmap <silent> <Leader>oL :FSSplitLeft<cr>
 " Instead of built-in command which opens help for word under cursor
 nnoremap K :YcmCompleter GoTo<CR>
 
-nnoremap <leader>rr :call RenameVariable()<CR>
-nnoremap <leader>ro :call ReorderParameters()<CR>
-nnoremap <leader>rp :call LocalVariableToParameter()<CR>
-nnoremap <leader>re :call ExtractMethod()<CR>
-nnoremap <leader>rd :call RemoveParameter()<CR>
-nnoremap <leader>rc :call IntroduceConstant()<CR>
+" nnoremap <leader>rr :call RenameVariable()<CR>
+" nnoremap <leader>ro :call ReorderParameters()<CR>
+" nnoremap <leader>rp :call LocalVariableToParameter()<CR>
+" nnoremap <leader>re :call ExtractMethod()<CR>
+" nnoremap <leader>rd :call RemoveParameter()<CR>
+" nnoremap <leader>rc :call IntroduceConstant()<CR>
 
 " append
 nnoremap <leader>app :w! >>
@@ -542,10 +541,10 @@ nnoremap <leader>app :w! >>
 " Use VimFiler instead of netrw by default
 let g:vimfiler_as_default_explorer = 1
 
-" Because I'm forced to use Ack 1.x
-if !s:is_linux
-    let g:ackprg = "ack -H --nocolor --nogroup --column --smart-case --follow"
-endif
+"" Because I'm forced to use Ack 1.x
+" if !s:is_linux
+"     let g:ackprg = "ack -H --nocolor --nogroup --column --smart-case --follow"
+" endif
 
 " doesn't work
 "au insertleave :update<cr>
@@ -589,72 +588,72 @@ if has("autocmd")
     augroup END
 endif
 
-" Rename the current file
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'), 'file')
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
+" " Rename the current file
+" function! RenameFile()
+"     let old_name = expand('%')
+"     let new_name = input('New file name: ', expand('%'), 'file')
+"     if new_name != '' && new_name != old_name
+"         exec ':saveas ' . new_name
+"         exec ':silent !rm ' . old_name
+"         redraw!
+"     endif
+" endfunction
 
-function! NewHeaderSourcePairInCurFileDir()
-    let pair_name = @f
-    if pair_name != ''
-        let @f=''
-    else
-        let pair_name = input('New header/source pair name: ')
-    endif
-    if pair_name != ''
-        " @TODO: for BZ, add project code (like 'lsit5_') automatically
-        let full_pair_name = expand('%:h') . '/' . pair_name
-        " @FIXME overwriting. Should prompt for it
-        let header = full_pair_name . '.h'
-        let source = full_pair_name . '.cpp'
-        " @FIXME screws up buffer history
-        exec ':e ' . source
-        " @FIXME hack
-        exec ':normal ggdG'
-        exec ':normal i#include "' . pair_name . '.h"'
-        put='' " blank line
-        exec ':w! ' . source
-        " @FIXME hack
-        set filetype=cpp
+" function! NewHeaderSourcePairInCurFileDir()
+"     let pair_name = @f
+"     if pair_name != ''
+"         let @f=''
+"     else
+"         let pair_name = input('New header/source pair name: ')
+"     endif
+"     if pair_name != ''
+"         " @TODO: for BZ, add project code (like 'lsit5_') automatically
+"         let full_pair_name = expand('%:h') . '/' . pair_name
+"         " @FIXME overwriting. Should prompt for it
+"         let header = full_pair_name . '.h'
+"         let source = full_pair_name . '.cpp'
+"         " @FIXME screws up buffer history
+"         exec ':e ' . source
+"         " @FIXME hack
+"         exec ':normal ggdG'
+"         exec ':normal i#include "' . pair_name . '.h"'
+"         put='' " blank line
+"         exec ':w! ' . source
+"         " @FIXME hack
+"         set filetype=cpp
 
-        exec ':e ' . header
-        " @FIXME hack
-        exec ':normal ggdG'
-        let include_guard = '_' . toupper(pair_name) . '_H_'
-        exec ':normal i#ifndef ' . include_guard
-        put=''
-        exec ':normal i#define ' . include_guard
-        put=''
-        put=''
-        put=''
-        put=''
-        exec ':normal i#endif'
-        exec ':normal gg3j'
-        exec ':w! ' . header
-        " @FIXME hack
-        set filetype=cpp
-        redraw!
-    endif
-endfunction
+"         exec ':e ' . header
+"         " @FIXME hack
+"         exec ':normal ggdG'
+"         let include_guard = '_' . toupper(pair_name) . '_H_'
+"         exec ':normal i#ifndef ' . include_guard
+"         put=''
+"         exec ':normal i#define ' . include_guard
+"         put=''
+"         put=''
+"         put=''
+"         put=''
+"         exec ':normal i#endif'
+"         exec ':normal gg3j'
+"         exec ':w! ' . header
+"         " @FIXME hack
+"         set filetype=cpp
+"         redraw!
+"     endif
+" endfunction
 
-" :t - just the filename
-nnoremap <silent><F4> :call YankOrPasteIncludeHeader()<CR>
-function! YankOrPasteIncludeHeader()
-    if @f != ''
-        put=@f
-        exec ':normal 0f"lvt.'
-        let @f=''
-    else
-        let @f='#include "' . expand("%:t") . '"'
-        echo "Current filename yanked for including"
-    endif
-endfunction
+" " :t - just the filename
+" nnoremap <silent><F4> :call YankOrPasteIncludeHeader()<CR>
+" function! YankOrPasteIncludeHeader()
+"     if @f != ''
+"         put=@f
+"         exec ':normal 0f"lvt.'
+"         let @f=''
+"     else
+"         let @f='#include "' . expand("%:t") . '"'
+"         echo "Current filename yanked for including"
+"     endif
+" endfunction
 
 " @TODO: need to unmap this default mapping, screws up window switching <C-l>           <Plug>(vimfiler_redraw_screen)
 
@@ -697,27 +696,27 @@ highlight Identifier gui=italic
 highlight cMember gui=italic
 highlight cMemberTag gui=italic
 
-if s:is_cygwin
-    let g:clang_auto_user_options='path, .clang_complete'
-    " let g:clang_exec='"clang'
-    " let g:clang_user_options='2>/dev/null || exit 0'
-    let g:clang_complete_auto = 0
-    let g:clang_complete_copen = 1
-    " let g:clang_library_path ='C:\Program Files\LLVM\bin'
-    let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
-    " let g:clang_user_options='|| exit 0'
-    " let g:clang_auto_user_options='|| exit 0"'
-    " let g:clang_snippets_engine='clang_complete'
-    " if there's an error, allow us to see it
-    " let g:clang_complete_copen=1
-    " let g:clang_complete_macros=1
-    " let g:clang_complete_patterns=0
-    " fix cygwin shell redirection
-    " set shellredir=>\\"%s\\"\\ 2 > &1
-    " set shellredir='>%s\ 2>&1'
-    " set shellredir=>\"%s\"\ 2>&1
-    " set shellredir=>\"%s\"\ 2>/dev/null
-endif
+" if s:is_cygwin
+"     let g:clang_auto_user_options='path, .clang_complete'
+"     " let g:clang_exec='"clang'
+"     " let g:clang_user_options='2>/dev/null || exit 0'
+"     let g:clang_complete_auto = 0
+"     let g:clang_complete_copen = 1
+"     " let g:clang_library_path ='C:\Program Files\LLVM\bin'
+"     let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
+"     " let g:clang_user_options='|| exit 0'
+"     " let g:clang_auto_user_options='|| exit 0"'
+"     " let g:clang_snippets_engine='clang_complete'
+"     " if there's an error, allow us to see it
+"     " let g:clang_complete_copen=1
+"     " let g:clang_complete_macros=1
+"     " let g:clang_complete_patterns=0
+"     " fix cygwin shell redirection
+"     " set shellredir=>\\"%s\\"\\ 2 > &1
+"     " set shellredir='>%s\ 2>&1'
+"     " set shellredir=>\"%s\"\ 2>&1
+"     " set shellredir=>\"%s\"\ 2>/dev/null
+" endif
 
 set shell=zsh\ -l
 
@@ -796,28 +795,28 @@ nmap <leader>u :UndotreeToggle<CR>
 
 set list lcs=tab:\|\ 
 
-nnoremap <silent> <leader>zw :call ZoomWin()<cr>
+" nnoremap <silent> <leader>zw :call ZoomWin()<cr>
 
-function! ScrollToPercent(percent)
-    let movelines=winheight(0)*(50-a:percent)/100
-    echo movelines
-    if movelines<0
-        let motion='k'
-        let rmotion='j'
-        let movelines=-movelines
-    elseif movelines>0
-        let motion='j'
-        let rmotion='k'
-    else
-        return 0
-    endif
-    if has('float') && type(movelines)==type(0.0)
-        let movelines=float2nr(movelines)
-    endif
-    execute 'normal! zz'.movelines.motion.'zz'.movelines.rmotion
-endfunction
+" function! ScrollToPercent(percent)
+"     let movelines=winheight(0)*(50-a:percent)/100
+"     echo movelines
+"     if movelines<0
+"         let motion='k'
+"         let rmotion='j'
+"         let movelines=-movelines
+"     elseif movelines>0
+"         let motion='j'
+"         let rmotion='k'
+"     else
+"         return 0
+"     endif
+"     if has('float') && type(movelines)==type(0.0)
+"         let movelines=float2nr(movelines)
+"     endif
+"     execute 'normal! zz'.movelines.motion.'zz'.movelines.rmotion
+" endfunction
 
-nnoremap <leader>zz :<C-u>call ScrollToPercent(15)<CR>
+" nnoremap <leader>zz :<C-u>call ScrollToPercent(15)<CR>
 
 " :hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
 " :hi CursorLine   cterm=NONE ctermbg=white ctermfg=black
