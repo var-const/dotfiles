@@ -14,6 +14,7 @@ export BROWSER=firefox
 export PASSWORD_STORE_DIR=/home/vk/en/.password-store
 export PASSWORD_STORE_CLIP_TIME=20
 
+# http://chneukirchen.org/blog/category/zsh.html
 autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 bindkey "^[," copy-earlier-word
