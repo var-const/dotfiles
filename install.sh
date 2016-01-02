@@ -10,6 +10,7 @@ stow archey3
 stow bash
 stow bspwm
 stow git
+stow goobook
 stow mercurial
 stow mps-youtube
 stow mpv
