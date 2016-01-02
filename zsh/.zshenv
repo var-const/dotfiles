@@ -65,6 +65,11 @@ alias mpv='mpv --no-audio-display'
 
 alias cv='cv -w'
 
+dus()
+{
+    du -sh -- "$@" | sort -h
+}
+
 alias less=$PAGER
 alias zless=$PAGER
 
