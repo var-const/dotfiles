@@ -23,6 +23,7 @@ stow svn
 stow termite
 stow tmux
 stow vim
+# @TODO: create vim's undo and backups directories
 stow vimpager
 stow x
 stow youtube-dl
