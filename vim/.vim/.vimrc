@@ -597,23 +597,11 @@ endfunction
 
 " @TODO: check it out
 " http://www.reddit.com/r/vim/comments/1yfzg2/does_anyone_actually_use_easymotion/
-" What I find myself doing constantly is to either jump to some arbitrary point on my screen, or copy some arbitrary line somewhere on screen to my current location.
-" In the former case, I focus my eye on it, hit / or ? and just type whatever I see at the location I want to jump to. incsearch will instantly give me a visual cue when I've typed enough to take me there. Hit enter and I'm there.
-" In the latter case I just use a range instead of counting lines. If I want to copy a line matching "foo", which is located above my current position, I just type:
-" :?foo?t.
-" ..and hit enter. If I wanted to move it, I'd swap the t for an m. If I wanted to do the same with a line below my current line, I'd swap the question marks with forward slashes:
-" :/foo/t.
-" Thanks to /u/romainl I can now combine these two methods with the following mappings in my .vimrc file:
-" " allows incsearch highlighting for range commands
-" cnoremap $t <CR>:t''<CR>
-" cnoremap $T <CR>:T''<CR>
-" cnoremap $m <CR>:m''<CR>
-" cnoremap $M <CR>:M''<CR>
-" cnoremap $d <CR>:d<CR>``
-" These allow me to first do a regular search forward or backwards by pressing / or ? and start typing what line I want to copy. Due to incsearch, I'll get an instant visual cue if I'm matching the line I want. Then I hit $ and the ex command I need. So using my previous example I would do:
-" ?foo$m
-
-" au FileType c,cpp,objc,objcpp call rainbow#load()
+cnoremap ?t <CR>:t''<CR>
+cnoremap ?T <CR>:T''<CR>
+cnoremap ?m <CR>:m''<CR>
+cnoremap ?M <CR>:M''<CR>
+cnoremap ?d <CR>:d<CR>``
 
 let g:indentLine_faster = 1
 
