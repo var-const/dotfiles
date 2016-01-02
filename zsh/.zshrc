@@ -18,6 +18,14 @@ autoload -Uz copy-earlier-word
 zle -N copy-earlier-word
 bindkey "^[," copy-earlier-word
 
+# http://blog.viktorkelemen.com/2012/10/retrieving-results-of-last-command-in.html
+zmodload -i zsh/parameter
+insert-last-command-output() {
+  LBUFFER+="$(eval $history[$((HISTCMD-1))])"
+}
+zle -N insert-last-command-output
+bindkey "^o" insert-last-command-output
+
 # -2 arg to tmux means "Use 256 colors w/o trying to guess whether
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
