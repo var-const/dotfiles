@@ -75,6 +75,8 @@ alias -g G='| grep'
 alias -g N="| /dev/null" 2>&1
 alias -g F='| fzf'
 
+alias lA='ls -A'
+
 alias less=$PAGER
 alias zless=$PAGER
 
