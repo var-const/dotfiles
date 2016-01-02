@@ -4,8 +4,6 @@ set encoding=utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,koi8-r,cp1251,default,latin1
-" No silly toolbar
-set guioptions-=T
 set ff=unix
 
 set t_Co=256
