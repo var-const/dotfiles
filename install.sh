@@ -23,6 +23,7 @@ stow qutebrowser
 stow svn
 stow termite
 stow tmux
+stow tmuxinator
 stow vim
 # @TODO: create vim's undo and backups directories
 stow vimpager
