@@ -607,7 +607,7 @@ let g:indentLine_faster = 1
 
 " Extend our undoable steps and preserve over restart (if available)
 if has('persistent_undo')
-    set undodir=$TMPDIR,~/tmp,~/.vim/tmp,/tmp,/var/tmp
+    set undodir=~/.vim/undo
     set undofile
     set undoreload=10000
 end
