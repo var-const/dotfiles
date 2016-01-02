@@ -592,7 +592,6 @@ function! NextClosedFold(dir)
     endif
 endfunction
 
-" @TODO: check it out
 " http://www.reddit.com/r/vim/comments/1yfzg2/does_anyone_actually_use_easymotion/
 cnoremap ?t <CR>:t''<CR>
 cnoremap ?T <CR>:T''<CR>
