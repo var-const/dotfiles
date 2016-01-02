@@ -14,6 +14,10 @@ export BROWSER=firefox
 export PASSWORD_STORE_DIR=/home/vk/en/.password-store
 export PASSWORD_STORE_CLIP_TIME=20
 
+autoload -Uz copy-earlier-word
+zle -N copy-earlier-word
+bindkey "^[," copy-earlier-word
+
 # -2 arg to tmux means "Use 256 colors w/o trying to guess whether
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
