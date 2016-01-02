@@ -14,34 +14,9 @@
 
 # goobook seems to fail on non-ascii characters
 
-# DONE:
-
 # Unfortunately, it seems like replacing Ctrl-G for cancelling with
 # something more reasonable, like Esc, is not possible:
 # http://unix.stackexchange.com/questions/47773/rebinding-clear-prompt-in-mutt
-
-# pass vs gnome keyring
-# integrating offlineimap with pass
-# integrating msmtp with pass
-# screen-256color?
-
-# generate folder list in offlineimap
-# sending emails
-
-# syncing offlineimap regularly
-
-# jumping to the sidepane
-
-# view attachments
-# open urls
-# autocomplete email addresses
-# notmuch
-
-# notifications on new emails:
-# icon
-# sound
-
-# skype notifications
 
 # Paths {{{
 
