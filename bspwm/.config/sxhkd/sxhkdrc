@@ -136,6 +136,19 @@ super + Escape
 super + BackSpace
     date | dzen2 -p 2
 
+# 1-3:   . - main terminal
+# 4-6:   / - scratch
+# 7:     m - email
+# 8:     i - skype (instant messenger)
+# 9-11:  b - qutebrowser
+# 12:    u - firefox
+# 13:    y - chrome
+# 14-16: o - documents
+# @TODO: mpv?
+
+super + {.,/,m,i,b,u,y,o}
+	bspc desktop --focus ^{1,4,7,8,9,12,13,14}
+
 # @TODO:
 #
 # Sticky window is a window which is visible
