@@ -369,7 +369,7 @@ nnoremap <leader>c "_c
 nnoremap <leader>cc "_cc
 nnoremap <leader>C "_C
 
-noremap <leader>ft :set filetype=
+noremap <leader>ft :set filetype
 
 noremap <leader>tn :tabnew<CR>
 noremap <C-n> gt
