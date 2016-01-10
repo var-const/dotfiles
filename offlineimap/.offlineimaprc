@@ -20,7 +20,7 @@ status_backend = sqlite
 # big deal if we lose an email here and there from a crash
 # (it’ll just be synced the next time anyway).
 fsync = False
-postsynchook = /home/vk/bin/offlineimap-hook.sh
+postsynchook = /home/vk/dotfiles/bin/offlineimap-hook.sh
 # Minutes between syncs
 autorefresh = 2
 # Number of quick-syncs between autorefreshes. Quick-syncs do not update if the
@@ -157,9 +157,9 @@ holdconnectionopen = yes
 # generate a muttrc fragment containing the mailboxes that it syncs."
 [mbnames]
 enabled = yes
-filename = ~/en/mail/all-mailboxes.muttrc
-header = "mailboxes "
+filename = ~/en/mail/all-mailboxes-raw
+# Doesn't work if header is omitted or empty (the latter seems to be a bug)
+header = " "
 peritem = "+%(accountname)s/%(foldername)s"
-# peritem = "+%(foldername)s"
-sep = " "
+sep = "\n"
 footer = "\n"

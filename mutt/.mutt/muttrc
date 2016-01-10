@@ -1,4 +1,4 @@
-# Copied, with minor changes, from Steve Losh's config:
+# Based on Steve Losh's config:
 # https://bitbucket.org/sjl/dotfiles/src/mutt/muttrc
 
 # @TODO:
@@ -48,7 +48,6 @@ set editor = "vim -c 'normal! }' -c 'redraw'"
 # @TODO: check out more colorschemes, though bad wolf isn't half bad
 source ~/.mutt/colorscheme-badwolf.muttrc
 
-# set folder = ~/en/mail/gmail/ # mailbox location
 set folder = ~/en/mail/ # mailbox location
 
 set wait_key = no        # shut up, mutt
@@ -149,40 +148,12 @@ unhdr_order *
 hdr_order from: to: cc: date: subject:  # and in this order
 
 # }}}
-# steve@stevelosh.com {{{
+# Email account {{{
 
-# Default inbox.
-set spoolfile = "+INBOX"
-
-# @TODO:
-# Alternate email addresses.
-# alternates sjl@pculture.org still\.?life@gmail.com steve@ladyluckblues.com steve@pculture.org steven15@ru.is
-
-# Mailboxes to show in the sidebar.
-# From Arch wiki:
-# https://wiki.archlinux.org/index.php/OfflineIMAP#Automatic_mailbox_generation_for_mutt
-# "Mutt cannot be simply pointed to an IMAP or maildir directory and be expected
-# to guess which subdirectories happen to be the mailboxes, yet offlineimap can
-# generate a muttrc fragment containing the mailboxes that it syncs."
-source ~/en/mail/gmail-mailboxes.muttrc
-
-# mailboxes +INBOX \
-#           +SENT \
-#           +ARCHIVE \
-#           +DRAFTS \
-#           +temporary/search \
-
-# Other special folders.
-set mbox      = "+gmail/ARCHIVE"
-set postponed = "+gmail/DRAFTS"
-
-# Sending email.
-set from     = "Konstantin <varconsteq@gmail.com>"
-set sendmail = "msmtp -a gmail"
 set sendmail_wait = 0 # no please don't silently fail, email is important
 unset record
-# @TODO: ???
-# set record = "+account/Sent\ Items"
+# The default account
+source ~/.mutt/gmail.muttrc
 
 # }}}
 # Key Bindings {{{
@@ -292,6 +263,5 @@ bind editor <Tab> complete-query
 # set nm_record = yes
 # set nm_record_tags ="-inbox me archive"
 
-set nm_default_uri="notmuch:///home/vk/en/mail/gmail"
 set virtual_spoolfile	= yes
 macro index n "<vfolder-from-query>"              # looks up a hand made query

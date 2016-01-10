@@ -1,0 +1,25 @@
+# Default inbox.
+set spoolfile = "+mailru/INBOX"
+
+# set sidebar_visible = no
+unmailboxes *
+source ~/en/mail/mailru.muttrc
+
+# Other special folders.
+# @FIXME
+# set mbox      = "+gmail/ARCHIVE"
+# set postponed = "+gmail/DRAFTS"
+
+# Sending email.
+set from     = "Константин <varlamovkonst@mail.ru>"
+set sendmail = "msmtp -a mailru"
+
+set nm_default_uri="notmuch:///home/vk/en/mail"
+
+# virtual-mailboxes \
+#     "INBOX"         "notmuch://?query=folder:INBOX" \
+#     "Other Unread"  "notmuch://?query=is:unread NOT folder:INBOX" \
+#     "Today"         "notmuch://?query=date:1d.." \
+#     "This Week"     "notmuch://?query=date:1w.."
+
+#set folder="imaps://imap.example.com/"
