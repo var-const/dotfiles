@@ -1,7 +1,10 @@
 vim/.vim/bundle
 vim/.vim/spell/*.spl
-vim/.vim/tmp
+vim/.vim/backups
+vim/.vim/tmp*
+vim/.vim/undo*
 vim/.vim/.netrwhist
 qutebrowser/.config/qutebrowser/bookmarks
 qutebrowser/.config/qutebrowser/quickmarks
 qutebrowser/.config/qutebrowser/qsettings
+mutt/.mutt/tmp*
