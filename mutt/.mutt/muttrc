@@ -43,8 +43,8 @@ set editor = "vim -c 'normal! }' -c 'redraw'"
 # }}}
 # Basic Options {{{
 
-# source ~/.mutt/colorscheme-archwiki.muttrc
-# source ~/.mutt/colorscheme-steve-losh.muttrc
+# source ~/.mutt/colorschemes/colorscheme-archwiki.muttrc
+# source ~/.mutt/colorschemes/colorscheme-steve-losh.muttrc
 # @TODO: check out more colorschemes, though bad wolf isn't half bad
 source ~/.mutt/colorscheme-badwolf.muttrc
 
