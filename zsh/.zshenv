@@ -79,6 +79,12 @@ alias cqk='vim ~/dotfiles/qutebrowser/.config/qutebrowser/keys.conf'
 # x
 alias cx='vim ~/dotfiles/x/.xinitrc'
 
+O()
+{
+    nohup xdg-open "$@" > /dev/null 2>&1 &
+    disown
+}
+
 dus()
 {
     du -sh -- "$@" | sort -h
@@ -89,12 +95,21 @@ alias -g G='| grep'
 alias -g N="| /dev/null" 2>&1
 alias -g F='| fzf'
 
-alias l='ls'
 alias v='vim'
-alias lA='ls -A'
+alias lal='ls -Al'
 
 alias less=$PAGER
 alias zless=$PAGER
+
+alias py='python'
+
+alias mnt='mount'
+alias umnt='umount'
+
+mkj () {
+    last=${@[-1]}
+    mkdir $* && cd "$last"
+}
 
 svn-log-user() {
 	username="$1"
