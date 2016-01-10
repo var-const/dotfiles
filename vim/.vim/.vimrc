@@ -37,6 +37,8 @@ if has('vim_starting')
     endif
 endif
 
+let g:gitgutter_map_keys = 0
+
 syntax off " seems like it should be off before the whole NeoBundle thing
 
 " Required:
@@ -162,7 +164,8 @@ NeoBundle 'luochen1990/rainbow'
 " NeoBundle 'dag/vim2hs'
 
 " Show a VCS diff using Vim's sign column.
-NeoBundle 'mhinz/vim-signify'
+" NeoBundle 'mhinz/vim-signify'
+NeoBundle 'airblade/vim-gitgutter'
 
 " NeoBundle 'nathanaelkane/vim-indent-guides'
 NeoBundle 'Yggdroot/indentLine'
@@ -724,10 +727,18 @@ let g:pymode_rope_complete_on_dot = 0
 " Fugitive mappings
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR>
+nnoremap <Leader>gW :Gwrite<CR>:Gcommit --verbose<CR>
 nnoremap <Leader>gc :Gcommit --verbose<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gv :Gvdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
+
+nnoremap <Leader>gA :GitGutterStageHunk<CR>:Gcommit --verbose<CR>
+nnoremap <Leader>ga :GitGutterStageHunk<CR>
+nnoremap <Leader>gu :GitGutterRevertHunk<CR>
+nnoremap <Leader>gp :GitGutterPreviewHunk<CR>
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
 
 " Write with superuser permissions
 cmap w!! w !sudo tee %
