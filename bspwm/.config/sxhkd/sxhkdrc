@@ -142,6 +142,11 @@ super + space
 super + Escape
 	pkill -USR1 -x sxhkd
 
+# Restart bspwm
+super + shift + Escape
+	bspc wm -d > "$BSPWM_STATE" && bspc quit ;\
+        echo "bspwm restarted" | dzen2 -p 1
+
 super + BackSpace
     date | dzen2 -p 1
 

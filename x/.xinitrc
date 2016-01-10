@@ -43,4 +43,4 @@ firefox &
 unclutter &
 skype &
 qutebrowser &
-exec bspwm
+exec "$HOME"/dotfiles/bin/loop-bspwm.sh

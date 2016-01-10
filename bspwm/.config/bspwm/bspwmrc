@@ -31,3 +31,8 @@ bspc rule -a Skype desktop=^3
 bspc rule -a qutebrowser desktop=^4
 
 bspc rule -a Conky sticky=on manage=off lower=on
+
+if [ -e "$BSPWM_STATE" ] ; then
+	bspc wm -l "$BSPWM_STATE"
+	rm "$BSPWM_STATE"
+fi
