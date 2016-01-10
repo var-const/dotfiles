@@ -155,7 +155,7 @@ super + BackSpace
 # 14-16: o - documents
 # @TODO: mpv?
 
-super + {.,/,m,i,b,u,y,o}
+super + {period,slash,m,i,b,u,y,o}
 	bspc desktop --focus ^{1,4,7,8,9,12,13,14}
 
 super + {equal,minus}
