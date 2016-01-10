@@ -34,6 +34,8 @@ if [[ -n $DISPLAY ]] && command -v tmux>/dev/null; then
   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 attach
 fi
 
+export TERM=screen-256color
+
 # To get fasd working in a shell, some initialization code must be run
 eval "$(fasd --init auto)"
 
