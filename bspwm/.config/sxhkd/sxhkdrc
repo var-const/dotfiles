@@ -149,6 +149,12 @@ super + BackSpace
 super + {.,/,m,i,b,u,y,o}
 	bspc desktop --focus ^{1,4,7,8,9,12,13,14}
 
+super + {equal,minus}
+    pulseaudio-ctl {up,down}; pulseaudio-ctl full-status | read vol mute_sink mute_src && printf "Volume: $vol%% mute: $mute_sink\n" | dzen2 -p 1
+
+super + plus
+    pulseaudio-ctl mute; pulseaudio-ctl full-status | read vol mute_sink mute_src && printf "Volume: $vol%% mute: $mute_sink\n" | dzen2 -p 1
+
 # @TODO:
 #
 # Sticky window is a window which is visible
