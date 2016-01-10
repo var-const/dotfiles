@@ -30,9 +30,6 @@ case $OS_NAME in
   darwin)
 	alias vim='mvim -v'
 	;;
-  linux)
-	alias open="xdg-open"
-	;;
 esac
 
 # svn
@@ -78,6 +75,9 @@ alias cq='vim ~/dotfiles/qutebrowser/.config/qutebrowser/qutebrowser.conf'
 alias cqk='vim ~/dotfiles/qutebrowser/.config/qutebrowser/keys.conf'
 # x
 alias cx='vim ~/dotfiles/x/.xinitrc'
+# DE
+alias cw='vim ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
+alias cwk='vim ~/dotfiles/bspwm/.config/sxhkd/sxhkdrc'
 
 O()
 {
