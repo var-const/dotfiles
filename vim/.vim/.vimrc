@@ -725,7 +725,8 @@ let g:pymode_rope_complete_on_dot = 0
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>gc :Gcommit --verbose<CR>
-nnoremap <Leader>gd :Gvdiff<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gv :Gvdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
 
 " Write with superuser permissions
