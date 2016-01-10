@@ -282,8 +282,8 @@ macro index,pager V "|vim -c 'setlocal ft=mail' -c 'setlocal buftype=nofile' -<e
 auto_view text/html
 folder-hook . `rm -f /home/vk/en/mail/tmp-attachments/*`
 
-macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro index,pager \cs "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro attach,compose \cs "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 
 set query_command="goobook query '%s'"
 macro index,pager a "<pipe-message>goobook add<return>" "add sender to google contacts"
