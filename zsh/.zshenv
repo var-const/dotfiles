@@ -64,6 +64,21 @@ alias ydl-prog='youtube-dl --output "/mnt/double/prog-vids/%(title)s.%(ext)s"'
 alias mpv='mpv --no-audio-display'
 alias cv='cv -w'
 
+# Quick config editing aliases
+# zsh
+alias czr='vim ~/dotfiles/zsh/.zshrc'
+alias cze='vim ~/dotfiles/zsh/.zshenv'
+# vim
+alias cv='vim ~/dotfiles/vim/.vim/.vimrc'
+# email
+alias cmutt='vim ~/dotfiles/mutt/.mutt/*muttrc'
+alias cofflineimap='vim ~/dotfiles/offlineimap/.offlineimaprc'
+# qutebrowser
+alias cq='vim ~/dotfiles/qutebrowser/.config/qutebrowser/qutebrowser.conf'
+alias cqk='vim ~/dotfiles/qutebrowser/.config/qutebrowser/keys.conf'
+# x
+alias cx='vim ~/dotfiles/x/.xinitrc'
+
 dus()
 {
     du -sh -- "$@" | sort -h
