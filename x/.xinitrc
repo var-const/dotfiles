@@ -38,9 +38,5 @@ fi
 compton -b --backend glx --vsync opengl-swc
 
 sxhkd &
-termite &
-firefox &
 unclutter &
-skype &
-qutebrowser &
 exec "$HOME"/dotfiles/bin/loop-bspwm.sh
