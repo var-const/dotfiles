@@ -62,7 +62,6 @@ alias ydl='youtube-dl'
 alias ydl-prog='youtube-dl --output "/mnt/double/prog-vids/%(title)s.%(ext)s"'
 
 alias mpv='mpv --no-audio-display'
-
 alias cv='cv -w'
 
 dus()
@@ -75,6 +74,8 @@ alias -g G='| grep'
 alias -g N="| /dev/null" 2>&1
 alias -g F='| fzf'
 
+alias l='ls'
+alias v='vim'
 alias lA='ls -A'
 
 alias less=$PAGER
