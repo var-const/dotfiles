@@ -601,7 +601,7 @@ cnoremap ?d <CR>:d<CR>``
 
 let g:indentLine_faster = 1
 
-" Extend our undoable steps and preserve over restart (if available)
+" Note: persistent undo fails if a file is modified externally
 if has('persistent_undo')
     set undodir=~/.vim/undo
     set undofile
@@ -610,6 +610,9 @@ end
 set undolevels=10000
 " UndoTree
 nmap <leader>u :UndotreeToggle<CR>
+
+set backup
+set backupdir=~/.vim/backups
 
 set list lcs=tab:\|\ 
 
