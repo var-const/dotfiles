@@ -4,13 +4,9 @@
 wd="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 os=$($wd/get-os.sh)
 
-stow aria2
+# Main workflow
 stow bspwm
 stow git
-stow goobook
-stow mps-youtube
-stow mpv
-stow qutebrowser
 stow termite
 stow tmux
 stow tmuxinator
@@ -18,10 +14,20 @@ stow tmuxinator
 stow vim
 stow vimpager
 stow x
-stow youtube-dl
 stow zathura
 stow zsh
 
+# Multimedia
+stow aria2
+stow mps-youtube
+stow mpv
+stow qutebrowser
+stow youtube-dl
+
+# Email
+stow goobook
+
+# Legacy
 stow bash
 stow mercurial
 stow svn
