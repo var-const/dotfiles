@@ -23,6 +23,7 @@ stow mps-youtube
 stow mpv
 stow qutebrowser
 stow youtube-dl
+# @TODO: wine
 
 # Email
 stow goobook
