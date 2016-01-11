@@ -103,10 +103,20 @@ zstyle ':prezto:module:editor' dot-expansion 'yes'
 # Prompt
 #
 
+# Use the trick from this discussion:
+# https://github.com/sorin-ionescu/prezto/issues/524
+# to load a custom theme from Prezto.
+# I much prefer to have Prezto managed by its AUR maintainer(s), and don't
+# really want to create my own custom package
+fpath=(
+  ${HOME}/dotfiles/zsh/prompt
+  ${fpath}
+)
+
 # Set the prompt theme to load.
 # Setting it to 'random' loads a random theme.
 # Auto set to 'off' on dumb terminals.
-zstyle ':prezto:module:prompt' theme 'sorin'
+zstyle ':prezto:module:prompt' theme 'vk'
 
 #
 # Ruby
