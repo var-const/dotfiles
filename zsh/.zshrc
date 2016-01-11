@@ -4,7 +4,7 @@ if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
 fi
 
-source "${HOME}/dotfiles/zgen/zgen.zsh"
+source "${HOME}/dotfiles/external/zgen/zgen.zsh"
 # check if there's no init script
 if ! zgen saved; then
     # A Zsh plugin to help remembering those aliases you once defined.
