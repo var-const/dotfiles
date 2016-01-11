@@ -110,6 +110,15 @@ alias py='python'
 alias mnt='mount'
 alias umnt='umount'
 
+alias tmux='tmux -2'
+alias tls='tmux ls'
+alias tk='tmux kill-session -t'
+alias ta='tmux attach-session -t'
+alias td='tmux detach'
+alias tn='tmux new -s'
+alias muxs='tmuxinator start'
+alias muxn='tmuxinator new'
+
 mkj () {
     last=${@[-1]}
     mkdir $* && cd "$last"
