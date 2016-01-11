@@ -116,6 +116,8 @@ alias tk='tmux kill-session -t'
 alias ta='tmux attach-session -t'
 alias td='tmux detach'
 alias tn='tmux new -s'
+alias trenw='tmux rename-window'
+alias trens='tmux rename-session'
 alias muxs='tmuxinator start'
 alias muxn='tmuxinator new'
 
