@@ -87,6 +87,8 @@ function chpwd() {
 alias l='ls'
 alias la='ls -A'
 
+source .zsh-fzf
+
 # Very cool - allows to always run Vim in a single instance and
 # automatically open new files from shell in this instance.
 # Stolen from: http://vim.wikia.com/wiki/Enable_servername_capability_in_vim/xterm
