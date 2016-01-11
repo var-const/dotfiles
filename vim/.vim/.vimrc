@@ -838,3 +838,6 @@ nnoremap <silent> <M-k> :TmuxNavigateUp<cr>
 nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 " @FIXME doesn't seem to work
 nnoremap <M-\> :TmuxNavigatePrevious<cr>
+
+" @CHECKITOUT: gq<motion> reformats the text, including wrapping to the set
+" column width
