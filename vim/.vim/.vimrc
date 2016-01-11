@@ -180,6 +180,14 @@ NeoBundle 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
 
 NeoBundle 'christoomey/vim-tmux-navigator'
 
+" This plugin instead offers an alternative yank command |gy|, which allows to
+" specify the accumulator register only once on its initial use, can then be
+" repeated
+" Since you don't need this plugin to repeat yanks to the unnamed register (just 
+" use the built-in y), register "a is used as the default register, i.e. when 
+" you use gy for the first time without explicitly specifying a register
+NeoBundle 'vim-scripts/RepeatableYank'
+
 call neobundle#end()
 
 " If there are uninstalled bundles found on startup,
