@@ -121,6 +121,8 @@ alias trens='tmux rename-session'
 alias muxs='tmuxinator start'
 alias muxn='tmuxinator new'
 
+alias zregen='rm -f ~/.zgen/init.zsh'
+
 mkj () {
     last=${@[-1]}
     mkdir $* && cd "$last"
