@@ -52,4 +52,5 @@ fi
 
 sxhkd &
 unclutter &
+feh --randomize --bg-fill ~/wallpapers/* &
 exec "$HOME"/dotfiles/bin/loop-bspwm.sh
