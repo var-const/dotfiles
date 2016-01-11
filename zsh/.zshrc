@@ -33,7 +33,7 @@ bindkey "^o" insert-last-command-output
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
 if [[ -n $DISPLAY ]] && command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 attach
+  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 new
 fi
 
 export TERM=screen-256color

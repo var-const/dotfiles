@@ -51,14 +51,34 @@ fi
 # 14-16: o - documents
 
 # Autostart
+# @TODO: starting tmuxinator projects is ugly and brittle. Surely there must be
+# a better way?
 if [[ -z "$(xtitle)" ]]; then
-    bspc rule --add termite desktop=^1 --one-shot; termite >/dev/null 2>&1 &
-    bspc rule --add termite desktop=^4 --one-shot; termite -e 'tmuxinator start scratch' >/dev/null 2>&1 &
-    bspc rule --add termite desktop=^7 --one-shot; termite -e 'tmuxinator start mail' >/dev/null 2>&1 &
+
     bspc rule --add Skype desktop=^8 --one-shot; skype >/dev/null 2>&1 &
     bspc rule --add qutebrowser desktop=^9 --one-shot; qutebrowser >/dev/null 2>&1 &
     bspc rule --add Firefox desktop=^12 --one-shot; firefox >/dev/null 2>&1 &
 
+    bspc rule --add termite desktop='^1' --one-shot; termite >/dev/null 2>&1 &
+    sleep 1
+    tmux send-keys -t 0 'tmuxinator start main' Enter
+    sleep 0.3
+
+    bspc rule --add termite desktop='^4' --one-shot; termite >/dev/null 2>&1 &
+    sleep 1
+    tmux send-keys -t 1 'tmuxinator start scratch' Enter
+    sleep 0.3
+
+    bspc rule --add termite desktop='^7' --one-shot; termite >/dev/null 2>&1 &
+    sleep 1
+    tmux send-keys -t 2 'tmuxinator start mail' Enter
+    sleep 0.3
+
     # Start from mail, it wants password
 	bspc desktop --focus ^7
+
+    sleep 0.1
+    tmux kill-session -t 0
+    tmux kill-session -t 1
+    tmux kill-session -t 2
 fi
