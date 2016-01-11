@@ -1,3 +1,6 @@
 [submodule "zgen"]
 	path = zgen
 	url = https://github.com/tarjoilija/zgen
+[submodule "external/battery"]
+	path = external/battery
+	url = https://github.com/richo/battery/
