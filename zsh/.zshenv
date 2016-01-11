@@ -65,6 +65,7 @@ alias cv='cv -w'
 # zsh
 alias czr='vim ~/dotfiles/zsh/.zshrc'
 alias cze='vim ~/dotfiles/zsh/.zshenv'
+alias cza='vim ~/dotfiles/zsh/.*'
 # vim
 alias cv='vim ~/dotfiles/vim/.vim/.vimrc'
 # email
@@ -78,6 +79,9 @@ alias cx='vim ~/dotfiles/x/.xinitrc'
 # DE
 alias cw='vim ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
 alias cwk='vim ~/dotfiles/bspwm/.config/sxhkd/sxhkdrc'
+alias cwa='vim ~/dotfiles/bspwm/.config/sxhkd/sxhkdrc ~/dotfiles/bspwm/.config/bspwm/bspwmrc'
+# tmux
+alias ct='vim ~/dotfiles/tmux/.tmux.conf'
 
 O()
 {
