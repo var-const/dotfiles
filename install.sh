@@ -26,6 +26,10 @@ stow youtube-dl
 
 # Email
 stow goobook
+stow msmtp
+stow mutt
+stow notmuch
+stow offlineimap
 
 # Legacy
 stow bash
