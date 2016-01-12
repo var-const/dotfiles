@@ -4,7 +4,7 @@ decode_from_base64()
 {
     base_header="=?UTF-8?B?"
     if echo "$1" | grep -q "$base_header"; then
-        /usr/bin/perl -e "use MIME::WordDecoder(mime_to_perl_string); print mime_to_perl_string(\""$1"\");"
+        $HOME/dotfiles/bin/decode-from-base64.py "$1"
     else
         echo "$1"
     fi
@@ -41,7 +41,7 @@ check_new_mail()
     if [[ -n "$message" ]]; then
         ls "$new_dir" >! "$cache"
 
-        mpv --volume 70 $HOME/sounds/tomb-raider-secret-sound.mp3 &
+        mpv --volume 70 $HOME/sounds/tomb-raider-secret-sound.mp3 > /dev/null 2>&1 &
         sudo -u vk DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u vk)/bus" notify-send '('$count')'" Inbox" "$message" -i /usr/share/icons/Adwaita/32x32/status/mail-unread.png &
 
         notmuch new &
