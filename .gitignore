@@ -1,6 +1,7 @@
 vim/.vim/bundle
 vim/.vim/spell/*.spl
 vim/.vim/backups
+vim/.vim/spell
 vim/.vim/tmp*
 vim/.vim/undo*
 vim/.vim/.netrwhist
