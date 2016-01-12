@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# This is a combination of qutedmenu and dmenu_qutebrowser from Qutebrowser's
+# stock userscripts
+
+# Pipes history, quickmarks, and bookmarks into dmenu.
+# :bind o spawn --userscript /path/to/userscripts/qutedmenu open
+# :bind O spawn --userscript /path/to/userscripts/qutedmenu tab
+
+readonly confdir=${XDG_CONFIG_HOME:-$HOME/.config}
+readonly datadir=${XDG_DATA_HOME:-$HOME/.local/share}
+
+create_menu() {
+    cat "$confdir"/qutebrowser/quickmarks
+    cat "$confdir"/qutebrowser/bookmarks/urls | cut -d ' ' -f1
+    # @FIXME: cat is much faster than the original 'while read'
+    cat "$datadir"/qutebrowser/history | cut -d ' ' -f2
+}
+
+# Awk from here:
+# http://unix.stackexchange.com/questions/11939/how-to-get-only-the-unique-results-without-having-to-sort-data
+url=$(create_menu | awk '!seen[$0]++' | dmenu -l 15 -p qutebrowser)
+url=$(echo $url | egrep "https?:" || echo $url)
+
+[ -z "${url// }" ] && exit
+
+case $1 in
+    open) printf '%s' "open $url" >> "$QUTE_FIFO" || qutebrowser "$url" ;;
+    tab)    printf '%s' "open -t $url" >> "$QUTE_FIFO" || qutebrowser "$url"  ;;
+esac
