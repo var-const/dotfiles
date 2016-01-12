@@ -1,6 +1,6 @@
 [user]
-	name = vk
-	email = vk@localhost
+	name = Konstantin
+	email = varconsteq@gmail.com
 [core]
 	excludesfile = /home/vk/.gitignore
     ; @TODO: make vimpager work
