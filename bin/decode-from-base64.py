@@ -5,7 +5,10 @@ from sys import argv
 
 def main():
     msg, encoding = decode_header(argv[1])[0]
-    print(msg.decode(encoding))
+    if encoding:
+        print(msg.decode(encoding))
+    else:
+        print(msg)
 
 if __name__ == '__main__':
     main()

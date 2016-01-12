@@ -2,12 +2,7 @@
 
 decode_from_base64()
 {
-    base_header="=?UTF-8?B?"
-    if echo "$1" | grep -q "$base_header"; then
-        $HOME/dotfiles/bin/decode-from-base64.py "$1"
-    else
-        echo "$1"
-    fi
+    $HOME/dotfiles/bin/decode-from-base64.py "$1"
 }
 
 check_new_mail()
