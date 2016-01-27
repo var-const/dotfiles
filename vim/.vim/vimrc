@@ -444,7 +444,8 @@ nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
 
 " Shortcut for editing  vimrc file in a new tab (\ev is for "edit vimrc")
 if has('unix')
-    nnoremap <leader>ev :tabedit ~/dotfiles/vim/.vim/.vimrc<CR>
+    "nnoremap <leader>ev :tabedit ~/dotfiles/vim/.vim/.vimrc<CR>
+    nnoremap <leader>ev :tabedit ~/dotfiles/vim/.vim/vimrc<CR>
 else
     nnoremap <leader>ev :tabedit ~/_vimrc<CR>
 endif
@@ -515,7 +516,8 @@ if has("autocmd")
     augroup myvimrchooks
         au!
         if has('unix')
-            autocmd bufwritepost .vimrc source ~/.vimrc
+            "autocmd bufwritepost .vimrc source ~/.vimrc
+            autocmd bufwritepost .vimrc source ~/.vim/vimrc
         else
             autocmd bufwritepost _vimrc source ~/_vimrc
         endif
