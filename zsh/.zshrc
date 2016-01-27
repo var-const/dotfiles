@@ -42,9 +42,9 @@ bindkey "^o" insert-last-command-output
 # -2 arg to tmux means "Use 256 colors w/o trying to guess whether
 # they're available or not" (this guessing seems to fail under
 # some terminals, mintty in particular)
-if [[ -n $DISPLAY ]] && command -v tmux>/dev/null; then
-  [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 new
-fi
+# if [[ -n $DISPLAY ]] && command -v tmux>/dev/null; then
+#   [[ ! $TERM =~ screen ]] && [ -z $TMUX ] && exec tmux -2 new
+# fi
 
 export TERM=screen-256color
 
@@ -97,7 +97,7 @@ function chpwd() {
 alias l='ls'
 alias la='ls -A'
 
-source .zsh-fzf
+source "$HOME"/.zsh-fzf
 
 # Very cool - allows to always run Vim in a single instance and
 # automatically open new files from shell in this instance.
