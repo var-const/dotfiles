@@ -12,6 +12,7 @@ stow tmux
 stow tmuxinator
 # @TODO: create vim's undo and backups directories
 stow vim
+mkdir "$HOME"/.vim/{backups,tmp}
 stow vimpager
 stow x
 stow zathura
