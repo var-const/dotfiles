@@ -1,7 +1,6 @@
 #!/bin/sh
 
 if [[ -z $(pidof xcape) ]]; then
-    # setxkbmap -model pc104 -layout us,ru -option grp:alt_shift_toggle
     setxkbmap -model pc104 -layout us,ru -option grp:shifts_toggle
 
     spare_modifier="VoidSymbol"
@@ -13,4 +12,3 @@ if [[ -z $(pidof xcape) ]]; then
 
     xcape -t 200 -e "$spare_modifier=Return;Control_L=Escape"
 fi
-
