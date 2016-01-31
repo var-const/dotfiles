@@ -1,7 +1,7 @@
 #!/bin/sh
 
 if [[ -z $(pidof xcape) ]]; then
-    setxkbmap -model pc104 -layout us,ru -option grp:alt_shift_toggle
+    setxkbmap -model pc104 -layout us,ru -option grp:shifts_toggle
 
     spare_modifier="VoidSymbol"
 

@@ -37,7 +37,7 @@ fi
 # compton -b --backend glx --vsync opengl-swc --paint-on-overlay
 compton -b --backend glx --vsync opengl-swc
 
-"$HOME/bin/xcape.sh"
+"$HOME"/dotfiles/bin/xcape.sh
 
 sxhkd &
 unclutter &

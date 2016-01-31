@@ -46,7 +46,7 @@ set editor = "vim -c 'normal! }' -c 'redraw'"
 # source ~/.mutt/colorschemes/colorscheme-archwiki.muttrc
 # source ~/.mutt/colorschemes/colorscheme-steve-losh.muttrc
 # @TODO: check out more colorschemes, though bad wolf isn't half bad
-source ~/.mutt/colorscheme-badwolf.muttrc
+source ~/.mutt/colorschemes/colorscheme-badwolf.muttrc
 
 set folder = ~/en/mail/ # mailbox location
 
@@ -265,3 +265,14 @@ bind editor <Tab> complete-query
 
 set virtual_spoolfile	= yes
 macro index n "<vfolder-from-query>"              # looks up a hand made query
+
+#folder-hook 'gmail' 'source ~/.mutt/gmail.muttrc'
+#folder-hook 'mailru' 'source ~/.mutt/mailru.muttrc'
+
+macro index,pager 1 '<sync-mailbox><enter-command>source ~/.mutt/gmail.muttrc<enter>'
+macro index,pager 2 '<sync-mailbox><enter-command>source ~/.mutt/mailru.muttrc<enter>'
+macro index,pager 3 '<enter-command>set sidebar_visible = yes<enter>'
+macro index,pager 4 '<enter-command>set sidebar_visible = no<enter>'
+
+macro index \CI  '<enter-command>unmailboxes *; source ~/crash.muttrc<enter>'
+macro index \CU  '<enter-command>unmailboxes *; mailboxes "+gmail/INBOX" "+mailru/INBOX" "+mailru/airbnb"<enter>'
