@@ -10,6 +10,25 @@ if ! zgen saved; then
     # A Zsh plugin to help remembering those aliases you once defined.
     zgen load djui/alias-tips
 
+    if "$HOME/dotfiles/get-distro-name.sh" | grep --quiet "ubuntu" ; then
+        zgen prezto
+
+        zgen prezto environment
+        zgen prezto editor
+        zgen prezto history
+        zgen prezto directory
+        zgen prezto utility
+        zgen prezto completion
+        zgen prezto archive
+        zgen prezto fasd
+        zgen prezto git
+        zgen prezto rsync
+        zgen prezto pacman
+        zgen prezto syntax-highlighting
+        zgen prezto history-substring-search
+        zgen prezto prompt
+    fi
+
     echo "Creating a zgen save"
     zgen save
 fi

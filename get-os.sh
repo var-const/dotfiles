@@ -1,5 +1,5 @@
-#!/bin/bash
 
+#!/bin/bash
 if [ "$(uname)" == "Darwin" ]; then
 	echo "darwin"
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
