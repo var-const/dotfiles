@@ -4,16 +4,17 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+# @FIXME too many aliases for a single program
 alias a='fasd -a'        # any
 alias s='fasd -si'       # show / search / select
 alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
+# alias f='fasd -f'        # file
 alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
 alias z='fasd_cd -d'     # cd, same functionality as j in autojump
 alias zz='fasd_cd -d -i' # cd with interactive selection
-alias v='f -e vim'       # quick opening files with vim
-alias zat='f -e zathura' # quick opening files with zathura
+# alias v='f -e vim'       # quick opening files with vim
+# alias zat='f -e zathura' # quick opening files with zathura
 
 # I want to copy directories too, for chrissake
 alias cpdv="rsync -rpoghb --backup-dir=/tmp/rsync -e /dev/null --progress --"
@@ -64,7 +65,9 @@ alias cv='cv -w'
 # Quick config editing aliases
 # zsh
 alias czr='vim ~/dotfiles/zsh/.zshrc'
+alias szr='source ~/dotfiles/zsh/.zshrc'
 alias cze='vim ~/dotfiles/zsh/.zshenv'
+alias sze='source ~/dotfiles/zsh/.zshenv'
 alias cza='vim ~/dotfiles/zsh/.*'
 # vim
 alias cv='vim ~/dotfiles/vim/.vim/.vimrc'
@@ -96,11 +99,17 @@ dus()
 
 alias -g S='| sort'
 alias -g G='| grep'
-alias -g N="> /dev/null" 2>&1
+alias -g N="> /dev/null 2>&1"
+alias -g NN="2> /dev/null"
 alias -g F='| fzf'
 
 alias v='vim'
+alias c='cd'
+alias c-='cd -'
+alias md='mkdir'
+alias y='yaourt'
 alias lal='ls -Al'
+alias chx='chmod +x'
 
 alias less=$PAGER
 alias zless=$PAGER
@@ -111,11 +120,13 @@ alias mnt='mount'
 alias umnt='umount'
 
 alias tmux='tmux -2'
-alias tls='tmux ls'
+alias t='tmux'
+alias tl='tmux ls'
 alias tk='tmux kill-session -t'
 alias ta='tmux attach-session -t'
 alias td='tmux detach'
 alias tn='tmux new -s'
+alias tb='tmux bind -n'
 alias trenw='tmux rename-window'
 alias trens='tmux rename-session'
 alias muxs='tmuxinator start'

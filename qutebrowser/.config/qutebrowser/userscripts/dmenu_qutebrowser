@@ -14,12 +14,15 @@ create_menu() {
     cat "$confdir"/qutebrowser/quickmarks
     cat "$confdir"/qutebrowser/bookmarks/urls | cut -d ' ' -f1
     # @FIXME: cat is much faster than the original 'while read'
-    cat "$datadir"/qutebrowser/history | cut -d ' ' -f2
+    tac "$datadir"/qutebrowser/history | cut -d ' ' -f2
 }
 
 # Awk from here:
 # http://unix.stackexchange.com/questions/11939/how-to-get-only-the-unique-results-without-having-to-sort-data
-url=$(create_menu | awk '!seen[$0]++' | dmenu -l 15 -p qutebrowser)
+# url=$(create_menu | awk '!seen[$0]++' | dmenu -l 15 -p qutebrowser -i)
+# awk: 0.027, frecency 0.067
+# url=$(tac "$datadir"/qutebrowser/history | "$HOME"/frecency | dmenu -l 15 -p qutebrowser -i)
+url=$(tail -n 5000 "$datadir"/qutebrowser/history | tac | "$HOME"/frecency --bonus=1 | dmenu -l 15 -p qutebrowser -i)
 url=$(echo $url | egrep "https?:" || echo $url)
 
 [ -z "${url// }" ] && exit

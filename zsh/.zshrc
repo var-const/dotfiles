@@ -19,7 +19,7 @@ fpath=(~/zsh-completions/src $fpath)
 export PATH=$HOME/bin:$HOME/dotfiles/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
-export BROWSER=firefox
+export BROWSER=qutebrowser
 
 export PASSWORD_STORE_DIR=/home/vk/en/.password-store
 export PASSWORD_STORE_CLIP_TIME=20
@@ -96,8 +96,9 @@ function chpwd() {
 # Reset them in zshrc:
 alias l='ls'
 alias la='ls -A'
+alias f='find . -iname'
 
-source .zsh-fzf
+source ~/.zsh-fzf
 
 # Very cool - allows to always run Vim in a single instance and
 # automatically open new files from shell in this instance.
