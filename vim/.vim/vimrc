@@ -17,6 +17,8 @@ let s:is_mac = !s:is_windows && !s:is_cygwin
             \     system('uname') =~? '^darwin'))
 let s:is_linux = !s:is_windows && !s:is_cygwin && !s:is_mac
 
+let s:is_work = 1
+
 " Use English interface.
 if s:is_windows
     " For Windows.
@@ -71,7 +73,7 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-commentary', {'autoload': {'filetypes':
-        \['python','c','cpp','vim','bash','sh','zsh','objcpp','objc']
+        \['python','c','cpp','vim','bash','sh','zsh','objcpp','objc','java','javascript','html']
     \}}
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
@@ -121,17 +123,17 @@ if s:is_windows
 end
 
 " On Arch, it's managed by pacman
-if s:is_mac
+" if s:is_mac
     NeoBundle 'Valloric/YouCompleteMe', {
                 \ 'build' : {
                 \   'mac' : './install.sh --clang-completer',
                 \   'unix' : './install.sh --clang-completer',
                 \   },
                 \ 'autoload' : {
-                \     'filetypes' : ['c', 'cpp', 'objc', 'objcpp', 'python'],
+                \     'filetypes' : ['c', 'cpp', 'java', 'objc', 'objcpp', 'python'],
                 \   },
                 \ },
-endif
+" endif
 
 " Search in files
 if s:is_mac || s:is_linux
@@ -188,6 +190,8 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 " you use gy for the first time without explicitly specifying a register
 NeoBundle 'vim-scripts/RepeatableYank'
 
+NeoBundle 'dart-lang/dart-vim-plugin'
+
 call neobundle#end()
 
 " If there are uninstalled bundles found on startup,
@@ -232,11 +236,20 @@ function! ToggleKeymap()
 endfunction
 
 " Tab stuff
-" how many columns a tab counts for.
-set tabstop=4
-" how many columns text is indented with the reindent operations (<< and >>)
-set shiftwidth=4
-set softtabstop=4
+if s:is_work
+    " how many columns a tab counts for.
+    set tabstop=2
+    " how many columns text is indented with the reindent operations (<< and >>)
+    set shiftwidth=2
+    set softtabstop=2
+    set textwidth=100
+else
+    set tabstop=4
+    set shiftwidth=4
+    set softtabstop=4
+    set textwidth=80
+endif
+
 " When expandtab is set, hitting Tab in insert mode will produce the appropriate number of spaces.
 set expandtab
 
@@ -263,7 +276,6 @@ set relativenumber
 set wrap
 set linebreak
 " set textwidth=99
-set textwidth=80
 set formatoptions=qrn1
 
 " Set incremental searching
@@ -511,7 +523,7 @@ set guifont=DejaVuSansMono\ 15
 colorscheme lucius
 LuciusLight
 " LuciusDark
-"LuciusWhite
+" LuciusWhite
 
 " Source the vimrc file after saving it. This way, you don't have to reload Vim to see the changes.
 if has("autocmd")
@@ -643,10 +655,10 @@ set cursorline
 :nnoremap <Leader>c :set cursorline!<CR>
 
 " @FIXME need a better mapping
-nmap <Up> <C-W>+
-nmap <Down> <C-W>-
-nmap <Left> <C-W>>
-nmap <Right> <C-W><
+nmap <Up> <C-W>-
+nmap <Down> <C-W>+
+nmap <Left> <C-W><
+nmap <Right> <C-W>>
 
 " set notimeout
 set timeout
@@ -844,3 +856,9 @@ nnoremap <silent> <M-l> :TmuxNavigateRight<cr>
 nnoremap <M-\> :TmuxNavigatePrevious<cr>
 
 nnoremap K :Ag <C-R><C-W><CR>
+
+" @TODO: restricted '/' ?
+" would only allow jumping within current screen (without moving it), to be more friendly in case of
+" errors
+
+source ~/work-dotfiles/vim/.vimrc
