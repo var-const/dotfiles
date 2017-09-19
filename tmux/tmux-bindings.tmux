@@ -26,6 +26,7 @@ bind -n M-p previous-window
 bind -n M-x kill-pane
 bind -n M-q kill-session
 bind -n M-space copy-mode
+bind -n M-u copy-mode
 #bind -n M-v split-window -h
 #bind -n M-- split-window -v
 bind -n M-v split-window -h -c "#{pane_current_path}"

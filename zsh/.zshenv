@@ -3,6 +3,7 @@
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
+source "$HOME"/work-dotfiles/zsh/.zshenv
 
 # @FIXME too many aliases for a single program
 alias a='fasd -a'        # any
@@ -64,9 +65,9 @@ alias cv='cv -w'
 
 # Quick config editing aliases
 # zsh
-alias czr='vim ~/dotfiles/zsh/.zshrc'
+alias czr='vim ~/dotfiles/zsh/.zshrc && ~/dotfiles/zsh/.zshrc && rehash'
 alias szr='source ~/dotfiles/zsh/.zshrc'
-alias cze='vim ~/dotfiles/zsh/.zshenv'
+alias cze='vim ~/dotfiles/zsh/.zshenv && source ~/dotfiles/zsh/.zshenv && rehash'
 alias sze='source ~/dotfiles/zsh/.zshenv'
 alias cza='vim ~/dotfiles/zsh/.*'
 # vim
@@ -134,9 +135,13 @@ alias muxn='tmuxinator new'
 
 alias zregen='rm -f ~/.zgen/init.zsh'
 
-mkj () {
+mdj () {
     last=${@[-1]}
     mkdir $* && cd "$last"
+}
+
+ff() {
+  find . -iname "*$1*"
 }
 
 svn-log-user() {
@@ -153,3 +158,5 @@ svn-log-user-period() {
 	today="$(date '+%Y-%m-%d %H:%M')"
 	svn log -vr \{"$prev_date"\}:\{"$today"\} | sed -n "/$username/,/-----$/ p"
 }
+
+alias rn=ranger

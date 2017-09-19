@@ -1,5 +1,6 @@
 [options]
-font = DejaVuSansMono 15
+font = DejaVuSansMono 12
+# font = DejaVuSansMono 15
 # font = FiraMono 15
 # font = DroidSansMono 14
 # font = Terminus (TTF) 14

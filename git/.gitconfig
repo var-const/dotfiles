@@ -6,15 +6,22 @@
     ; @TODO: make vimpager work
     pager = less
 [diff]
-	tool = vimdiff
+	tool = gvimdiff
 [merge]
-	tool = vimdiff
+	tool = gvimdiff
+  conflictstyle = diff3
+  prompt = false
 [difftool]
 	prompt = false
 [alias]
-    ci = commit --verbose
-    diff = diff --word-diff
-    dc = diff --cached
-    dt = difftool --word-diff
-    st = status -s
-    co = checkout
+  ci = commit --verbose
+  diff = diff --word-diff
+  dc = diff --cached
+  dt = difftool --word-diff
+  st = status -s
+  co = checkout
+  tree = log --all --graph --decorate --pretty=oneline --abbrev-commit
+[include]
+  path = ~/work-dotfiles/git/.gitconfig
+[color]
+	ui = auto

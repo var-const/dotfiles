@@ -38,7 +38,8 @@ fpath=(~/zsh-completions/src $fpath)
 export PATH=$HOME/bin:$HOME/dotfiles/bin:/usr/local/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
-export BROWSER=qutebrowser
+# export BROWSER=qutebrowser
+export BROWSER=google-chrome
 
 export PASSWORD_STORE_DIR=/home/vk/en/.password-store
 export PASSWORD_STORE_CLIP_TIME=20
@@ -101,13 +102,16 @@ case $OS_NAME in
     esac
 	# export LESS="-R"
 	# export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
-    export PAGER=/usr/bin/vimpager
+  # @TODO: make vimpager work under Ubuntu
+    #export PAGER=/usr/bin/vimpager
+    export PAGER=/usr/bin/less
     ;;
 esac
 
-# ls automatically after changing dirs
+# pwd and ls automatically after changing dirs
 function chpwd() {
     emulate -L zsh
+    pwd
     ls -A
 }
 
@@ -115,9 +119,15 @@ function chpwd() {
 # Reset them in zshrc:
 alias l='ls'
 alias la='ls -A'
-alias f='find . -iname'
+# alias f='find . -iname'
 
 source "$HOME"/.zsh-fzf
+
+# @TODO: see if it's a reasonable place to invoke it
+zstyle ':completion:*' users root $USER
+
+# @FIXME path
+source "$HOME"/work-dotfiles/zsh/.zshrc
 
 # Very cool - allows to always run Vim in a single instance and
 # automatically open new files from shell in this instance.
@@ -148,3 +158,9 @@ source "$HOME"/.zsh-fzf
 #     $vim_orig --servername vim "$@"
 #   fi
 # }
+
+cd "$AUTOCD"
+
+bindkey "^K" edit-command-line
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
