@@ -873,8 +873,6 @@ nnoremap <leader>- :set guifont=DejaVuSansMono\ 10<cr>
 nnoremap + g,
 nnoremap - g;
 
-source ~/work-dotfiles/vim/.vimrc
-
 nnoremap <C-h> :BufferHistoryBack<CR>
 nnoremap <C-l> :BufferHistoryForward<CR>
 
@@ -911,3 +909,7 @@ command! -bar RangerChooser call RangeChooser()
 nnoremap <BS> :<C-U>RangerChooser<CR>
 
 " set termguicolors
+
+if s:is_work
+  source ~/work-dotfiles/vim/.vimrc
+endif
