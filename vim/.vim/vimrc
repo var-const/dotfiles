@@ -7,24 +7,14 @@ set fileencodings=utf-8,koi8-r,cp1251,default,latin1
 set ff=unix
 
 " From Shougo's .vimrc
-let s:is_windows = has('win16') || has('win32') || has('win64')
-let s:is_cygwin = has('win32unix')
-let s:is_mac = !s:is_windows && !s:is_cygwin
-            \ && (has('mac') || has('macunix') || has('gui_macvim') ||
+let s:is_mac = (has('mac') || has('macunix') || has('gui_macvim') ||
             \   (!executable('xdg-open') &&
             \     system('uname') =~? '^darwin'))
-let s:is_linux = !s:is_windows && !s:is_cygwin && !s:is_mac
+let s:is_linux = !s:is_mac
 
 let s:is_work = 1
 
-" Use English interface.
-if s:is_windows
-    " For Windows.
-    language message en
-else
-    " For Linux.
-    language mes C
-endif
+language mes C " Use English interface.
 
 if has('vim_starting')
     set nocompatible               " Be iMproved
@@ -111,14 +101,6 @@ NeoBundle 'djoshea/vim-autoread'
 " "NeoBundle 'bbchung/clighter'
 
 " NeoBundle 'SirVer/ultisnips'
-
-if s:is_windows
-    NeoBundle 'Rip-Rip/clang_complete', {
-                \ 'autoload' : {
-                \     'filetypes' : ['c', 'cpp'],
-                \    },
-                \ }
-end
 
 " On Arch, it's managed by pacman
 " if s:is_mac
@@ -558,28 +540,6 @@ endif
 " and close the selection list, same as other IDEs.
 " CONFLICT with some plugins like tpope/Endwise
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-
-if s:is_cygwin
-    let g:clang_auto_user_options='path, .clang_complete'
-    " let g:clang_exec='"clang'
-    " let g:clang_user_options='2>/dev/null || exit 0'
-    let g:clang_complete_auto = 0
-    let g:clang_complete_copen = 1
-    " let g:clang_library_path ='C:\Program Files\LLVM\bin'
-    let g:clang_library_path ='/cygdrive/c/Program Files/LLVM/bin'
-    " let g:clang_user_options='|| exit 0'
-    " let g:clang_auto_user_options='|| exit 0"'
-    " let g:clang_snippets_engine='clang_complete'
-    " if there's an error, allow us to see it
-    " let g:clang_complete_copen=1
-    " let g:clang_complete_macros=1
-    " let g:clang_complete_patterns=0
-    " fix cygwin shell redirection
-    " set shellredir=>\\"%s\\"\\ 2 > &1
-    " set shellredir='>%s\ 2>&1'
-    " set shellredir=>\"%s\"\ 2>&1
-    " set shellredir=>\"%s\"\ 2>/dev/null
-endif
 
 set shell=zsh\ -l
 
