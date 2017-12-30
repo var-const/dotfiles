@@ -17,8 +17,6 @@ let s:is_work = 1
 language mes C " Use English interface.
 
 if has('vim_starting')
-    set nocompatible               " Be iMproved
-
     " Required:
     if has('unix')
         set runtimepath+=~/.vim/bundle/neobundle.vim/
