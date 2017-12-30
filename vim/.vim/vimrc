@@ -139,12 +139,6 @@ end
 
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'kshenoy/vim-sol'
-" NeoBundle 'whatyouhide/vim-gotham'
-" NeoBundle 'vim-scripts/xoria256.vim'
-" NeoBundle 'dsolstad/vim-wombat256i'
-" NeoBundle 'vim-scripts/wombat256.vim'
-" NeoBundle 'jnurmine/Zenburn'
-" NeoBundle 'tomasr/molokai'
 
 " NeoBundle 'vim-scripts/argtextobj.vim'
 
