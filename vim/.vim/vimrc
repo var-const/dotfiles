@@ -137,11 +137,6 @@ end
                 " \   'unix' : './install.py --clang-completer --omnisharp-completer',
                 " \   },
 
-" Search in files
-if s:is_mac || s:is_linux
-    NeoBundle 'rking/ag.vim'
-endif
-
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'kshenoy/vim-sol'
 " NeoBundle 'whatyouhide/vim-gotham'
