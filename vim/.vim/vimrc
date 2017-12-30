@@ -1,12 +1,4 @@
-set langmenu=C
-set helplang=en
-set encoding=utf-8
-set termencoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,koi8-r,cp1251,default,latin1
-set ff=unix
-
-" From Shougo's .vimrc
+""" Flags
 let s:is_mac = (has('mac') || has('macunix') || has('gui_macvim') ||
             \   (!executable('xdg-open') &&
             \     system('uname') =~? '^darwin'))
@@ -14,8 +6,7 @@ let s:is_linux = !s:is_mac
 
 let s:is_work = 1
 
-language mes C " Use English interface.
-
+""" NeoBundle start
 if has('vim_starting')
     " Required:
     if has('unix')
@@ -25,19 +16,14 @@ if has('vim_starting')
     endif
 endif
 
-let g:gitgutter_map_keys = 0
+"syntax off " seems like it should be off before the whole NeoBundle thing
 
-syntax off " seems like it should be off before the whole NeoBundle thing
-
-" Required:
 if has('unix')
     call neobundle#begin(expand('~/.vim/bundle/'))
 else
     call neobundle#begin(expand('~/vimfiles/bundle/'))
 endif
 
-" Let NeoBundle manage NeoBundle
-" Required:
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/vimproc.vim', {
@@ -48,12 +34,8 @@ NeoBundle 'Shougo/vimproc.vim', {
             \    },
             \ }
 
-NeoBundle 'Shougo/vimfiler.vim'
-
 NeoBundle 'Shougo/unite.vim'
-" TODO: unused
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'Shougo/neomru.vim'
+
 " NeoBundle 'ujihisa/unite-colorscheme'
 
 NeoBundle 'tpope/vim-sensible'
@@ -93,10 +75,6 @@ NeoBundle 'Raimondi/delimitMate'
 " The GUI version of Vim will check more often (for example on Focus change),
 " and prompt you if you want to reload the file"
 NeoBundle 'djoshea/vim-autoread'
-
-" @TODO: find a fix. Right now it just garbles all C++ files, maybe due to
-" updated clang
-" "NeoBundle 'bbchung/clighter'
 
 " NeoBundle 'SirVer/ultisnips'
 
@@ -166,8 +144,6 @@ NeoBundle 'dart-lang/dart-vim-plugin'
 
 NeoBundle 'dhruvasagar/vim-buffer-history'
 
-" NeoBundle 'mhinz/vim-hugefile'
-
 call neobundle#end()
 
 " If there are uninstalled bundles found on startup,
@@ -176,7 +152,17 @@ NeoBundleCheck
 
 syntax on
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Main
+
+set langmenu=C
+set helplang=en
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,koi8-r,cp1251,default,latin1
+set ff=unix
+language mes C " Use English interface.
+
 set keymap=russian-jcukenwin
 " set iminsert=2
 set iminsert=0
@@ -617,87 +603,6 @@ set timeoutlen=500
 set ttimeoutlen=10
 set noesckeys
 
-" 'Clighter searches libclang-3.5 in your system automatically.
-" You must set this option when clighter cannot find libclang, or other version of libclang is used.'
-" On Ubuntu, We're using 3.6, so let's provide the path explicitly
-" let g:clighter_libclang_file = '/usr/lib/x86_64-linux-gnu/libclang-3.6.so'
-" @TODO: differentiate between Arch and Ubuntu
-let g:clighter_occurrences_mode = 1
-
-" " Free functions
-hi link clighterDeclRefExprCall Function
-hi link clighterFunctionDecl Function
-
-" " Enums
-" hi link clighterEnumDecl Identifier
-" hi link clighterEnumConstantDecl Constant
-" hi link clighterDeclRefExprEnum Constant
-
-" hi link clighterMacroInstantiation Constant
-" hi link clighterPrepro PreProc
-
-" Member variable and method calls
-hi link clighterMemberRefExprCall Function
-
-" " Not working
-" hi link clighterMemberRefExprVar Error
-
-" " namespace { ... }
-" hi link clighterNamespace Constant
-" hi link clighterNamespaceRef Constant
-
-" hi link clighterOccurrences IncSearch
-
-" " Templated types
-" hi link clighterTemplateRef Type
-
-" " References to templated types
-" hi link clighterTypeRef Type
-
-" " The 'T' in template <class T>
-" hi link clighterTemplateTypeParameter Type
-
-" " class/struct declarations
-" hi link clighterClassDecl None
-" hi link clighterStructDecl None
-
-" " 'using name = ...' statements
-" hi link clighterDecl None
-
-" " Class member variable declarations
-" hi link clighterFieldDecl None
-
-" " Function parameters, including the template types
-" hi link clighterParmDecl None
-
-" " Lambda campture variables, using std::name statements
-" hi link clighterRef None
-
-" hi link clighterUnionDecl None
-
-" " Local variables
-" hi link clighterVarDecl None
-
-" let g:pymode_lint_checkers = ['pylint', 'pep8', 'mccabe', 'pep257']
-" let g:pymode_lint_checkers = ['pylint', 'pep8', 'mccabe']
-" All these rebindings don't work for some reason
-" let g:pymode_run_bind = '<leader>pr'
-" let g:pymode_run_bind = '<leader>q'
-" let g:pymode_breakpoint_bind='<leader>e'
-
-let g:pymode_lint_ignore = ''
-" Sort errors: E errors first, then warnings, etc.
-let g:pymode_lint_sort = ['E', 'C', 'I']
-" let g:pymode_lint_todo_symbol = 'WW'
-let g:pymode_lint_comment_symbol = '⚠'
-" let g:pymode_lint_visual_symbol = 'RR'
-let g:pymode_lint_error_symbol = '✗'
-" let g:pymode_lint_info_symbol = 'II'
-" let g:pymode_lint_pyflakes_symbol = 'FF'
-
-let g:pymode_rope_completion = 0
-let g:pymode_rope_complete_on_dot = 0
-
 " Fugitive mappings
 nnoremap <Leader>gs :Gstatus<CR>
 nnoremap <Leader>gw :Gwrite<CR>
@@ -824,6 +729,8 @@ if &diff
 endif
 
 " let g:hugefile_trigger_size=1
+
+let g:gitgutter_map_keys = 0
 
 nnoremap <leader>+ :set guifont=DejaVuSansMono\ 11<cr>
 nnoremap <leader>- :set guifont=DejaVuSansMono\ 10<cr>
