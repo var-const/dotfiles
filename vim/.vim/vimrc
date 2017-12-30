@@ -6,8 +6,6 @@ set fileencoding=utf-8
 set fileencodings=utf-8,koi8-r,cp1251,default,latin1
 set ff=unix
 
-set t_Co=256
-
 " From Shougo's .vimrc
 let s:is_windows = has('win16') || has('win32') || has('win64')
 let s:is_cygwin = has('win32unix')
@@ -278,9 +276,7 @@ autocmd FileType java,html setlocal textwidth=100
 "Indent stuff
 set smartindent
 
-" Hybrid numbering
 set number
-set relativenumber
 
 " Better line wrapping
 set wrap
