@@ -1,4 +1,5 @@
-""" Flags
+"""""""""""""""""""""""""""""""" FLAGS """"""""""""""""
+
 let s:is_mac = (has('mac') || has('macunix') || has('gui_macvim') ||
             \   (!executable('xdg-open') &&
             \     system('uname') =~? '^darwin'))
@@ -6,7 +7,8 @@ let s:is_linux = !s:is_mac
 
 let s:is_work = executable('placer')
 
-""" NeoBundle start
+"""""""""""""""""""""""""""""""" NEOBUNDLE """"""""""""""""
+
 if has('vim_starting')
     " Required:
     if has('unix')
@@ -44,7 +46,7 @@ NeoBundle 'tpope/vim-commentary', {'autoload': {'filetypes':
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
 
-" Git
+""" GIT
 NeoBundle 'tpope/vim-fugitive'
 " Show a VCS diff using Vim's sign column.
 NeoBundle 'airblade/vim-gitgutter'
@@ -85,7 +87,7 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 " you use gy for the first time without explicitly specifying a register
 NeoBundle 'vim-scripts/RepeatableYank'
 
-" Colorschemes
+""" COLORSCHEMES
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'kshenoy/vim-sol'
 
@@ -102,7 +104,7 @@ NeoBundleCheck
 
 syntax on
 
-"""""""""""""""""""""""""""""""" SETTINGS """""""""""""""" 
+"""""""""""""""""""""""""""""""" SETTINGS """"""""""""""""
 
 """ ENCODING
 
