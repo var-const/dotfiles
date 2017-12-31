@@ -127,7 +127,9 @@ source "$HOME"/.zsh-fzf
 zstyle ':completion:*' users root $USER
 
 # @FIXME path
-source "$HOME"/work-dotfiles/zsh/.zshrc
+if [[ -n $(command -v placer) ]]; then
+  source "$HOME"/work-dotfiles/zsh/.zshrc
+fi
 
 # Very cool - allows to always run Vim in a single instance and
 # automatically open new files from shell in this instance.
