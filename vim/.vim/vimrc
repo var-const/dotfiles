@@ -478,6 +478,7 @@ nnoremap <Leader>gc :Gcommit --verbose<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gv :Gvdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gl :Glog<CR>
 
 " GitGutter mappings
 let g:gitgutter_map_keys = 0
@@ -489,6 +490,14 @@ nmap ]c <Plug>GitGutterNextHunk
 nmap [c <Plug>GitGutterPrevHunk
 
 """ TMUX NAVIGATOR
+
+" https://stackoverflow.com/questions/6778961/alt-key-shortcuts-not-working-on-gnome-terminal-with-vim
+let c='a'
+while c <= 'z'
+  exec "set <A-".c.">=\e".c
+  exec "imap \e".c." <A-".c.">"
+  let c = nr2char(1+char2nr(c))
+endw
 
 let g:tmux_navigator_no_mappings = 1
 nnoremap <silent> <M-h> :TmuxNavigateLeft<cr>
