@@ -66,7 +66,7 @@ NeoBundle 'Shougo/vimfiler.vim'
 
 NeoBundle 'Shougo/unite.vim'
 " TODO: unused
-NeoBundle 'Shougo/unite-outline'
+" NeoBundle 'Shougo/unite-outline'
 NeoBundle 'Shougo/neomru.vim'
 " NeoBundle 'ujihisa/unite-colorscheme'
 
@@ -96,9 +96,9 @@ NeoBundle 'tpope/vim-fugitive'
 " That will replace Square with Rectangle, square with rectangle, SQUARE with RECTANGLE.
 " Also:
 " Want to turn fooBar into foo_bar? Press crs (coerce to snake_case). MixedCase (crm), camelCase (crc), snake_case (crs), and UPPER_CASE (cru) are all just 3 keystrokes away. These commands support repeat.vim.
-NeoBundle 'tpope/vim-abolish'
+" NeoBundle 'tpope/vim-abolish'
 
-" NeoBundle 'derekwyatt/vim-fswitch'
+NeoBundle 'derekwyatt/vim-fswitch'
 
 NeoBundle 'Raimondi/delimitMate'
 " Original comment: "If you are using a console version of Vim, or dealing
@@ -106,7 +106,7 @@ NeoBundle 'Raimondi/delimitMate'
 " then Vim does not always check to see if the file has been changed.
 " The GUI version of Vim will check more often (for example on Focus change),
 " and prompt you if you want to reload the file"
-NeoBundle 'djoshea/vim-autoread'
+" NeoBundle 'djoshea/vim-autoread'
 
 " @TODO: find a fix. Right now it just garbles all C++ files, maybe due to
 " updated clang
@@ -140,9 +140,9 @@ end
                 " \   },
 
 " Search in files
-if s:is_mac || s:is_linux
-    NeoBundle 'rking/ag.vim'
-endif
+" if s:is_mac || s:is_linux
+"     NeoBundle 'rking/ag.vim'
+" endif
 
 NeoBundle 'jonathanfilip/vim-lucius'
 NeoBundle 'kshenoy/vim-sol'
@@ -165,25 +165,25 @@ NeoBundle 'houtsnip/vim-emacscommandline'
 " Screws up folding
 " NeoBundle 'kien/rainbow_parentheses.vim'
 " NeoBundle 'oblitum/rainbow' " Seems to be very slow
-NeoBundle 'luochen1990/rainbow'
+" NeoBundle 'luochen1990/rainbow'
 
 " For Haskell
 " NeoBundle 'dag/vim2hs'
 
 " Show a VCS diff using Vim's sign column.
 " NeoBundle 'mhinz/vim-signify'
-NeoBundle 'airblade/vim-gitgutter'
+" NeoBundle 'airblade/vim-gitgutter'
 
 " NeoBundle 'nathanaelkane/vim-indent-guides'
-NeoBundle 'Yggdroot/indentLine'
+" NeoBundle 'Yggdroot/indentLine'
 
-NeoBundle 'ntpeters/vim-better-whitespace'
+" NeoBundle 'ntpeters/vim-better-whitespace'
 
 NeoBundle 'mbbill/undotree'
 
 " NeoBundle 'junegunn/vim-easy-align'
 
-NeoBundle 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
+" NeoBundle 'klen/python-mode', {'autoload': {'filetypes': ['python']}}
 
 NeoBundle 'christoomey/vim-tmux-navigator'
 
@@ -195,9 +195,16 @@ NeoBundle 'christoomey/vim-tmux-navigator'
 " you use gy for the first time without explicitly specifying a register
 NeoBundle 'vim-scripts/RepeatableYank'
 
-NeoBundle 'dart-lang/dart-vim-plugin'
+" NeoBundle 'dart-lang/dart-vim-plugin'
 
 NeoBundle 'dhruvasagar/vim-buffer-history'
+
+NeoBundle 'jremmen/vim-ripgrep'
+
+NeoBundle 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+NeoBundle 'junegunn/fzf.vim'
+
+NeoBundle 'haya14busa/incsearch.vim'
 
 " NeoBundle 'mhinz/vim-hugefile'
 
@@ -278,10 +285,6 @@ autocmd FileType java,html setlocal textwidth=100
 "Indent stuff
 set smartindent
 
-" Hybrid numbering
-set number
-set relativenumber
-
 " Better line wrapping
 set wrap
 set linebreak
@@ -318,7 +321,7 @@ set ttyfast
 " completes
 set lazyredraw
 
-set foldmethod=syntax
+set foldmethod=manual
 set foldnestmax=1 "deepest fold is 1 level
 set foldlevelstart=0
 " Folding doesn't seem to be a good default
@@ -417,7 +420,8 @@ call unite#filters#matcher_default#use(['matcher_glob'])
 " nnoremap <leader>ur :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
 nnoremap <leader>fr :<C-u>Unite -no-split -buffer-name=files   -start-insert file_rec/async:!<cr>
 " Filesystem-file
-nnoremap <leader>ff :<C-u>Unite -no-split -buffer-name=files   -start-insert file file_rec/async file/new<cr>
+" nnoremap <leader>ff :<C-u>Unite -no-split -buffer-name=files   -start-insert file file_rec/async file/new<cr>
+nnoremap <leader>ff :<C-u>:Files<cr>
 " Filesystem-history
 nnoremap <leader>fh :<C-u>Unite -no-split -buffer-name=mru     -start-insert file_mru<cr>
 " Filesystem-outline
@@ -926,3 +930,31 @@ command! -bar RangerChooser call RangeChooser()
 nnoremap <BS> :<C-U>RangerChooser<CR>
 
 " set termguicolors
+
+" https://github.com/romainl/vim-galore#editing-small-files-is-slow
+set synmaxcol=200
+" Hybrid numbering
+set number
+set norelativenumber
+" set nocursorline
+autocmd WinEnter    * set cursorline
+autocmd WinLeave    * set nocursorline
+" The keyword completion (<c-n>/<c-p>) tries completing whatever is listed in
+" the 'complete' option. By default this also includes tags (which can be
+" annoying) and scanning all included files (which can be very slow). If you can
+" live without these things, disable them:
+set complete-=i   " disable scanning included files
+set complete-=t   " disable searching tags
+
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+let g:incsearch#auto_nohlsearch = 1
+" map n  <Plug>(incsearch-nohl-n)
+" map N  <Plug>(incsearch-nohl-N)
+" map *  <Plug>(incsearch-nohl-*)
+" map #  <Plug>(incsearch-nohl-#)
+" map g* <Plug>(incsearch-nohl-g*)
+" map g# <Plug>(incsearch-nohl-g#)
+
+noremap <silent> <leader>fp :let @+ = expand("%")<CR>
