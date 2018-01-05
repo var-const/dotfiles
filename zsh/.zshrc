@@ -36,6 +36,7 @@ fi
 fpath=(~/zsh-completions/src $fpath)
 
 export PATH=$HOME/bin:$HOME/dotfiles/bin:/usr/local/bin:$PATH
+export PATH=$HOME/homebrew/bin:$PATH
 export EDITOR=vim
 export VISUAL=vim
 # export BROWSER=qutebrowser

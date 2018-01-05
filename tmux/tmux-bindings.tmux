@@ -50,7 +50,7 @@ bind -n M-r source-file ~/.tmux.conf \; display 'tmux config reloaded'
 # bind x lock-server - probably better in window manager
 # bind * list-clients - how is it different from choose-session?
 # bind -n M-K confirm-before "kill-window"
-bind -n M-' command-prompt "rename-window %%"
+#bind -n M-' command-prompt "rename-window %%"
 # "insert"
 bind -n M-i paste-buffer
 # "yank"
