@@ -8,11 +8,15 @@ bind -n M-l if-shell "$is_vim" "send-keys M-l" "select-pane -R"
 bind -n M-\ if-shell "$is_vim" "send-keys M-\\" "select-pane -l"
 
 # Also emulate visual mode
-bind-key -t vi-copy 'v' begin-selection
+#bind-key -t vi-copy 'v' begin-selection
 # bind-key -t vi-copy 'y' copy-selection
 # Copy to the system clipboard
-bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard'
-bind -t vi-copy 'Y' copy-pipe 'xclip -in -selection clipboard'
+#bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard'
+#bind -t vi-copy 'Y' copy-pipe 'xclip -in -selection clipboard'
+bind-key -Tcopy-mode-vi 'v' send -X begin-selection
+bind-key -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "xclip -selection clipboard -i"
+bind-key -Tcopy-mode-vi Escape send -X cancel
+bind-key -Tcopy-mode-vi V send -X rectangle-toggle
 
 # resize panes using PREFIX H, J, K, L
 # The -r switch to bind allows half a second time (set via repeat-time) to perform the next keystroke without pressing the prefix again.
@@ -24,7 +28,7 @@ bind -n M-L resize-pane -R 5
 bind -n M-n next-window
 bind -n M-p previous-window
 bind -n M-x kill-pane
-bind -n M-q kill-session
+bind -n M-q confirm-before kill-session
 bind -n M-space copy-mode
 bind -n M-u copy-mode
 #bind -n M-v split-window -h
@@ -50,7 +54,7 @@ bind -n M-r source-file ~/.tmux.conf \; display 'tmux config reloaded'
 # bind x lock-server - probably better in window manager
 # bind * list-clients - how is it different from choose-session?
 # bind -n M-K confirm-before "kill-window"
-#bind -n M-' command-prompt "rename-window %%"
+#bind -n M-' command-prompt "rename-window %%" # Doesn't work
 # "insert"
 bind -n M-i paste-buffer
 # "yank"

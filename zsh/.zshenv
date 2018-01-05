@@ -3,7 +3,9 @@
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-source "$HOME"/work-dotfiles/zsh/.zshenv
+if [[ -n $(command -v dremel) ]]; then
+  source "$HOME"/work-dotfiles/zsh/.zshenv
+fi
 
 # @FIXME too many aliases for a single program
 alias a='fasd -a'        # any

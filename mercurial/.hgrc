@@ -2,7 +2,8 @@
 [ui]
 # name and email, e.g.
 # username = Jane Doe <jdoe@example.com>
-username = vk
+username = varconst
+merge = internal:merge3
 
 [extensions]
 # uncomment these lines to enable some popular extensions
