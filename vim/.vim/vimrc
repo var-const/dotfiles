@@ -96,6 +96,20 @@ NeoBundle 'junegunn/fzf.vim'
 
 NeoBundle 'haya14busa/incsearch.vim'
 
+if s:is_mac
+    NeoBundle 'Valloric/YouCompleteMe', {
+                \  'autoload' : {
+                \      'filetypes' : [
+                \          'c', 'cpp', 'cs', 'java', 'javascript', 'objc',
+                \          'objcpp', 'python', 'typescript'
+                \      ],
+                \    },
+                \  'build' : {
+                \    'mac' : './install.py --clang-completer --js-completer',
+                \  },
+                \},
+endif
+
 " @TODO: unused
 " NeoBundle 'SirVer/ultisnips'
 " Haskell
