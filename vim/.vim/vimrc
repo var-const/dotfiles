@@ -96,10 +96,13 @@ NeoBundle 'junegunn/fzf.vim'
 
 NeoBundle 'haya14busa/incsearch.vim'
 
-" @TODO: unused
-" NeoBundle 'SirVer/ultisnips'
+""" LANGUAGE SUPPORT
+NeoBundle 'leafgarland/typescript-vim'
 " Haskell
 " NeoBundle 'dag/vim2hs'
+
+" @TODO: unused
+" NeoBundle 'SirVer/ultisnips'
 
 call neobundle#end()
 
@@ -231,6 +234,8 @@ nnoremap N Nzz
 nnoremap { {zz
 nnoremap } }zz
 
+nnoremap <leader>n :Rg<cr>
+
 """ WINDOWS AND TABS
 
 set splitright
@@ -343,8 +348,6 @@ nnoremap <silent> <C-k> :move-2<cr>
 nnoremap <silent> <C-j> :move+<cr>
 xnoremap <silent> <C-k> :move-2<cr>gv
 xnoremap <silent> <C-j> :move'>+<cr>gv
-xnoremap <silent> <C-h> <C-w><C-h>
-xnoremap <silent> <C-l> <C-w><C-l>
 
 """ ERASE FROM EXISTENCE
 
@@ -432,10 +435,15 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_error_symbol = '✗'
 let g:ycm_warning_symbol = '⚠'
 let g:ycm_autoclose_preview_window_after_completion = 1
-" Instead of built-in command which opens help for word under cursor
-nnoremap K :YcmCompleter GoTo<CR>
-" nnoremap gk :YcmCompleter GoTo<CR>
+" nnoremap K :YcmCompleter GoTo<CR>
+nnoremap <leader>jj :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jr :YcmCompleter GoToReferences<CR>
 nnoremap <leader>rec :YcmForceCompileAndDiagnostics<CR>
+" Enable TypeScript support
+if !exists("g:ycm_semantic_triggers")
+   let g:ycm_semantic_triggers = {}
+endif
+let g:ycm_semantic_triggers['typescript'] = ['.']
 
 """ RELOADING VIMRC
 
