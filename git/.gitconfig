@@ -1,17 +1,18 @@
 [user]
-	name = vconst
+	name = varconst
 	email = varconsteq@gmail.com
 [core]
-	excludesfile = /home/vk/.gitignore
+  excludesfile = /home/vk/.gitignore
     ; @TODO: make vimpager work
     pager = less
 [diff]
 	tool = gvimdiff
 [merge]
 	tool = gvimdiff
-  conflictstyle = diff3
+  conflictstyle = merge
   prompt = false
 [difftool]
+	tool = gvimdiff
 	prompt = false
 [alias]
   ci = commit --verbose
@@ -25,3 +26,12 @@
   path = ~/work-dotfiles/git/.gitconfig
 [color]
 	ui = auto
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[http]
+	cookiefile = /Users/varconst/.gitcookies
+[url "git@github.com:"]
+  pushInsteadOf = "https://github.com/"

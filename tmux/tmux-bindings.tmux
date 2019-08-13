@@ -14,7 +14,10 @@ bind -n M-\ if-shell "$is_vim" "send-keys M-\\" "select-pane -l"
 #bind -t vi-copy 'y' copy-pipe 'xclip -in -selection clipboard'
 #bind -t vi-copy 'Y' copy-pipe 'xclip -in -selection clipboard'
 bind-key -Tcopy-mode-vi 'v' send -X begin-selection
-bind-key -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel "xclip -selection clipboard -i"
+
+if-shell "~/dotfiles/get-os.sh | grep -q darwin" "bind-key -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel 'reattach-to-user-namespace pbcopy'"
+if-shell "~/dotfiles/get-os.sh | grep -qv darwin" "bind-key -Tcopy-mode-vi 'y' send -X copy-pipe-and-cancel 'xclip -selection clipboard -i'"
+
 bind-key -Tcopy-mode-vi Escape send -X cancel
 bind-key -Tcopy-mode-vi V send -X rectangle-toggle
 

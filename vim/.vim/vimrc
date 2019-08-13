@@ -41,7 +41,7 @@ NeoBundle 'ujihisa/unite-colorscheme'
 NeoBundle 'tpope/vim-sensible'
 NeoBundle 'tpope/vim-repeat'
 NeoBundle 'tpope/vim-commentary', {'autoload': {'filetypes':
-        \['python','c','cpp','vim','bash','sh','zsh','objcpp','objc','java','javascript','html']
+        \['python','c','cpp','vim','bash','sh','zsh','objcpp','objc','java','javascript','html','typescript']
     \}}
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'tpope/vim-unimpaired'
@@ -59,7 +59,7 @@ NeoBundle 'Yggdroot/indentLine'
 " then Vim does not always check to see if the file has been changed.
 " The GUI version of Vim will check more often (for example on Focus change),
 " and prompt you if you want to reload the file"
-" NeoBundle 'djoshea/vim-autoread'
+NeoBundle 'djoshea/vim-autoread'
 
 NeoBundle 'vim-scripts/ReplaceWithRegister'
 
@@ -71,6 +71,10 @@ NeoBundle 'houtsnip/vim-emacscommandline'
 NeoBundle 'luochen1990/rainbow'
 
 NeoBundle 'ntpeters/vim-better-whitespace'
+
+NeoBundle 'rhysd/vim-clang-format'
+
+"NeoBundle 'w0rp/ale'
 
 NeoBundle 'mbbill/undotree'
 
@@ -99,25 +103,27 @@ NeoBundle 'haya14busa/incsearch.vim'
 """ LANGUAGE SUPPORT
 " YCM is managed by package managers on other platforms.
 if s:is_mac
-    NeoBundle 'Valloric/YouCompleteMe', {
-                \  'autoload' : {
-                \      'filetypes' : [
-                \          'c', 'cpp', 'cs', 'java', 'javascript', 'objc',
-                \          'objcpp', 'python', 'typescript'
-                \      ],
-                \    },
-                \  'build' : {
-                \    'mac' : './install.py --clang-completer --js-completer',
-                \  },
-                \},
+    NeoBundle 'Valloric/YouCompleteMe'
+    "NeoBundle 'Valloric/YouCompleteMe', {
+    "            \  'autoload' : {
+    "            \      'filetypes' : [
+    "            \          'c', 'cpp', 'cs', 'java', 'javascript', 'objc',
+    "            \          'objcpp', 'python', 'typescript'
+    "            \      ],
+    "            \    },
+    "            \  'build' : {
+    "            \    'mac' : './install.py --clang-completer --js-completer',
+    "            \  },
+    "            \},
 endif
 
 NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'keith/swift.vim'
 " Haskell
 " NeoBundle 'dag/vim2hs'
 
 " @TODO: unused
-" NeoBundle 'SirVer/ultisnips'
+NeoBundle 'SirVer/ultisnips'
 
 call neobundle#end()
 
@@ -147,7 +153,7 @@ set helplang=en
 autocmd FileType text,gitcommit setlocal spell
 set spelllang=en_us,ru_ru
 set complete+=kspell
-set keymap=russian-jcukenwin
+"set keymap=russian-jcukenwin
 " set iminsert=2
 set iminsert=0
 set imsearch=-1
@@ -195,14 +201,14 @@ autocmd BufReadPost * if &filetype != 'gitcommit' && expand('%:h') !~ 'fugitive'
 if s:is_linux
     set clipboard=unnamedplus
 else
-    set clipboard+=unnamed
+    set clipboard=unnamed
 endif
 
 """ INDENTATION
 
 set number
 set textwidth=80
-autocmd FileType java,html setlocal textwidth=100
+autocmd FileType java,html,objc setlocal textwidth=100
 set colorcolumn=+1 " Relative to textwidth
 
 set smartindent
@@ -223,8 +229,10 @@ set expandtab
 set shiftround
 " Don't join lines with two spaces at the end of sentences; I don't two-space
 set nojoinspaces
-" Match all forms of brackets in pairs (including angle brackets)
-set matchpairs=(:),{:},[:],<:>
+"" Match all forms of brackets in pairs (including angle brackets)
+" set matchpairs=(:),{:},[:],<:>
+" Match all forms of brackets in pairs (excluding angle brackets)
+set matchpairs=(:),{:},[:]
 
 let g:indentLine_faster = 1
 
@@ -543,6 +551,8 @@ endif
 " highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 " highlight DiffChange cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 " highlight DiffText   cterm=bold ctermfg=10 ctermbg=88 gui=none guifg=bg guibg=Red
+" https://vimways.org/2018/the-power-of-diff/
+" set diffopt+=algorithm:patience,indent-heuristic
 
 """ GVIM
 :set guioptions-=m  " remove menu bar
@@ -559,6 +569,16 @@ colorscheme lucius
 LuciusLight
 " LuciusDark
 " LuciusWhite
+
+""" FORMATTING
+
+let g:clang_format#detect_style_file=1
+autocmd FileType cpp,objc,objcpp ClangFormatAutoEnable
+
+let g:ale_fixers = {}
+let g:ale_fixers['typescript'] = ['prettier']
+let g:ale_javascript_prettier_use_local_config = 1
+let g:ale_fix_on_save = 0
 
 """ RANDOM
 
@@ -580,27 +600,27 @@ nnoremap <BS> :b#<CR>
 set list lcs=tab:\|\ 
 
 """ UNUSED begin
-" UltiSnipsExpandTrigger="<c-j>"
-" " let g:UltiSnipsListSnippets ="<s-tab>"
-" function! g:UltiSnips_Complete()
-"     call UltiSnips#ExpandSnippet()
-"     if g:ulti_expand_res == 0
-"         if pumvisible()
-"             return "\<C-n>"
-"         else
-"             call UltiSnips#JumpForwards()
-"             if g:ulti_jump_forwards_res == 0
-"                 return "\<TAB>"
-"             endif
-"         endif
-"     endif
-"     return ""
-" endfunction
+let g:UltiSnipsExpandTrigger="<c-y>"
+let g:UltiSnipsListSnippets ="<s-tab>"
+function! g:UltiSnips_Complete()
+    call UltiSnips#ExpandSnippet()
+    if g:ulti_expand_res == 0
+        if pumvisible()
+            return "\<C-n>"
+        else
+            call UltiSnips#JumpForwards()
+            if g:ulti_jump_forwards_res == 0
+                return "\<TAB>"
+            endif
+        endif
+    endif
+    return ""
+endfunction
 
-" au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsListSnippets="<c-e>"
-" let g:UltiSnipsSnippetDirectories = ["custom-ulti-snippets", "UltiSnips"]
+au BufEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsListSnippets="<c-e>"
+let g:UltiSnipsSnippetDirectories = ["custom-ulti-snippets", "UltiSnips"]
 
 " http://www.reddit.com/r/vim/comments/1yfzg2/does_anyone_actually_use_easymotion/
 cnoremap ?t <CR>:t''<CR>
@@ -616,6 +636,8 @@ cnoremap ?d <CR>:d<CR>``
 " errors
 
 """ UNUSED end
+
+autocmd FileType objcpp set filetype=cpp
 
 if s:is_work
   source ~/work-dotfiles/vim/.vimrc

@@ -128,7 +128,7 @@ source "$HOME"/.zsh-fzf
 zstyle ':completion:*' users root $USER
 
 # @FIXME path
-if [[ -n $(command -v dremel) ]]; then
+if [[ -n $(command -v gcert) ]]; then
   source "$HOME"/work-dotfiles/zsh/.zshrc
 fi
 
@@ -167,3 +167,6 @@ cd "$AUTOCD"
 bindkey "^K" edit-command-line
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export NVM_DIR="$HOME/.nvm"
+. "/Users/varconst/homebrew/opt/nvm/nvm.sh"

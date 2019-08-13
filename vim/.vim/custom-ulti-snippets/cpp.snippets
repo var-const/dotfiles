@@ -160,4 +160,27 @@ endsnippet
 
 # @TODO: ostringstream with clearing in each loop
 
+# Firestore
+
+snippet ff
+firebase::firestore::
+endsnippet
+
+snippet uff
+using firebase::firestore::${1:folder}::${0};
+endsnippet
+
+snippet nff
+namespace firebase {
+namespace firestore {
+namespace ${1} {
+
+  ${0}
+
+}  // namespace $1
+}  // namespace firestore
+}  // namespace firebase
+endsnippet
+
+
 # vim:ft=snippets:

@@ -3,7 +3,7 @@
 if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
-if [[ -n $(command -v dremel) ]]; then
+if [[ -n $(command -v gcert) ]]; then
   source "$HOME"/work-dotfiles/zsh/.zshenv
 fi
 
